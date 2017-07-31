@@ -1,0 +1,15 @@
+AddHandler application/x-lsphp70 .php5 .phtml .php
+# устанавливаем нужную кодировку
+php_value default_charset UTF-8
+# так безопаснее
+php_flag register_globals off
+# запрещаем передавать id сессии через адресную строку
+php_flag session.use_only_cookies on
+
+RewriteEngine on
+RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php

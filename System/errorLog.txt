@@ -1,0 +1,5 @@
+Ошибка: №Error (2017-07-31 13:31:25)
+Описание: Call to undefined method Controllers\MainController::display()
+Файл: /var/www/task/Controllers/MainController.php
+Строка: 8
+---------
