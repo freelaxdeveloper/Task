@@ -2,11 +2,78 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Мои проекты</title>
+        <title>{% block title %}Мои проекты{% endblock %}</title>
         <link rel="stylesheet" href="/Static/default/css/style.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="shortcut icon" href="/Static/default/favicon.ico">
+
+        <script type="text/javascript"src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     </head>
     <body>
-        {% block contnet %}{% endblock %}
+        <header>
+            <div class="header">
+                <a href="/" id="logo" title="На главную">TODO</a>
+                <a href="#" title="Выполненные задания"><i class="fa fa-check"></i></a>
+            </div>
+        </header>
+        <div id="container">
+            <nav>
+                <ul>
+                    <li><a href="#">Навигация</a></li>
+                    <li><a href="#">Навигация</a></li>
+                </ul>
+                <ul>
+                    <li>
+                        <a href="#">Проект</a><span id="menu1" data-action="action1"><i class="fa fa-ellipsis-v"></i></span>
+                        <ul class="action_none" id="action1">
+                            <li><a href="#">Подменю 1</a></li>
+                            <li><a href="#">Подменю 2</a></li>
+                            <li><a href="#">Подменю 3</a></li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a href="#">Проект</a><span id="menu2" data-action="action2"><i class="fa fa-ellipsis-v"></i></span>
+                        <ul class="action_none" id="action2">
+                            <li><a href="#">Подменю 1</a></li>
+                            <li><a href="#">Подменю 2</a></li>
+                            <li><a href="#">Подменю 3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Проект</a><span id="menu3" data-action="action3"><i class="fa fa-ellipsis-v"></i></span>
+                        <ul class="action_none" id="action3">
+                            <li><a href="#">Подменю 1</a></li>
+                            <li><a href="#">Подменю 2</a></li>
+                            <li><a href="#">Подменю 3</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Проект</a><span id="menu4" data-action="action4"><i class="fa fa-ellipsis-v"></i></span>
+                        <ul class="action_none" id="action4">
+                            <li><a href="#">Подменю 1</a></li>
+                            <li><a href="#">Подменю 2</a></li>
+                            <li><a href="#">Подменю 3</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li>Work</li>
+                    <li>Home</li>
+                    <li>Music</li>
+                    <li>Other</li>
+                </ul>
+                <ul>
+                    <li><a href="#">+ Add</a></li>
+                </ul>
+            </nav>
+            <div class="content">
+                {% block contnet %}{% endblock %}
+            </div>
+        </div>
+        <footer>
+            &copy; by Sanek_OS9<span>@mail.ru</span>
+        </footer>
+        <script src="/Static/default/js/test.js" charset="utf-8"></script>
     </body>
 </html>
