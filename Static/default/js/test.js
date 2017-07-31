@@ -72,7 +72,8 @@ $(function(){
         });
         $('#typeProject').click(function(){
             var colors = ['green', 'red', 'blue', 'yellow'];
-            var key = Math.round(Math.random()*(colors.length-1))
+            // var key = Math.round(Math.random()*(colors.length-1));
+            key = (key+1) % colors.length;
             $('.typeProject').css('background-color', colors[key]);
             console.log(key);
         });
