@@ -8,6 +8,7 @@
         <link rel="shortcut icon" href="/Static/default/favicon.ico">
 
         <script type="text/javascript"src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
     </head>
     <body>
         <header>
@@ -19,8 +20,8 @@
         <div id="container">
             <nav>
                 <ul>
-                    <li><a href="#">Навигация</a></li>
-                    <li><a href="#">Навигация</a></li>
+                    <li><a href="#">На сегодня</a></li>
+                    <li><a href="#">На неделю</a></li>
                 </ul>
                 <ul>
                     <li>
@@ -63,9 +64,15 @@
                     <li>Music</li>
                     <li>Other</li>
                 </ul>
-                <ul>
-                    <li><a href="#">+ Add</a></li>
+                <ul id="add_project">
+                    <li><a href="#">+ Add project</a></li>
                 </ul>
+                <form id="formProject" action="#" method="post">
+                    <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span>
+                    <input type="text" name="nameproject" value=""><br>
+                    <button type="button" name="button">Добавить</button>
+                    <button id="cancelProject" type="button" name="button">Отменить</button>
+                </form>
             </nav>
             <div class="content">
                 {% block contnet %}{% endblock %}

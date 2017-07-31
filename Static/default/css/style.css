@@ -1,3 +1,4 @@
+/* global */
 body, html{
     margin: 0;
     padding:0;
@@ -5,6 +6,9 @@ body, html{
 a{
     text-decoration: none;
 }
+/* endglobal */
+
+/* header */
 .header{
     display: block;
     width: 100%;
@@ -19,7 +23,7 @@ a{
 }
 .header > a{
     position: relative;
-    left: 84%;
+    left: 85%;
     color: #fff;
 }
 .header_title h1{
@@ -30,6 +34,9 @@ a{
     font-size: small;
     font-style: italic;
 }
+/* endheader */
+
+/* contnet */
 #container{
     border-radius: 5px;
     background-color: #d5d9da;
@@ -44,9 +51,19 @@ a{
     min-height: calc(100vh - 130px);
     text-align: left;
 }
+/* endcontent */
+
+/* navigation */
 ul{
     list-style-type: none;
     position: relative;
+}
+li{
+	position:relative;
+	padding: 1px;
+}
+li:hover a{
+	color:red;
 }
 nav{
     display: inline-block;
@@ -63,7 +80,7 @@ nav ul span{
     position: relative;
     left: 5px;
     cursor: pointer;
-    color: #232323;
+    color: #575757;
     padding: 0 15px 0 15px;
 }
 nav ul .action_display{
@@ -71,7 +88,7 @@ nav ul .action_display{
 	position:absolute;
 	min-width:80px;
 	top:0px;
-    left: 120px;
+    left: 80px;
     opacity: 1;
     -webkit-transition:0.55s linear opacity;
     z-index:100;
@@ -83,6 +100,9 @@ nav ul .action_display{
 nav ul .action_display a{
 	color:#fff;
 }
+/* endnavigation */
+
+/* footer */
 footer{
     padding: 15px;
     font-style: italic;
@@ -91,3 +111,34 @@ footer{
 footer > span{
     font-size: small;
 }
+/* endfooter */
+
+/* formproject */
+#formProject{
+    display: none;
+    text-align:center;
+}
+#formProject input{
+    text-align:right;
+    padding:3px;
+    display:inline-block;
+    width:132px;
+}
+#formProject button{
+	float:left;
+	margin: 3px -18px 0 39px;
+}
+#formProject button:nth-child(3n){
+	background-color:rgb(55, 103, 250);
+	padding:5px;
+	color:#fff;
+}
+#formProject input[name='typeProject']{
+	position:relative;
+	left:2.5em;
+    width: 1.2em;
+    background-color:red;
+    border:0px;
+    border-radius:50%;
+}
+/* endformproject */
