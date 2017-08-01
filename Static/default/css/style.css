@@ -179,8 +179,8 @@ footer > span{
     background-color:red;
     border-radius:50%;
     cursor:pointer;
-    width:1em;
-	height:1em;
+    width:1.5em;
+	height:1.5em;
 }
 
 #formTask input{
@@ -189,8 +189,10 @@ footer > span{
 #formTask select{
 	position:absolute;
 	right:30px;
-	top:0;
+	top:-4px;
 	margin-top:3px;
+	height:25px;
+	width:80px;
 }
 /* endform */
 
