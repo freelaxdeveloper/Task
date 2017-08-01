@@ -60,45 +60,49 @@ a{
 /* endcontent */
 
 /* navigation */
-ul{
+nav ul{
     list-style-type: none;
     position: relative;
 }
-li{
+nav li{
 	position:relative;
 	padding: 1px;
 }
-li:hover a{
+nav li:hover a{
 	color:red;
 }
 nav{
     display: inline-block;
-    width: 200px;
-    margin-right: 70px;
-    border: 1px solid #fff;
+    width: 290px;
+    margin-right: 50px;
     text-align: left;
 }
-/*nav ul .action_none{
-	position:absolute;
-	opacity:0;
-}*/
 nav ul span{
     position: relative;
     left: 5px;
     cursor: pointer;
     padding: 0 15px 0 15px;
 }
+nav .color_project{
+	display:inline-block;
+	width:10px;
+	height:10px;
+	background-color:red;
+	padding:0;
+	left:0;
+	border-radius:50%;
+}
 nav ul .action_display{
 	position:absolute;
 	min-width:80px;
 	top:0px;
-    left: 80px;
-    -webkit-transition:0.55s linear opacity;
-    z-index:100;
-    background-color:rgb(55, 103, 250);
-    text-align:left;
-    border-radius:7px;
-    padding:5px;
+	left: 110px;
+	-webkit-transition:0.55s linear opacity;
+	z-index:100;
+	background-color:rgb(55, 103, 250);
+	text-align:left;
+	border-radius:7px;
+	padding:5px;
 }
 nav ul .action_display a{
 	color:#fff;
@@ -123,8 +127,12 @@ footer > span{
 #formProject, #formTask{
     display: none;
 }
+#formProject a, #formTask a{
+    font-size: 13px;
+    vertical-align:bottom;
+}
 #formProject{
-    text-align:center;
+    text-align:left;
 }
 #formProject input{
     text-align:right;
@@ -133,43 +141,55 @@ footer > span{
     width:132px;
 }
 #formProject button{
-	float:left;
-	margin: 3px -18px 0 39px;
+	margin-left: 20px;
 }
 #formProject button:nth-child(2n), #formTask button:nth-child(2n){
 	background-color:rgb(55, 103, 250);
 	padding:5px;
 	color:#fff;
 }
-#formProject input[name='typeProject'], #formTask input[name='typeTask']{
+#formProject #typeProject{
 	position:relative;
-	left:2.5em;
-    width: 1.2em;
-    background-color:red;
-    border:0px;
-    border-radius:50%;
-    cursor:pointer;
+	display:inline-block;
+	left:25px;
+	top:5px;
+	width: 1em;
+	height:1em;
+	background-color:red;
+	border:0px;
+	border-radius:50%;
+	cursor:pointer;
 }
 
 #formTask input[type='text']{
-	width:85%;
+	width:73%;
 }
 #formTask input[type='date']{
 	width:13%;
 }
+#formTask{
+	position:relative;
+}
 #formTask #typeTask{
-	width:1.5em;
-	height:1.5em;
-	float:right;
-	margin-right:20px;
-	margin-top:3px;
+	position:absolute;
+	right:0;
+	top:0;
+    width: 1em;
+    height:1em;
+    background-color:red;
+    border-radius:50%;
+    cursor:pointer;
+    width:1em;
+	height:1em;
 }
 
 #formTask input{
 	height:20px;
 }
 #formTask select{
-	float:right;
+	position:absolute;
+	right:30px;
+	top:0;
 	margin-top:3px;
 }
 /* endform */
@@ -203,7 +223,7 @@ span.listing-action{
 .listing-post .action_display{
 	position:absolute;
 	background-color:rgb(55, 103, 250);
-	left:110px;
+	left:155px;
 	top:0;
 	border-radius:5px;
 	padding:3px 10px 3px 10px;
@@ -216,7 +236,6 @@ span.listing-action{
 	color:red;
 }
 /* endlisting*/
-.display_none{
-    position: absolute;
-    opacity: 0;
+.display_none {
+    display: none;
 }

@@ -9,7 +9,7 @@
 
         <div class="listing-post">
             <span class="listing-status"></span> Что то нужно сделать
-            <span class="listing-right">Work
+            <span class="listing-right">Проект1
                 <span class="listing-action"></span>
                 <span class="listing-menu" id="listing1" data-action="listingAction1"><i class="fa fa-ellipsis-v"></i></span>
                 <span class="display_none" id="listingAction1">
@@ -23,7 +23,7 @@
         </div>
         <div class="listing-post">
             <span class="listing-status"></span> Что то нужно сделать
-            <span class="listing-right">Work
+            <span class="listing-right">Проект2
                 <span class="listing-action"></span>
                 <span class="listing-menu" id="listing2" data-action="listingAction2"><i class="fa fa-ellipsis-v"></i></span>
                 <span class="display_none" id="listingAction2">
@@ -37,7 +37,7 @@
         </div>
         <div class="listing-post">
             <span class="listing-status"></span> Что то нужно сделать
-            <span class="listing-right">Work
+            <span class="listing-right">Проект1
                 <span class="listing-action"></span>
                 <span class="listing-menu" id="listing3" data-action="listingAction3"><i class="fa fa-ellipsis-v"></i></span>
                 <span class="display_none" id="listingAction3">
@@ -52,16 +52,17 @@
 
     </div>
     <div>
-        <a id="Task" href="#">+ add task</a>
+        <a id="Task" href="#">+ Добавить задание</a>
         <form id="formTask" action="#" method="post">
-            <input type="text" name="name_task" value="">
+            <input type="text" name="name_task" value="" placeholder="Что Вам необходимо сделать">
             <input type="date" name="name_date" value=""><br>
-            <span id="typeTask"><input class="typeTask" type="text" name="typeTask" value=""></span>
+            <!-- <span id="typeTask"><input class="typeTask" type="text" name="typeTask" value=""></span> -->
             <select class="" name="project">
                 <option value="1">Проект</option>
                 <option value="2">Проект</option>
                 <option value="3">Проект</option>
             </select>
+            <span id="typeTask"></span>
             <button type="button" name="button">Добавить</button>
             <a href="#" class="cancel">Отменить</a>
         </form>

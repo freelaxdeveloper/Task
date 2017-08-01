@@ -35,7 +35,7 @@ $(function(){
         /* проверяем показываются выбранные действия или нет */
         this.checkDisplay = function()
         {
-            if (this.action.css('opacity') == 0) {
+            if (this.action.css('display') == 'none') {
                 return false;
             } else {
                 return true;
@@ -44,11 +44,11 @@ $(function(){
         /* пишем логи в консоль */
         this.log = function(message)
         {
-            console.log(message + ' (' + this.id + ')');
+            //console.log(message + ' (' + this.id + ')');
         }
     }
     /* ловим клик по действиям */
-    $('nav ul span, .listing span').click(function(){
+    $('nav ul span, .listing-menu').click(function(){
         var action_id = $('#' + this.id).attr('data-action');
         var action = new classAction(action_id);
         action.display();
@@ -84,7 +84,7 @@ $(function(){
                 console.log('Зашел');
                 var colors = ['red', 'green', 'blue', 'yellow'];
                 key = (key+1) % colors.length;
-                $('.type' + id).css('background-color', colors[key]);
+                $('#type' + id).css('background-color', colors[key]);
             });
         });
 
