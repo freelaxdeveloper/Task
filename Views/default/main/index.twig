@@ -6,50 +6,22 @@
     </div>
 
     <div class="listing">
-
-        <div class="listing-post">
-            <span class="listing-status"></span> Что то нужно сделать
-            <span class="listing-right">Проект1
-                <span class="listing-action"></span>
-                <span class="listing-menu" id="listing1" data-action="listingAction1"><i class="fa fa-ellipsis-v"></i></span>
-                <span class="display_none" id="listingAction1">
-                    <a href="#">Выполнить</a><br>
-                    <a href="#">Изменить</a><br>
-                    <a href="#">Удалить</a><br>
+        {% for task in tasks %}
+            <div class="listing-post">
+                <span class="listing-status {{task.color}}"></span> {{task.message}}
+                <span class="listing-right">{{task.title}}
+                    <span class="listing-action {% if task.status == 0 %}red{% else %}green{% endif %}"></span>
+                    <span class="listing-menu" id="listing{{task.id}}" data-action="listingAction{{task.id}}"><i class="fa fa-ellipsis-v"></i></span>
+                    <span class="display_none" id="listingAction{{task.id}}">
+                        <a href="/task/complete/{{task.id}}/">Выполнить</a><br>
+                        <a href="/task/edit/{{task.id}}/">Изменить</a><br>
+                        <a href="/task/delete/{{task.id}}/">Удалить</a><br>
+                    </span>
                 </span>
-            </span>
 
-            <hr>
-        </div>
-        <div class="listing-post">
-            <span class="listing-status"></span> Что то нужно сделать
-            <span class="listing-right">Проект2
-                <span class="listing-action"></span>
-                <span class="listing-menu" id="listing2" data-action="listingAction2"><i class="fa fa-ellipsis-v"></i></span>
-                <span class="display_none" id="listingAction2">
-                    <a href="#">Выполнить</a><br>
-                    <a href="#">Изменить</a><br>
-                    <a href="#">Удалить</a><br>
-                </span>
-            </span>
-
-            <hr>
-        </div>
-        <div class="listing-post">
-            <span class="listing-status"></span> Что то нужно сделать
-            <span class="listing-right">Проект1
-                <span class="listing-action"></span>
-                <span class="listing-menu" id="listing3" data-action="listingAction3"><i class="fa fa-ellipsis-v"></i></span>
-                <span class="display_none" id="listingAction3">
-                    <a href="#">Выполнить</a><br>
-                    <a href="#">Изменить</a><br>
-                    <a href="#">Удалить</a><br>
-                </span>
-            </span>
-
-            <hr>
-        </div>
-
+                <hr>
+            </div>
+        {% endfor %}
     </div>
     <div>
         <a id="Task" href="#">+ Добавить задание</a>

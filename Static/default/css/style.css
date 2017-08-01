@@ -12,7 +12,22 @@ a{
 #add_project a, #add_task a{
 	color:red;
 }
+.display_none {
+    display: none;
+}
 /* endother */
+
+/* actions_colors*/
+.red{
+    background-color: #ff2e00;
+}
+.green{
+    background-color: #35b11b;
+}
+.blue{
+    background-color: #0500ff;
+}
+/* endactions_colors*/
 
 /* header */
 .header{
@@ -87,7 +102,6 @@ nav .color_project{
 	display:inline-block;
 	width:10px;
 	height:10px;
-	background-color:red;
 	padding:0;
 	left:0;
 	border-radius:50%;
@@ -202,7 +216,6 @@ footer > span{
 }
 span.listing-status, span.listing-action{
 	display:inline-block;
-	background-color:red;
 	width:15px;
 	height:15px;
 }
@@ -238,6 +251,3 @@ span.listing-action{
 	color:red;
 }
 /* endlisting*/
-.display_none {
-    display: none;
-}

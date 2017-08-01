@@ -24,39 +24,16 @@
                     <li><a href="#">На неделю</a></li>
                 </ul>
                 <ul>
-                    <li>
-                        <a href="#"><span class="color_project"></span> Проект</a><span id="menu1" data-action="action1"><i class="fa fa-ellipsis-v"></i></span>
-                        <ul class="display_none" id="action1">
-                            <li><a href="#">Выполнить все</a></li>
-                            <li><a href="#">Изменить</a></li>
-                            <li><a href="#">Удалить</a></li>
-                        </ul>
-
-                    </li>
-                    <li>
-                        <a href="#"><span class="color_project"></span> Проект</a><span id="menu2" data-action="action2"><i class="fa fa-ellipsis-v"></i></span>
-                        <ul class="display_none" id="action2">
-                            <li><a href="#">Выполнить все</a></li>
-                            <li><a href="#">Изменить</a></li>
-                            <li><a href="#">Удалить</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><span class="color_project"></span> Проект</a><span id="menu3" data-action="action3"><i class="fa fa-ellipsis-v"></i></span>
-                        <ul class="display_none" id="action3">
-                            <li><a href="#">Выполнить все</a></li>
-                            <li><a href="#">Изменить</a></li>
-                            <li><a href="#">Удалить</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#"><span class="color_project"></span> Проект</a><span id="menu4" data-action="action4"><i class="fa fa-ellipsis-v"></i></span>
-                        <ul class="display_none" id="action4">
-                            <li><a href="#">Выполнить все</a></li>
-                            <li><a href="#">Изменить</a></li>
-                            <li><a href="#">Удалить</a></li>
-                        </ul>
-                    </li>
+                    {% for project in projects %}
+                        <li>
+                            <a href="/project/{{project.id}}/"><span class="color_project {{project.color}}"></span> {{project.title}}</a><span id="menu{{project.id}}" data-action="action{{project.id}}"><i class="fa fa-ellipsis-v"></i></span>
+                            <ul class="display_none" id="action{{project.id}}">
+                                <li><a href="/project/complete_all/{{project.id}}/">Выполнить все</a></li>
+                                <li><a href="/project/edit/{{project.id}}/">Изменить</a></li>
+                                <li><a href="/project/delete/{{project.id}}/">Удалить</a></li>
+                            </ul>
+                        </li>
+                    {% endfor %}
                 </ul>
 
                 <div>

@@ -1,10 +1,5 @@
-Ошибка: №Error (2017-07-31 13:31:25)
-Описание: Call to undefined method Controllers\MainController::display()
+Ошибка: №8 (2017-08-02 02:31:36)
+Описание: Undefined index: tasks
 Файл: /var/www/task/Controllers/MainController.php
-Строка: 8
----------
-Ошибка: №Twig_Error_Runtime (2017-07-31 15:45:59)
-Описание: Block "title" on template "document.twig" does not exist.
-Файл: /var/www/task/Views/default/document.twig
-Строка: 1
+Строка: 13
 ---------
