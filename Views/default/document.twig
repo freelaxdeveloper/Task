@@ -26,7 +26,7 @@
                 <ul>
                     <li>
                         <a href="#">Проект</a><span id="menu1" data-action="action1"><i class="fa fa-ellipsis-v"></i></span>
-                        <ul class="action_none" id="action1">
+                        <ul class="display_none" id="action1">
                             <li><a href="#">Подменю 1</a></li>
                             <li><a href="#">Подменю 2</a></li>
                             <li><a href="#">Подменю 3</a></li>
@@ -35,7 +35,7 @@
                     </li>
                     <li>
                         <a href="#">Проект</a><span id="menu2" data-action="action2"><i class="fa fa-ellipsis-v"></i></span>
-                        <ul class="action_none" id="action2">
+                        <ul class="display_none" id="action2">
                             <li><a href="#">Подменю 1</a></li>
                             <li><a href="#">Подменю 2</a></li>
                             <li><a href="#">Подменю 3</a></li>
@@ -43,7 +43,7 @@
                     </li>
                     <li>
                         <a href="#">Проект</a><span id="menu3" data-action="action3"><i class="fa fa-ellipsis-v"></i></span>
-                        <ul class="action_none" id="action3">
+                        <ul class="display_none" id="action3">
                             <li><a href="#">Подменю 1</a></li>
                             <li><a href="#">Подменю 2</a></li>
                             <li><a href="#">Подменю 3</a></li>
@@ -51,7 +51,7 @@
                     </li>
                     <li>
                         <a href="#">Проект</a><span id="menu4" data-action="action4"><i class="fa fa-ellipsis-v"></i></span>
-                        <ul class="action_none" id="action4">
+                        <ul class="display_none" id="action4">
                             <li><a href="#">Подменю 1</a></li>
                             <li><a href="#">Подменю 2</a></li>
                             <li><a href="#">Подменю 3</a></li>
@@ -64,15 +64,18 @@
                     <li>Music</li>
                     <li>Other</li>
                 </ul>
-                <ul id="add_project">
-                    <li><a href="#">+ Add project</a></li>
-                </ul>
-                <form id="formProject" action="#" method="post">
-                    <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span>
-                    <input type="text" name="nameproject" value=""><br>
-                    <button type="button" name="button">Добавить</button>
-                    <button id="cancelProject" type="button" name="button">Отменить</button>
-                </form>
+                <div>
+                    <ul id="Project">
+                        <li><a href="#">+ Add project</a></li>
+                    </ul>
+                    <form id="formProject" action="#" method="post">
+                        <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span>
+                        <input type="text" name="name_project" value=""><br>
+
+                        <button type="button" name="button">Добавить</button>
+                        <a href="#" class="cancel">Отменить</a>
+                    </form>
+                </div>
             </nav>
             <div class="content">
                 {% block contnet %}{% endblock %}

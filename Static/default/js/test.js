@@ -1,5 +1,6 @@
 $(function(){
-    function classAction(action_id){
+    function classAction(action_id)
+    {
         this.id = action_id; // ID списка дейтсвий
         this.action = $('#' + this.id); // объект действий
 
@@ -22,11 +23,14 @@ $(function(){
             this.actionHide();
             // показываем действия выбранного проекта
             this.action.attr('class', 'action_display');
+            //this.action.css('opacity', '1');
         }
         /* скрываем действия */
         this.actionHide = function()
         {
-            $('.action_display').attr('class', 'action_none');
+            $('.action_display').attr('class', 'display_none');
+            //this.action.css('opacity', '0');
+
         }
         /* проверяем показываются выбранные действия или нет */
         this.checkDisplay = function()
@@ -44,41 +48,47 @@ $(function(){
         }
     }
     /* ловим клик по действиям */
-    $('nav ul span').click(function(){
+    $('nav ul span, .listing span').click(function(){
         var action_id = $('#' + this.id).attr('data-action');
         var action = new classAction(action_id);
         action.display();
     });
     /*-------------------------------------------------*/
-    function classProject(){
+    function classProject(id)
+    {
+        this.id = id;
+        /* скрываем ссылку и показываем форму */
         this.hideLinkAddProject = function()
         {
-            $('#add_project').fadeOut('slowe');
-            $('#formProject').fadeIn('slowe');
+            $('#' + this.id).fadeOut('slowe'); // скрыли ссылку
+            $('#form' + this.id).fadeIn('slowe'); // скрыли форму
         }
+        /* показываем ссылку и скрываем форму */
         this.showLinkAddProject = function()
         {
-            $('#add_project').fadeIn('slowe');
-            $('#formProject').fadeOut('slowe');
+            $('#' + this.id).fadeIn('slowe'); // показали ссылку
+            $('#form' + this.id).fadeOut('slowe'); // скрыли форму
         }
     }
-    /* ловим клик по добавлению проекта */
-    $('#add_project').click(function(){
-        var project = new classProject();
-        project.hideLinkAddProject();
+    $('#Task, #Project').each(function(i, el) {
+        $(el).click(function(){
+            var id = $(this).attr('id');
+            var form = new classProject(id);
+            form.hideLinkAddProject();
+            $('.cancel').click(function(){
+                form.showLinkAddProject();
+            });
+            var key = 0;
+            console.log(id);
+            $('#type' + id).click(function(){
+                console.log('Зашел');
+                var colors = ['red', 'green', 'blue', 'yellow'];
+                key = (key+1) % colors.length;
+                $('.type' + id).css('background-color', colors[key]);
+            });
+        });
 
-        $('#cancelProject').click(function(){
-            project.showLinkAddProject();
-        });
-        $('#typeProject').click(function(){
-            var colors = ['green', 'red', 'blue', 'yellow'];
-            // var key = Math.round(Math.random()*(colors.length-1));
-            key = (key+1) % colors.length;
-            $('.typeProject').css('background-color', colors[key]);
-            console.log(key);
-        });
 
     });
-
 
 });

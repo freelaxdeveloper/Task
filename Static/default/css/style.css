@@ -8,6 +8,12 @@ a{
 }
 /* endglobal */
 
+/* other */
+#add_project a, #add_task a{
+	color:red;
+}
+/* endother */
+
 /* header */
 .header{
     display: block;
@@ -72,24 +78,21 @@ nav{
     border: 1px solid #fff;
     text-align: left;
 }
-nav ul .action_none{
+/*nav ul .action_none{
 	position:absolute;
 	opacity:0;
-}
+}*/
 nav ul span{
     position: relative;
     left: 5px;
     cursor: pointer;
-    color: #575757;
     padding: 0 15px 0 15px;
 }
 nav ul .action_display{
-	display:block;
 	position:absolute;
 	min-width:80px;
 	top:0px;
     left: 80px;
-    opacity: 1;
     -webkit-transition:0.55s linear opacity;
     z-index:100;
     background-color:rgb(55, 103, 250);
@@ -99,6 +102,9 @@ nav ul .action_display{
 }
 nav ul .action_display a{
 	color:#fff;
+}
+nav ul .action_display a:hover{
+	color:red;
 }
 /* endnavigation */
 
@@ -113,9 +119,11 @@ footer > span{
 }
 /* endfooter */
 
-/* formproject */
-#formProject{
+/* form */
+#formProject, #formTask{
     display: none;
+}
+#formProject{
     text-align:center;
 }
 #formProject input{
@@ -128,17 +136,87 @@ footer > span{
 	float:left;
 	margin: 3px -18px 0 39px;
 }
-#formProject button:nth-child(3n){
+#formProject button:nth-child(2n), #formTask button:nth-child(2n){
 	background-color:rgb(55, 103, 250);
 	padding:5px;
 	color:#fff;
 }
-#formProject input[name='typeProject']{
+#formProject input[name='typeProject'], #formTask input[name='typeTask']{
 	position:relative;
 	left:2.5em;
     width: 1.2em;
     background-color:red;
     border:0px;
     border-radius:50%;
+    cursor:pointer;
 }
-/* endformproject */
+
+#formTask input[type='text']{
+	width:85%;
+}
+#formTask input[type='date']{
+	width:13%;
+}
+#formTask #typeTask{
+	width:1.5em;
+	height:1.5em;
+	float:right;
+	margin-right:20px;
+	margin-top:3px;
+}
+
+#formTask input{
+	height:20px;
+}
+#formTask select{
+	float:right;
+	margin-top:3px;
+}
+/* endform */
+
+/* listing */
+.listing-post{
+    margin-bottom: 15px;
+}
+span.listing-status, span.listing-action{
+	display:inline-block;
+	background-color:red;
+	width:15px;
+	height:15px;
+}
+span.listing-status{
+	vertical-align:middle;
+	border: 1.5px solid #000;
+}
+span.listing-right{
+	position:relative;
+	float:right;
+}
+span.listing-action{
+	margin: 0 15px 0 15px;
+	border-radius:50%;
+}
+.listing-post .listing-menu{
+	padding: 3px;
+    cursor: pointer;
+}
+.listing-post .action_display{
+	position:absolute;
+	background-color:rgb(55, 103, 250);
+	left:110px;
+	top:0;
+	border-radius:5px;
+	padding:3px 10px 3px 10px;
+    -webkit-transition:0.55s linear opacity;
+}
+.listing-post .action_display a{
+	color:#fff;
+}
+.listing-post .action_display a:hover{
+	color:red;
+}
+/* endlisting*/
+.display_none{
+    position: absolute;
+    opacity: 0;
+}
