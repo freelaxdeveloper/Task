@@ -1,5 +1,5 @@
-Ошибка: №8 (2017-08-02 02:31:36)
-Описание: Undefined index: tasks
+Ошибка: №8 (2017-08-02 20:46:14)
+Описание: Undefined index: errors
 Файл: /var/www/task/Controllers/MainController.php
-Строка: 13
+Строка: 27
 ---------

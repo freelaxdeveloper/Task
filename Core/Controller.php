@@ -2,7 +2,8 @@
 namespace Core;
 
 use \More\{Text,Pages};
-use \Core\{Twig,App};
+use \Core\{App};
+use \Models\{Project,Task};
 
 class Controller{
     protected $params = [];
@@ -26,6 +27,8 @@ class Controller{
     }
     protected function display(string $filename)
     {
+        $this->_inicialization();
+
         $this->params['server_name'] = $_SERVER['SERVER_NAME'];
 
         $loader = new \Twig_Loader_Filesystem(H . '/Views/' . $this->template_dir);
@@ -33,5 +36,10 @@ class Controller{
 
         $template = $twig->loadTemplate('/' . $filename . '.twig');
         echo $template->render($this->params);
+    }
+    private function _inicialization()
+    {
+        $this->params['projects'] = Project::getAll();
+        $this->params['tasks'] = Task::getAll();
     }
 }

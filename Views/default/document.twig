@@ -14,7 +14,10 @@
         <header>
             <div class="header">
                 <a href="/" id="logo" title="На главную">TODO</a>
-                <a href="#" title="Выполненные задания"><i class="fa fa-check"></i></a>
+                <span class="right">
+                    <a href="/register/">Регистрация</a> / <a href="/authorize/">Авторизация</a>
+                    <a href="#" title="Выполненные задания"><i class="fa fa-check"></i></a>
+                </span>
             </div>
         </header>
         <div id="container">
@@ -51,6 +54,25 @@
                 </div>
             </nav>
             <div class="content">
+                <div class="messages">
+                    {% for error in errors %}
+                        <div class="error">
+                            {{error}}
+                        </div>
+                    {% endfor %}
+                    {% for message in messages %}
+                        <div class="message">
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                </div>
+
+                {% block header_title %}
+                    <div class="header_title">
+                        <h1>{{block('title')}}</h1>
+                    </div>
+                {% endblock %}
+
                 {% block contnet %}{% endblock %}
             </div>
         </div>

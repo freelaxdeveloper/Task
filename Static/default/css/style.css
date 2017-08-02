@@ -42,9 +42,11 @@ a{
     position: relative;
     left: 40px;
 }
-.header > a{
-    position: relative;
-    left: 85%;
+.header .right{
+    float:right;
+    margin-right:8%;
+}
+.header a{
     color: #fff;
 }
 .header_title h1{
@@ -255,3 +257,19 @@ div.listing-right span.project-name{
 	color:red;
 }
 /* endlisting*/
+.messages{
+	text-align:center;
+	margin-top:-15px;
+}
+.messages .error, .messages .message{
+	color:#fff;
+	height:35px;
+	line-height:35px;
+	margin-bottom:1px;
+}
+.messages .error{
+	background-color:#f41111;
+}
+.messages .message{
+	background-color:#269818;
+}

@@ -9,4 +9,8 @@ use \Core\App;
 return [
     # главная страница
     ['pattern' => '','run' => 'main/index','method' => 'GET'],
+    # страница регистрации
+    ['pattern' => 'register','run' => 'main/register','method' => 'GET'],
+    # страница регистрации (отправка формы)
+    ['pattern' => 'register/send','run' => 'main/register','method' => 'POST'],
 ];
