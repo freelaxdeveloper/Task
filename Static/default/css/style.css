@@ -213,6 +213,7 @@ footer > span{
 /* listing */
 .listing-post{
     margin-bottom: 15px;
+	position:relative;
 }
 span.listing-status, span.listing-action{
 	display:inline-block;
@@ -223,13 +224,15 @@ span.listing-status{
 	vertical-align:middle;
 	border: 1.5px solid #000;
 }
-span.listing-right{
-	position:relative;
+div.listing-right{
 	float:right;
 }
 span.listing-action{
 	margin: 0 15px 0 15px;
 	border-radius:50%;
+}
+div.listing-right span.project-name{
+
 }
 .listing-post .listing-menu{
 	padding: 3px;
@@ -238,11 +241,12 @@ span.listing-action{
 .listing-post .action_display{
 	position:absolute;
 	background-color:rgb(55, 103, 250);
-	left:155px;
-	top:0;
+	right:10px;
+	top:0px;
 	border-radius:5px;
 	padding:3px 10px 3px 10px;
     -webkit-transition:0.55s linear opacity;
+    z-index:100;
 }
 .listing-post .action_display a{
 	color:#fff;

@@ -9,7 +9,8 @@
         {% for task in tasks %}
             <div class="listing-post">
                 <span class="listing-status {{task.color}}"></span> {{task.message}}
-                <span class="listing-right">{{task.title}}
+                <div class="listing-right">
+                    <span class="project-name">{{task.title}}</span>
                     <span class="listing-action {% if task.status == 0 %}red{% else %}green{% endif %}"></span>
                     <span class="listing-menu" id="listing{{task.id}}" data-action="listingAction{{task.id}}"><i class="fa fa-ellipsis-v"></i></span>
                     <span class="display_none" id="listingAction{{task.id}}">
@@ -17,7 +18,7 @@
                         <a href="/task/edit/{{task.id}}/">Изменить</a><br>
                         <a href="/task/delete/{{task.id}}/">Удалить</a><br>
                     </span>
-                </span>
+                </div>
 
                 <hr>
             </div>
