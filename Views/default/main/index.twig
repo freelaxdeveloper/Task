@@ -21,20 +21,22 @@
             </div>
         {% endfor %}
     </div>
-    <div>
-        <a id="Task" href="#">+ Добавить задание</a>
-        <form id="formTask" action="#" method="post">
-            <input type="text" name="name_task" value="" placeholder="Что Вам необходимо сделать">
-            <input type="date" name="name_date" value=""><br>
-            <!-- <span id="typeTask"><input class="typeTask" type="text" name="typeTask" value=""></span> -->
-            <select class="" name="project">
-                <option value="1">Проект</option>
-                <option value="2">Проект</option>
-                <option value="3">Проект</option>
-            </select>
-            <span id="typeTask"></span>
-            <button type="button" name="button">Добавить</button>
-            <a href="#" class="cancel">Отменить</a>
-        </form>
-    </div>
+    {% if user.id %}
+        <div>
+            <a id="Task" href="#">+ Добавить задание</a>
+            <form id="formTask" action="#" method="post">
+                <input type="text" name="name_task" value="" placeholder="Что Вам необходимо сделать">
+                <input type="date" name="name_date" value=""><br>
+                <!-- <span id="typeTask"><input class="typeTask" type="text" name="typeTask" value=""></span> -->
+                <select class="" name="project">
+                    <option value="1">Проект</option>
+                    <option value="2">Проект</option>
+                    <option value="3">Проект</option>
+                </select>
+                <span id="typeTask"></span>
+                <button type="button" name="button">Добавить</button>
+                <a href="#" class="cancel">Отменить</a>
+            </form>
+        </div>
+    {% endif %}
 {% endblock %}

@@ -15,8 +15,13 @@
             <div class="header">
                 <a href="/" id="logo" title="На главную">TODO</a>
                 <span class="right">
-                    <a href="/register/">Регистрация</a> / <a href="/authorize/">Авторизация</a>
-                    <a href="#" title="Выполненные задания"><i class="fa fa-check"></i></a>
+                    {% if user.id == 0 %}
+                        <a href="/register/">Регистрация</a> / <a href="/authorize/">Авторизация</a>
+                    {% else %}
+                        <a href="/exit/">Выход</a> <a href="#" title="Выполненные задания"><i class="fa fa-check"></i></a>
+                    {% endif %}
+
+
                 </span>
             </div>
         </header>
@@ -29,7 +34,7 @@
                 <ul>
                     {% for project in projects %}
                         <li>
-                            <a href="/project/{{project.id}}/"><span class="color_project {{project.color}}"></span> {{project.title}}</a><span id="menu{{project.id}}" data-action="action{{project.id}}"><i class="fa fa-ellipsis-v"></i></span>
+                            <a href="/project/{{project.id}}/"><span class="color_project {{project.color}}"></span> {{project.title}}</a><span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
                             <ul class="display_none" id="action{{project.id}}">
                                 <li><a href="/project/complete_all/{{project.id}}/">Выполнить все</a></li>
                                 <li><a href="/project/edit/{{project.id}}/">Изменить</a></li>
@@ -38,20 +43,21 @@
                         </li>
                     {% endfor %}
                 </ul>
+                {% if user.id %}
+                    <div>
+                        <ul id="Project">
+                            <li><a href="#">+ Добавить проект</a></li>
+                        </ul>
+                        <form id="formProject" action="#" method="post">
+                            <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
+                            <span id="typeProject"></span>
+                            <input type="text" name="name_project" value="" placeholder="Название проекта"><br>
 
-                <div>
-                    <ul id="Project">
-                        <li><a href="#">+ Добавить проект</a></li>
-                    </ul>
-                    <form id="formProject" action="#" method="post">
-                        <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
-                        <span id="typeProject"></span>
-                        <input type="text" name="name_project" value="" placeholder="Название проекта"><br>
-
-                        <button type="button" name="button">Добавить</button>
-                        <a href="#" class="cancel">Отменить</a>
-                    </form>
-                </div>
+                            <button type="button" name="button">Добавить</button>
+                            <a href="#" class="cancel">Отменить</a>
+                        </form>
+                    </div>
+                {% endif %}
             </nav>
             <div class="content">
                 <div class="messages">

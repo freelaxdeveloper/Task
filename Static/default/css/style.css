@@ -90,7 +90,7 @@ nav li:hover a{
 }
 nav{
     display: inline-block;
-    width: 290px;
+    width: 200px;
     margin-right: 50px;
     text-align: left;
 }
@@ -98,7 +98,9 @@ nav ul span{
     position: relative;
     left: 5px;
     cursor: pointer;
-    padding: 0 15px 0 15px;
+}
+nav ul span.menu_action{
+	float:right;
 }
 nav .color_project{
 	display:inline-block;
@@ -111,8 +113,8 @@ nav .color_project{
 nav ul .action_display{
 	position:absolute;
 	min-width:80px;
-	top:0px;
-	left: 110px;
+	top:0;
+	left: 40px;
 	-webkit-transition:0.55s linear opacity;
 	z-index:100;
 	background-color:rgb(55, 103, 250);
