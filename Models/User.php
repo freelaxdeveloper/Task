@@ -19,7 +19,7 @@ class User{
         if ($user = $q->fetch()) {
             return $user;
         }
-        return ['id' => 0, 'login' => 'Sanek'];
+        return ['id' => 0, 'login' => '[Guest]'];
     }
     public function __get($name)
     {

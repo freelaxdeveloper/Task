@@ -10,11 +10,15 @@ return [
     # главная страница
     ['pattern' => '','run' => 'main/index','method' => 'GET'],
     # страница регистрации
-    ['pattern' => 'register','run' => 'main/register','method' => 'GET'],
+    ['pattern' => 'register','run' => 'authorize/register','method' => 'GET'],
     # страница регистрации (отправка формы)
-    ['pattern' => 'register/send','run' => 'main/register','method' => 'POST'],
+    ['pattern' => 'register/send','run' => 'authorize/register','method' => 'POST'],
     # страница авторизации
-    ['pattern' => 'authorize','run' => 'main/authorize','method' => 'GET'],
+    ['pattern' => 'authorize','run' => 'authorize/authorize','method' => 'GET'],
     # страница авторизации (отправка формы)
-    ['pattern' => 'authorize/send','run' => 'main/authorize','method' => 'POST'],
+    ['pattern' => 'authorize/send','run' => 'authorize/authorize','method' => 'POST'],
+    # выход с профиля
+    ['pattern' => 'exit','run' => 'authorize/exit','method' => 'GET'],
+    # просмотр заданий проекта
+    ['pattern' => 'project/([0-9]+)','run' => 'project/view/$1','method' => 'GET'],
 ];

@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>{% block title %}Мои проекты{% endblock %}</title>
+        <title>{% block title %}{% if title %}{{title}}{% else %}Мои проекты{% endif %}{% endblock %}</title>
         <link rel="stylesheet" href="/Static/default/css/style.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="shortcut icon" href="/Static/default/favicon.ico">
@@ -34,12 +34,15 @@
                 <ul>
                     {% for project in projects %}
                         <li>
-                            <a href="/project/{{project.id}}/"><span class="color_project {{project.color}}"></span> {{project.title}}</a><span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
-                            <ul class="display_none" id="action{{project.id}}">
-                                <li><a href="/project/complete_all/{{project.id}}/">Выполнить все</a></li>
-                                <li><a href="/project/edit/{{project.id}}/">Изменить</a></li>
-                                <li><a href="/project/delete/{{project.id}}/">Удалить</a></li>
-                            </ul>
+                            <a href="/project/{{project.id}}/"><span class="color_project {{project.color}}"></span> {{project.title}}</a>
+                            {% if user.id %}
+                                <span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
+                                <ul class="display_none" id="action{{project.id}}">
+                                    <li><a href="/project/complete_all/{{project.id}}/">Выполнить все</a></li>
+                                    <li><a href="/project/edit/{{project.id}}/">Изменить</a></li>
+                                    <li><a href="/project/delete/{{project.id}}/">Удалить</a></li>
+                                </ul>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
@@ -79,7 +82,7 @@
                     </div>
                 {% endblock %}
 
-                {% block contnet %}{% endblock %}
+                {% block content %}{% endblock %}
             </div>
         </div>
         <footer>

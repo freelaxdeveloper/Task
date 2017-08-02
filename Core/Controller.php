@@ -40,6 +40,20 @@ class Controller{
     private function _inicialization()
     {
         $this->params['projects'] = Project::getAll();
-        $this->params['tasks'] = Task::getAll();
+        $this->params['user'] = App::user();
+    }
+    # доступ только пользователю
+    protected function access_user()
+    {
+        if (!App::user()->id) {
+            $this->access_denied('Для просмотра страницы необходимо авторизоваться');
+        }
+    }
+    # доступ только гостью
+    protected function access_guest()
+    {
+        if (App::user()->id) {
+            $this->access_denied('Страница доступна только гостью');
+        }
     }
 }
