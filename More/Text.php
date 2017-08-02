@@ -9,11 +9,11 @@ abstract class Text{
         return trim($text);
     }
     # допускаем строки подходящие для названий
-    # без.спец.символов, разрешен лишь пробел, диапазон от 3 до 32 символа
+    # без.спец.символов, разрешен лишь пробел и нижнее подчеркивание, диапазон от 3 до 32 символа
     public static function for_name(string $text): string
     {
         $text = self::input_text($text);
-        if (preg_match('/^[а-яa-z|\s]{3,32}$/ui', $text)) {
+        if (preg_match('/^[а-яa-z0-9|\s|\_]{3,32}$/ui', $text)) {
             return $text;
         }
         return '';

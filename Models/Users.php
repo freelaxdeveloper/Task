@@ -18,4 +18,22 @@ abstract class Users{
 
         return DB::me()->lastInsertId() ? true : false;
     }
+    # получаем данные по логину и паролю
+    /*
+     так как PHP7.1 возможности пока что использовать нету, использовать :?int не получится
+     потому пока что возвращаемое значение указывать не буду
+    */
+    public static function getUserByPassword(string $login, string $password)
+    {
+        $q = DB::me()->prepare("SELECT `id`,`password` FROM `users` WHERE `login` = :login LIMIT 1");
+        $q->bindParam(':login', $login, \PDO::PARAM_STR);
+        $q->execute();
+        if (!$user = $q->fetch()) {
+            return false;
+        }
+        if (!password_verify($password, $user['password'])) {
+            return false;
+        }
+        return $user;
+    }
 }

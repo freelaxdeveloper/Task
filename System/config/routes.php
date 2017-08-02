@@ -13,4 +13,8 @@ return [
     ['pattern' => 'register','run' => 'main/register','method' => 'GET'],
     # страница регистрации (отправка формы)
     ['pattern' => 'register/send','run' => 'main/register','method' => 'POST'],
+    # страница авторизации
+    ['pattern' => 'authorize','run' => 'main/authorize','method' => 'GET'],
+    # страница авторизации (отправка формы)
+    ['pattern' => 'authorize/send','run' => 'main/authorize','method' => 'POST'],
 ];
