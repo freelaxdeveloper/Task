@@ -1,1 +1,3 @@
 /sys/config/db.php
+/composer.phar
+/vendor/

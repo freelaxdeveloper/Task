@@ -1,0 +1,16 @@
+{
+    "name": "vendor/test",
+    "description": "lalala",
+    "type": "test",
+    "require": {
+        "twig/twig": "^2.4"
+    },
+    "license": "none",
+    "authors": [
+        {
+            "name": "Sanek-OS9",
+            "email": "Sanek_OS9@mail.ru"
+        }
+    ],
+    "minimum-stability": "beta"
+}
