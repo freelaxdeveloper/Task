@@ -59,8 +59,11 @@ class ProjectController extends Controller{
     public function actionDelete(int $id_project)
     {
         $this->access_user(); # доступ только авторизированным
-
-        Project::deleteOne($id_project);
-        header('Location: ' . App::referer());
+        if (Project::deleteOne($id_project)) {
+            header('Location: ' . App::referer());
+        } else {
+            $this->params['title'] = 'Ошибка удаления';
+            $this->access_denied('Проект не может быть удален пока в нем есть не выполненные задания');
+        }
     }
 }

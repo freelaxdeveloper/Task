@@ -114,7 +114,7 @@ nav ul .action_display{
 	position:absolute;
 	min-width:80px;
 	top:0;
-	left: 40px;
+	left: 65px;
 	-webkit-transition:0.55s linear opacity;
 	z-index:100;
 	background-color:rgb(55, 103, 250);
