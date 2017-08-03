@@ -21,4 +21,6 @@ return [
     ['pattern' => 'exit','run' => 'authorize/exit','method' => 'GET'],
     # просмотр заданий проекта
     ['pattern' => 'project/([0-9]+)','run' => 'project/view/$1','method' => 'GET'],
+    # удаление задания
+    ['pattern' => 'task/delete/([0-9]+)','run' => 'task/delete/$1','method' => 'GET'],
 ];

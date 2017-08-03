@@ -23,4 +23,11 @@ abstract class Task{
         }
         return [];
     }
+    # удаляем одно задание
+    public static function deleteOne(int $id_task)
+    {
+        $q = DB::me()->prepare("DELETE FROM `tasks` WHERE `id` = :id LIMIT 1");
+        $q->bindParam(':id', $id_task, \PDO::PARAM_INT);
+        $q->execute();
+    }
 }
