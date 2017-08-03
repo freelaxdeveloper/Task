@@ -145,35 +145,66 @@ footer > span{
 /* endfooter */
 
 /* form */
+.form{
+	background-color:rgb(55, 103, 250);
+	color:#fff;
+	padding: 7px;
+	border-radius:7px;
+}
+.form input{
+	height:30px;
+	width:30%;
+	margin-bottom:5px;
+	font-size:13px;
+	border: 1px solid rgb(55, 103, 250);
+	padding-left:5px;
+	border-radius:7px;
+}
+.form input:hover{
+    border: 1px solid #f674e1;
+}
+.form input[type=submit]{
+	color:#fff;
+	background-color:#f674e1;
+	width:100px;
+	cursor:pointer;
+}
+.form a{
+	display:inline-block;;
+	height:27px;
+	line-height:27px;
+	color:#fff;
+	background-color:#f674e1;
+	padding:0 5px 0 5px;
+}
+.form a:hover{
+	border: 1px solid #f674e1;
+}
+
 #formProject, #formTask{
     display: none;
+    position:relative;
 }
 #formProject a, #formTask a{
-    font-size: 13px;
-    vertical-align:bottom;
+    font-size: 14px;
+    border-radius:7px;
 }
 #formProject{
-    text-align:left;
+    text-align:center;
 }
 #formProject input{
-    text-align:right;
+    text-align:center;
     padding:3px;
     display:inline-block;
-    width:132px;
+    width:180px;
 }
-#formProject button{
-	margin-left: 20px;
-}
-#formProject button:nth-child(2n), #formTask button:nth-child(2n){
-	background-color:rgb(55, 103, 250);
-	padding:5px;
-	color:#fff;
+#formProject input[type=submit]{
+	width:100px;
 }
 #formProject #typeProject{
-	position:relative;
-	display:inline-block;
-	left:25px;
-	top:5px;
+	position:absolute;
+	left:10px;
+	top:18px;
 	width: 1em;
 	height:1em;
 	background-color:red;
@@ -193,8 +224,8 @@ footer > span{
 }
 #formTask #typeTask{
 	position:absolute;
-	right:0;
-	top:0;
+	right:3px;
+	top:10px;
     width: 1em;
     height:1em;
     background-color:red;
@@ -204,16 +235,18 @@ footer > span{
 	height:1.5em;
 }
 
-#formTask input{
-	height:20px;
-}
 #formTask select{
 	position:absolute;
 	right:30px;
-	top:-4px;
+	top: 5px;
 	margin-top:3px;
-	height:25px;
+	height: 30px;
 	width:80px;
+	background-color:#fff;
+	border-radius:7px;
+}
+#formTask select:hover{
+	border: 1px solid #f674e1;
 }
 /* endform */
 

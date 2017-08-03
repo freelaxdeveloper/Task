@@ -8,7 +8,7 @@
     {% if user.id and projects %}
         <div>
             <a id="Task" href="#">+ Добавить задание</a>
-            <form id="formTask" action="/task/new/" method="post">
+            <form id="formTask" class="form" action="/task/new/" method="post">
                 <input type="text" name="name_task" value="" placeholder="Что Вам необходимо сделать">
                 <input type="date" name="name_date" value=""><br>
                 <!-- <span id="typeTask"><input class="typeTask" type="text" name="typeTask" value=""></span> -->
@@ -20,7 +20,7 @@
 
                 <input type="hidden" name="color" value="red">
                 <span id="typeTask"></span>
-                <button type="submit" name="add">Добавить</button>
+                <input type="submit" name="add" value="Добавить">
                 <a href="#" class="cancel">Отменить</a>
             </form>
         </div>
