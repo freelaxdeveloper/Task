@@ -58,4 +58,13 @@ abstract class Project
         $q->bindParam(':time_create', $time_create, \PDO::PARAM_INT);
         $q->execute();
     }
+    # создаем проект
+    public static function update(string $title, string $color, int $id_project)
+    {
+        $q = DB::me()->prepare("UPDATE `projects` SET `title` = :title, `color` = :color WHERE `id` = :id_project LIMIT 1");
+        $q->bindParam(':title', $title, \PDO::PARAM_STR);
+        $q->bindParam(':color', $color, \PDO::PARAM_STR);
+        $q->bindParam(':id_project', $id_project, \PDO::PARAM_INT);
+        $q->execute();
+    }
 }

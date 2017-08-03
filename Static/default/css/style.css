@@ -155,6 +155,7 @@ footer > span{
 
 /* form */
 .form{
+	position:relative;
 	background-color:rgb(55, 103, 250);
 	color:#fff;
 	padding: 7px;
@@ -168,6 +169,7 @@ footer > span{
 	border: 1px solid rgb(55, 103, 250);
 	padding-left:5px;
 	border-radius:7px;
+	text-align:center;
 }
 .form input:hover{
     border: 1px solid #f674e1;
@@ -210,7 +212,7 @@ footer > span{
 #formProject input[type=submit]{
 	width:100px;
 }
-#formProject #typeProject{
+#typeProject,#ProjectEdit{
 	position:absolute;
 	left:10px;
 	top:18px;

@@ -23,6 +23,26 @@ class ProjectController extends Controller{
 
         $this->display('project/view');
     }
+    public function actionEdit(int $id_project)
+    {
+        $project = Project::getOne($id_project);
+        if (!$project) {
+            $this->access_denied('Проект не найден');
+        }
+        if (isset($_POST['title']) && isset($_POST['color_edit'])) {
+            $title = Text::for_name($_POST['title']);
+            $color = Text::for_name($_POST['color_edit']);
+
+            if ($title && $color) {
+                Project::update($title, $color, $project['id']);
+                header('Location: ' . App::referer());
+            }
+        }
+        $this->params['title'] = $project['title'] . ' - редактирование';
+        $this->params['project'] = $project;
+
+        $this->display('project/edit');
+    }
     # просмотр завершенных заданий
     public function actionViewComplete(int $id_project)
     {

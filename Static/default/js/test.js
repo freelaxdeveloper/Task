@@ -86,14 +86,8 @@ $(function(){
                 form.showLinkAddProject();
             });
             var key = 0;
-            console.log(id);
             $('#type' + id).click(function(){
                 var colors = form.getColors();
-                // if (id == 'Task') {
-                //     var colors = ['red', 'green', 'yellow'];
-                // } else {
-                //     var colors = ['red', 'green', 'blue', 'yellow','black'];
-                // }
                 key = (key+1) % colors.length;
                 $('#type' + id).css('background-color', colors[key]);
                 $('input[name=color]').attr('value', colors[key]);
@@ -102,5 +96,4 @@ $(function(){
 
 
     });
-
 });
