@@ -19,6 +19,7 @@ class ProjectController extends Controller{
         $this->params['title'] = $project['title'];
         $this->params['tasks'] = $tasks;
         $this->params['project'] = $project;
+        $this->params['id_activePproject'] = $project['id'];
 
         $this->display('project/view');
     }

@@ -36,7 +36,7 @@
                 </ul>
                 <ul>
                     {% for project in projects %}
-                        <li>
+                        <li class="{% if project.id == id_activePproject %}active{% endif %}">
                             <a href="/project/{{project.id}}/"><span class="color_project {{project.color}}"></span> {{project.title}}</a>
                             {% if user.id %}
                                 <span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>

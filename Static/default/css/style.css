@@ -81,8 +81,19 @@ nav ul{
 nav li{
 	position:relative;
 	padding: 1px;
+	border-radius:7px;
+	margin-bottom:1px;
 }
-nav li:hover a{
+nav li.active{
+	background-color:rgb(55, 103, 250);
+}
+nav li.active a{
+	color:#fff;
+}
+nav .active:hover > a{
+	color:#eeec19;
+}
+nav li:hover > a{
 	color:red;
 }
 nav ul#Project li:hover a{
@@ -101,6 +112,7 @@ nav ul span{
 }
 nav ul span.menu_action{
 	float:right;
+	margin-right:15px;
 }
 nav .color_project{
 	display:inline-block;
@@ -114,7 +126,7 @@ nav ul .action_display{
 	position:absolute;
 	min-width:80px;
 	top:0;
-	left: 65px;
+	left: 50px;
 	-webkit-transition:0.55s linear opacity;
 	z-index:100;
 	background-color:rgb(55, 103, 250);
@@ -122,7 +134,7 @@ nav ul .action_display{
 	border-radius:7px;
 	padding:5px;
 }
-nav ul .action_display a{
+nav .action_display a{
 	color:#fff;
 }
 nav ul .action_display a:hover{
