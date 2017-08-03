@@ -30,5 +30,5 @@ return [
     # удаление задания
     ['pattern' => 'task/delete/([0-9]+)','run' => 'task/delete/$1','method' => 'GET'],
     # просмотр завершенных заданий
-    ['pattern' => 'task/complete/([0-9]+)','run' => 'task/complete/$1','method' => 'GET'],
+    ['pattern' => 'task/view/complete/([0-9]+)','run' => 'task/viewComplete/$1','method' => 'GET'],
 ];

@@ -39,12 +39,17 @@ class TaskController extends Controller{
             }
         }
     }
-    # список завершенных заданий
+    # завершение задания
     public function actionComplete(int $id_task)
     {
         $this->access_user(); # доступ только авторизированным
 
         Task::setComplete($id_task);
         header('Location: ' . App::referer());
+    }
+    # просмотр завершенных заданий
+    public function actionViewComplete(int $id_project)
+    {
+        echo 'hello';
     }
 }
