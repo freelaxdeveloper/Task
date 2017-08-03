@@ -19,9 +19,11 @@ abstract class Task{
         }
     }
     # получаем список всех заданий
-    public static function getAll(): array
+    public static function getAll(int $status = 1): array
     {
-        $q = DB::me()->query("SELECT `tasks`.*, `projects`.`title`, `projects`.`color` FROM `tasks` INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id` WHERE `tasks`.`status` = '0' ORDER BY `tasks`.`id` DESC");
+        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`title`, `projects`.`color` FROM `tasks` INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id` WHERE `tasks`.`status` = :status ORDER BY `tasks`.`importance` DESC, `tasks`.`time_create` DESC");
+        $q->bindParam(':status', $status, \PDO::PARAM_INT);
+        $q->execute();
         if ($tasks = $q->fetchAll()) {
             return $tasks;
         }
@@ -30,14 +32,15 @@ abstract class Task{
     # отмечаем как выполненное
     public static function setComplete(int $id_task)
     {
-        $q = DB::me()->prepare("UPDATE `tasks` SET `status` = '1' WHERE `id` = :id_task LIMIT 1");
+        $q = DB::me()->prepare("UPDATE `tasks` SET `status` = '2' WHERE `id` = :id_task LIMIT 1");
         $q->bindParam(':id_task', $id_task, \PDO::PARAM_INT);
         $q->execute();
     }
-    public static function getByProject(int $id_project): array
+    public static function getByProject(int $id_project, int $status = 1): array
     {
-        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`title`, `projects`.`color` FROM `tasks` INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id` AND `projects`.`id` = :id_project AND `tasks`.`status` = '0' ORDER BY `tasks`.`id` DESC");
+        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`title`, `projects`.`color` FROM `tasks` INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id` AND `projects`.`id` = :id_project AND `tasks`.`status` = :status ORDER BY `tasks`.`importance` DESC, `tasks`.`time_create` DESC");
         $q->bindParam(':id_project', $id_project, \PDO::PARAM_INT);
+        $q->bindParam(':status', $status, \PDO::PARAM_INT);
         $q->execute();
         if ($tasks = $q->fetchAll()) {
             return $tasks;

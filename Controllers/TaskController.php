@@ -47,9 +47,4 @@ class TaskController extends Controller{
         Task::setComplete($id_task);
         header('Location: ' . App::referer());
     }
-    # просмотр завершенных заданий
-    public function actionViewComplete(int $id_project)
-    {
-        echo 'hello';
-    }
 }

@@ -21,6 +21,8 @@ return [
     ['pattern' => 'exit','run' => 'authorize/exit','method' => 'GET'],
     # просмотр заданий проекта
     ['pattern' => 'project/([0-9]+)','run' => 'project/view/$1','method' => 'GET'],
+    # просмотр завершенных заданий
+    ['pattern' => 'task/view/complete/([0-9]+)','run' => 'project/viewComplete/$1','method' => 'GET'],
     # добавление проекта
     ['pattern' => 'project/new','run' => 'project/create','method' => 'POST'],
     # удаление проекта
@@ -29,6 +31,6 @@ return [
     ['pattern' => 'task/new','run' => 'task/create','method' => 'POST'],
     # удаление задания
     ['pattern' => 'task/delete/([0-9]+)','run' => 'task/delete/$1','method' => 'GET'],
-    # просмотр завершенных заданий
-    ['pattern' => 'task/view/complete/([0-9]+)','run' => 'task/viewComplete/$1','method' => 'GET'],
+    # завершение задания
+    ['pattern' => 'task/complete/([0-9]+)','run' => 'task/complete/$1','method' => 'GET'],
 ];

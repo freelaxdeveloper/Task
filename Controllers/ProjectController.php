@@ -22,6 +22,24 @@ class ProjectController extends Controller{
 
         $this->display('project/view');
     }
+    # просмотр завершенных заданий
+    public function actionViewComplete(int $id_project)
+    {
+        $project = Project::getOne($id_project);
+
+        if (!$project) {
+            $project = ['title' => 'Весь список', 'id' => 0];
+            $tasks = Task::getAll(2);
+        } else {
+            $tasks = Task::getByProject($id_project, 2);
+        }
+
+        $this->params['title'] = $project['title'] . ' - выполненные задания';
+        $this->params['tasks'] = $tasks;
+        $this->params['project'] = $project;
+
+        $this->display('project/view');
+    }
     # добавляем проект
     public function actionCreate()
     {
