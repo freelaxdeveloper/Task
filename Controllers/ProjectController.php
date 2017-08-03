@@ -27,7 +27,7 @@ class ProjectController extends Controller{
     {
         $this->access_user(); # доступ только авторизированным
 
-        if (isset($_POST['add'])) {
+        if (isset($_POST['title']) && isset($_POST['color'])) {
             $title = Text::for_name($_POST['title']);
             $color = Text::for_name($_POST['color']);
 

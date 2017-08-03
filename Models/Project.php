@@ -32,7 +32,7 @@ abstract class Project
     public static function deleteOne(int $id_project)
     {
         // удаляем все заказы с проекта
-        $q = DB::me()->prepare("DELETE FROM `tasks` WHERE `id_project` = :id_project LIMIT 1");
+        $q = DB::me()->prepare("DELETE FROM `tasks` WHERE `id_project` = :id_project");
         $q->bindParam(':id_project', $id_project, \PDO::PARAM_INT);
         $q->execute();
         // удаляем проект

@@ -8,15 +8,6 @@ a{
 }
 /* endglobal */
 
-/* other */
-#add_project a, #add_task a{
-	color:red;
-}
-.display_none {
-    display: none;
-}
-/* endother */
-
 /* actions_colors*/
 .red{
     background-color: #ff2e00;
@@ -29,6 +20,9 @@ a{
 }
 .black{
     background-color: #020214;
+}
+.yellow{
+    background-color: #e1f40f;
 }
 /* endactions_colors*/
 
@@ -90,6 +84,9 @@ nav li{
 }
 nav li:hover a{
 	color:red;
+}
+nav ul#Project li:hover a{
+    color: #fff;
 }
 nav{
     display: inline-block;
@@ -169,13 +166,14 @@ footer > span{
 	width:100px;
 	cursor:pointer;
 }
-.form a{
+.form a, .btn{
 	display:inline-block;;
 	height:27px;
 	line-height:27px;
 	color:#fff;
 	background-color:#f674e1;
 	padding:0 5px 0 5px;
+    border-radius:7px;
 }
 .form a:hover{
 	border: 1px solid #f674e1;
@@ -187,7 +185,6 @@ footer > span{
 }
 #formProject a, #formTask a{
     font-size: 14px;
-    border-radius:7px;
 }
 #formProject{
     text-align:center;
@@ -214,25 +211,25 @@ footer > span{
 }
 
 #formTask input[type='text']{
-	width:73%;
+	width:65%;
 }
 #formTask input[type='date']{
-	width:13%;
+	width:15%;
 }
 #formTask{
 	position:relative;
 }
 #formTask #typeTask{
 	position:absolute;
-	right:3px;
-	top:10px;
-    width: 1em;
-    height:1em;
-    background-color:red;
-    border-radius:50%;
-    cursor:pointer;
-    width:1.5em;
-	height:1.5em;
+	right: 6px;
+	top: 14px;
+	width: 1em;
+	height:1em;
+	background-color:red;
+	border-radius:50%;
+	cursor:pointer;
+	width: 1.2em;
+	height: 1.2em;
 }
 
 #formTask select{
@@ -241,9 +238,10 @@ footer > span{
 	top: 5px;
 	margin-top:3px;
 	height: 30px;
-	width:80px;
+	width:130px;
 	background-color:#fff;
 	border-radius:7px;
+	font-size:14px;
 }
 #formTask select:hover{
 	border: 1px solid #f674e1;
@@ -295,6 +293,8 @@ div.listing-right span.project-name{
 	color:red;
 }
 /* endlisting*/
+
+/* notice */
 .messages{
 	text-align:center;
 	margin-top:-15px;
@@ -311,3 +311,13 @@ div.listing-right span.project-name{
 .messages .message{
 	background-color:#269818;
 }
+/* notice */
+
+/* other */
+#add_project a, #add_task a{
+	color:red;
+}
+.display_none {
+    display: none;
+}
+/* endother */

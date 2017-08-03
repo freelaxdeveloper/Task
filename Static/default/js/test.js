@@ -69,6 +69,13 @@ $(function(){
             $('#' + this.id).fadeIn('slowe'); // показали ссылку
             $('#form' + this.id).fadeOut('slowe'); // скрыли форму
         }
+        this.getColors = function()
+        {
+            if ('Task' == this.id) {
+                return ['red', 'green', 'yellow'];
+            }
+            return ['red', 'green', 'blue', 'yellow','black'];
+        }
     }
     $('#Task, #Project').each(function(i, el) {
         $(el).click(function(){
@@ -81,8 +88,12 @@ $(function(){
             var key = 0;
             console.log(id);
             $('#type' + id).click(function(){
-                console.log('Зашел');
-                var colors = ['red', 'green', 'blue', 'yellow'];
+                var colors = form.getColors();
+                // if (id == 'Task') {
+                //     var colors = ['red', 'green', 'yellow'];
+                // } else {
+                //     var colors = ['red', 'green', 'blue', 'yellow','black'];
+                // }
                 key = (key+1) % colors.length;
                 $('#type' + id).css('background-color', colors[key]);
                 $('input[name=color]').attr('value', colors[key]);
