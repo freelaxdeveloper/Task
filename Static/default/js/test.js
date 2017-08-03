@@ -85,6 +85,7 @@ $(function(){
                 var colors = ['red', 'green', 'blue', 'yellow'];
                 key = (key+1) % colors.length;
                 $('#type' + id).css('background-color', colors[key]);
+                $('input[name=color]').attr('value', colors[key]);
             });
         });
 

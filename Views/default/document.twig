@@ -51,12 +51,12 @@
                         <ul id="Project">
                             <li><a href="#">+ Добавить проект</a></li>
                         </ul>
-                        <form id="formProject" action="#" method="post">
+                        <form id="formProject" action="/project/new/" method="post">
                             <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
                             <span id="typeProject"></span>
-                            <input type="text" name="name_project" value="" placeholder="Название проекта"><br>
-
-                            <button type="button" name="button">Добавить</button>
+                            <input type="hidden" name="color" value="red">
+                            <input type="text" name="title" value="" placeholder="Название проекта" pattern="^[a-zа-яЁё0-9]{3,32}$"><br>
+                            <button type="submit" name="add">Добавить</button>
                             <a href="#" class="cancel">Отменить</a>
                         </form>
                     </div>

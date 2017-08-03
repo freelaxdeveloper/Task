@@ -1,7 +1,7 @@
 <?php
 namespace Models;
 
-use \Core\DB;
+use \Core\{DB,App};
 
 /**
  * Работа с проектами
@@ -38,6 +38,19 @@ abstract class Project
         // удаляем проект
         $q = DB::me()->prepare("DELETE FROM `projects` WHERE `id` = :id LIMIT 1");
         $q->bindParam(':id', $id_project, \PDO::PARAM_INT);
+        $q->execute();
+    }
+    # создаем проект
+    public static function create(string $title, string $color)
+    {
+        $id_user = App::user()->id;
+        $time_create = TIME;
+
+        $q = DB::me()->prepare("INSERT INTO `projects` (`title`, `color`,`id_user`,`time_create`) VALUES (:title, :color, :id_user, :time_create)");
+        $q->bindParam(':title', $title, \PDO::PARAM_STR);
+        $q->bindParam(':color', $color, \PDO::PARAM_STR);
+        $q->bindParam(':id_user', $id_user, \PDO::PARAM_INT);
+        $q->bindParam(':time_create', $time_create, \PDO::PARAM_INT);
         $q->execute();
     }
 }

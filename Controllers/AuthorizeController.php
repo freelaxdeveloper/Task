@@ -9,7 +9,7 @@ class AuthorizeController extends Controller{
     # выход с профиля
     public function actionExit()
     {
-        $this->access_user();
+        $this->access_user(); # доступ только авторизированным
 
         Authorize::exit();
         header('Location: /');
