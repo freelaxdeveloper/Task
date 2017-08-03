@@ -18,8 +18,11 @@
                     {% if user.id == 0 %}
                         <a href="/register/">Регистрация</a> / <a href="/authorize/">Авторизация</a>
                     {% else %}
-                        <a href="/exit/">Выход</a> <a href="#" title="Выполненные задания"><i class="fa fa-check"></i></a>
+                        <a href="/exit/">Выход</a>
                     {% endif %}
+                    {% block complete %}
+                        <a href="/task/complete/0/" title="Выполненные задания"><i class="fa fa-check"></i></a>
+                    {% endblock %}
 
 
                 </span>

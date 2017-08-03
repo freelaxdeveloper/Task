@@ -24,4 +24,9 @@ class TaskController extends Controller{
 
         printr($_POST);
     }
+    # список завершенных заданий
+    public function actionComplete(int $id_project)
+    {
+        echo 'hello';
+    }
 }

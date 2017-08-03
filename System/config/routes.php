@@ -29,4 +29,6 @@ return [
     ['pattern' => 'task/new','run' => 'task/create','method' => 'POST'],
     # удаление задания
     ['pattern' => 'task/delete/([0-9]+)','run' => 'task/delete/$1','method' => 'GET'],
+    # просмотр завершенных заданий
+    ['pattern' => 'task/complete/([0-9]+)','run' => 'task/complete/$1','method' => 'GET'],
 ];

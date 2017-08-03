@@ -9,19 +9,16 @@ class ProjectController extends Controller{
 
     public function actionView(int $id_project)
     {
-        # получем список заданий
-        if (!$tasks = Task::getByProject($id_project)) {
-            # если заданий нету получем данные проекта (если задания есть то данные проекта там присутствуют)
-            $project = Project::getOne($id_project);
-        }
-        $title = $tasks[0]['title'] ?? $project['title'] ?? false;
-
-        if (!$title) {
+        $project = Project::getOne($id_project);
+        if (!$project) {
             $this->access_denied('Проект не найден');
         }
+        # получем список заданий
+        $tasks = Task::getByProject($id_project);
 
-        $this->params['title'] = $title;
+        $this->params['title'] = $project['title'];
         $this->params['tasks'] = $tasks;
+        $this->params['project'] = $project;
 
         $this->display('project/view');
     }
