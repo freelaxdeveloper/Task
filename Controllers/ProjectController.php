@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-use \Core\{Controller};
+use \Core\{Controller,App};
 use \Models\{Project,Task};
 
 class ProjectController extends Controller{
@@ -23,5 +23,11 @@ class ProjectController extends Controller{
         $this->params['tasks'] = $tasks;
 
         $this->display('project/view');
+    }
+    # удаляем проект
+    public function actionDelete(int $id_project)
+    {
+        Project::deleteOne($id_project);
+        header('Location: ' . App::referer());
     }
 }

@@ -29,4 +29,9 @@ abstract class App{
         }
         return $_instance;
     }
+    # возвращаем референую ссылку, если таковой нету то заданую
+    public static function referer(string $link = '/'): string
+    {
+        return $_SERVER['HTTP_REFERER'] ?? $link;
+    }
 }

@@ -28,4 +28,16 @@ abstract class Project
         }
         return [];
     }
+    # удаляем один проект
+    public static function deleteOne(int $id_project)
+    {
+        // удаляем все заказы с проекта
+        $q = DB::me()->prepare("DELETE FROM `tasks` WHERE `id_project` = :id_project LIMIT 1");
+        $q->bindParam(':id_project', $id_project, \PDO::PARAM_INT);
+        $q->execute();
+        // удаляем проект
+        $q = DB::me()->prepare("DELETE FROM `projects` WHERE `id` = :id LIMIT 1");
+        $q->bindParam(':id', $id_project, \PDO::PARAM_INT);
+        $q->execute();
+    }
 }
