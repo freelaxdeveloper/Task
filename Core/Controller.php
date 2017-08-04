@@ -3,7 +3,7 @@ namespace Core;
 
 use \More\{Text,Pages};
 use \Core\{App};
-use \Models\{Project,Task};
+use \Models\{Projects};
 
 class Controller{
     protected $params = [];
@@ -39,7 +39,7 @@ class Controller{
     }
     private function _inicialization()
     {
-        $this->params['projects'] = Project::getAll();
+        $this->params['projects'] = Projects::getAll();
         $this->params['user'] = App::user();
     }
     # доступ только пользователю

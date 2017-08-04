@@ -6,7 +6,7 @@ use \Core\{DB,App};
 /**
  * Работа с проектами
  */
-abstract class Project
+abstract class Projects
 {
     # получаем список всех проектов
     static function getAll(): array

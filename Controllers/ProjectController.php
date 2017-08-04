@@ -2,19 +2,19 @@
 namespace Controllers;
 
 use \Core\{Controller,App};
-use \Models\{Project,Task};
+use \Models\{Projects,Tasks};
 use \More\Text;
 
 class ProjectController extends Controller{
 
     public function actionView(int $id_project)
     {
-        $project = Project::getOne($id_project);
+        $project = Projects::getOne($id_project);
         if (!$project) {
             $this->access_denied('Проект не найден');
         }
         # получем список заданий
-        $tasks = Task::getByProject($id_project);
+        $tasks = Tasks::getByProject($id_project);
 
         $this->params['title'] = $project['title'];
         $this->params['tasks'] = $tasks;
@@ -25,7 +25,7 @@ class ProjectController extends Controller{
     }
     public function actionEdit(int $id_project)
     {
-        $project = Project::getOne($id_project);
+        $project = Projects::getOne($id_project);
         if (!$project) {
             $this->access_denied('Проект не найден');
         }
@@ -34,7 +34,7 @@ class ProjectController extends Controller{
             $color = Text::for_name($_POST['color_edit']);
 
             if ($title && $color) {
-                Project::update($title, $color, $project['id']);
+                Projects::update($title, $color, $project['id']);
                 header('Location: ' . App::referer());
             }
         }
@@ -46,13 +46,13 @@ class ProjectController extends Controller{
     # просмотр завершенных заданий
     public function actionViewComplete(int $id_project)
     {
-        $project = Project::getOne($id_project);
+        $project = Projects::getOne($id_project);
 
         if (!$project) {
             $project = ['title' => 'Весь список', 'id' => 0];
-            $tasks = Task::getAll(2);
+            $tasks = Tasks::getAll(2);
         } else {
-            $tasks = Task::getByProject($id_project, 2);
+            $tasks = Tasks::getByProject($id_project, 2);
         }
 
         $this->params['title'] = $project['title'] . ' - выполненные задания';
@@ -71,7 +71,7 @@ class ProjectController extends Controller{
             $color = Text::for_name($_POST['color']);
 
             if ($title && $color) {
-                Project::create($title, $color);
+                Projects::create($title, $color);
             }
         }
         header('Location: ' . App::referer());
@@ -80,7 +80,7 @@ class ProjectController extends Controller{
     public function actionDelete(int $id_project)
     {
         $this->access_user(); # доступ только авторизированным
-        if (Project::deleteOne($id_project)) {
+        if (Projects::deleteOne($id_project)) {
             header('Location: ' . App::referer());
         } else {
             $this->params['title'] = 'Ошибка удаления';

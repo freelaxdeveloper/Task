@@ -3,7 +3,7 @@ namespace Models;
 
 use \Core\{DB,App};
 
-abstract class Task{
+abstract class Tasks{
     # получаем номер важности задания
     public static function getImportance(string $importance): int
     {
