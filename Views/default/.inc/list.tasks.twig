@@ -4,12 +4,14 @@
         <div class="listing-right">
             <span class="project-name">{{task.title}}</span>
             <span class="listing-action {% if task.importance == 0 %}green{% elseif task.importance == 1 %}yellow{% elseif task.importance == 2 %}red{% endif %}"></span>
-            
+
             {% if user.id %}
                 <span class="listing-menu" id="listing{{task.id}}" data-action="listingAction{{task.id}}"><i class="fa fa-ellipsis-v"></i></span>
                 <span class="display_none" id="listingAction{{task.id}}">
-                    <a href="/task/complete/{{task.id}}/">Выполнить</a><br>
-                    <a href="/task/edit/{{task.id}}/">Изменить</a><br>
+                    {% if task.status == 1 %}
+                        <a href="/task/complete/{{task.id}}/">Выполнить</a><br>
+                        <a href="/task/edit/{{task.id}}/">Изменить</a><br>
+                    {% endif %}
                     <a href="/task/delete/{{task.id}}/">Удалить</a><br>
                 </span>
             {% endif %}

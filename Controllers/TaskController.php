@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use \Core\{Controller,App};
-use \Models\{Tasks};
+use \Models\{Tasks,Task};
 use \More\{Text,Misc};
 
 class TaskController extends Controller{
@@ -11,7 +11,12 @@ class TaskController extends Controller{
     {
         $this->access_user(); # доступ только авторизированным
 
-        Tasks::deleteOne($id_task);
+        $task = new Task($id_task);
+
+        if (!$task->id) {
+            $this->access_denied('Задание не найдено');
+        }
+        $task->delete();
         header('Location: ' . App::referer());
     }
     # добавляем задание
@@ -25,7 +30,7 @@ class TaskController extends Controller{
             # дата, когда нужно выполнить задание
             $deadlines = Text::input_text($_POST['deadlines']);
             # важность задания
-            $importance = Tasks::getImportance($_POST['color']);
+            $importance = Task::setImportance($_POST['color']);
             # ID проекта
             $id_project = (int) abs($_POST['id_project']);
 
@@ -44,7 +49,13 @@ class TaskController extends Controller{
     {
         $this->access_user(); # доступ только авторизированным
 
-        Tasks::setComplete($id_task);
+        $task = new Task($id_task);
+
+        if (!$task->id) {
+            $this->access_denied('Задание не найдено');
+        }
+
+        $task->status = 2;
         header('Location: ' . App::referer());
     }
     # редактирование задания
@@ -52,50 +63,32 @@ class TaskController extends Controller{
     {
         $this->access_user(); # доступ только авторизированным
 
-        $task = Tasks::getOne($id_task);
-
-        if (!$task['id']) {
+        $task = new Task($id_task);
+        if (!$task->id || $task->status == 2) {
             $this->access_denied('Задание не найдено');
         }
-        $date = new \DateTime();
-        $date->setTimestamp($task['deadlines']);
-        $task['deadlines'] = $date->format('Y-m-d\TH:i');
 
-        $task['importance'] = Tasks::getImportanceStr($task['importance']);
-
-        $this->params['title'] = $task['message'] . ' - редактирование';
-        $this->params['task'] = $task;
-
-        $this->display('task/edit');
-    }
-    # редактирование задания сохранение
-    public function actionEditSave(int $id_task)
-    {
-        $this->access_user(); # доступ только авторизированным
-
-        $task = Tasks::getOne($id_task);
-
-        if (!$task['id']) {
-            $this->access_denied('Задание не найдено');
-        }
         if (isset($_POST['message']) && isset($_POST['deadlines']) && isset($_POST['color_edit']) && isset($_POST['id_project'])) {
             # задание
             $message = Text::input_text($_POST['message']);
             # дата, когда нужно выполнить задание
             $deadlines = Text::input_text($_POST['deadlines']);
             # важность задания
-            $importance = Tasks::getImportance($_POST['color_edit']);
+            $importance = Text::input_text($_POST['color_edit']);
             # ID проекта
             $id_project = (int) abs($_POST['id_project']);
 
-            if ($message && $deadlines && $id_project) {
-                # хранить дату будем в UNIX
-                $date = new \DateTime($deadlines);
-                if ($deadlines = $date->format('U')) {
-                    Tasks::update($message, $deadlines, $importance, $id_project, $task['id']);
-                }
+            if ($message && $deadlines && $id_project && $importance) {
+                $task->message = $message;
+                $task->deadlines = $deadlines;
+                $task->importance = $importance;
+                $task->id_project = $id_project;
             }
         }
-        header('Location: /task/edit/' . $task['id'] . '/');
+
+        $this->params['title'] = $task->message . ' - редактирование';
+        $this->params['task'] = $task;
+
+        $this->display('task/edit');
     }
 }

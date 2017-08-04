@@ -40,5 +40,5 @@ return [
     # редактирование задания
     ['pattern' => 'task/edit/([0-9]+)','run' => 'task/edit/$1','method' => 'GET'],
     # редактирование задания (сохранение)
-    ['pattern' => 'task/edit/([0-9]+)/save','run' => 'task/editSave/$1','method' => 'POST'],
+    ['pattern' => 'task/edit/([0-9]+)/save','run' => 'task/edit/$1','method' => 'POST'],
 ];
