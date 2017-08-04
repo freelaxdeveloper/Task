@@ -33,7 +33,7 @@ abstract class Tasks{
     * @param int status
     * статус выполнения проекта (1 не выполнено, 2 - выполнено)
     */
-    public static function getTasks(?array $params = null)
+    public static function getTasks(array $params = []): array
     {
         $tasks = [];
         $where = '';
