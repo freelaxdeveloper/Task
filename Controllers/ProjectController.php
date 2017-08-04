@@ -14,7 +14,7 @@ class ProjectController extends Controller{
             $this->access_denied('Проект не найден');
         }
         # получем список заданий
-        $tasks = Tasks::getByProject($id_project);
+        $tasks = Tasks::getTasks(['id_project' => $project['id']]);
 
         $this->params['title'] = $project['title'];
         $this->params['tasks'] = $tasks;
@@ -50,12 +50,13 @@ class ProjectController extends Controller{
 
         if (!$project) {
             $project = ['title' => 'Весь список', 'id' => 0];
-            $tasks = Tasks::getAll(2);
+            $tasks = Tasks::getTasks(['status' => 2]);
+            $this->params['title'] = 'Весь список выполненных заданий';
         } else {
-            $tasks = Tasks::getByProject($id_project, 2);
+            $tasks = Tasks::getTasks(['status' => 2, 'id_project' => $id_project]);
+            $this->params['title'] = $project['title'] . ' - выполненные задания';
         }
 
-        $this->params['title'] = $project['title'] . ' - выполненные задания';
         $this->params['tasks'] = $tasks;
         $this->params['project'] = $project;
 

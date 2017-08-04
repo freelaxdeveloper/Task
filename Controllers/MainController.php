@@ -9,7 +9,7 @@ class MainController extends Controller{
 
     public function actionIndex()
     {
-        $this->params['tasks'] = Tasks::getAll();
+        $this->params['tasks'] = Tasks::getTasks();
 
         $this->display('main/index');
     }
@@ -31,7 +31,7 @@ class MainController extends Controller{
                 break;
         }
         $this->params['title'] = $title;
-        $this->params['tasks'] = Tasks::getAllForTime($shit_days);
+        $this->params['tasks'] = Tasks::getTasks(['shit_days' => $shit_days]);
         $this->display('main/index');
     }
 }
