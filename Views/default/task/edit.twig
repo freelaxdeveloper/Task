@@ -1,0 +1,21 @@
+{% extends 'document.twig' %}
+
+{% block meta %}
+    {{parent('meta')}}
+    <script src="/Static/default/js/project.edit.js" charset="utf-8"></script>
+{% endblock %}
+
+{% block content %}
+    <form class="form form-task" action="/task/edit/{{task.id}}/save/" method="post">
+        <span id="TaskEdit"></span>
+        <input type="hidden" name="color_edit" value="{{task.importance}}">
+        <input type="text" name="message" value="{{task.message}}">
+        <input type="datetime-local" name="deadlines" value="{{task.deadlines}}"><br>
+        <select class="" name="id_project">
+        {% for project in projects %}
+            <option value="{{project.id}}" {% if project.id == task.id_project %}selected{% endif %}>{{project.title}}</option>
+        {% endfor %}
+        </select>
+        <input type="submit" name="save" value="Сохранить">
+    </form>
+{% endblock %}

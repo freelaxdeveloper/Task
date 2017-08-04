@@ -8,9 +8,9 @@
     {% if user.id and projects %}
         <div>
             <a id="Task" href="#" class="btn">Добавить задание</a>
-            <form id="formTask" class="form" action="/task/new/" method="post">
+            <form id="formTask" class="form form-task" action="/task/new/" method="post">
                 <input type="text" name="message" value="" placeholder="Что Вам необходимо сделать">
-                <input type="date" name="deadlines" value="2017-01-31"><br>
+                <input type="datetime-local" name="deadlines" value="2017-06-01T08:30"><br>
                 <!-- <span id="typeTask"><input class="typeTask" type="text" name="typeTask" value=""></span> -->
                 <select class="" name="id_project">
                 {% for project in projects %}

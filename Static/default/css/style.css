@@ -212,7 +212,7 @@ footer > span{
 #formProject input[type=submit]{
 	width:100px;
 }
-#typeProject,#ProjectEdit{
+#typeProject,#ProjectEdit,#TaskEdit{
 	position:absolute;
 	left:10px;
 	top:18px;
@@ -224,16 +224,16 @@ footer > span{
 	cursor:pointer;
 }
 
-#formTask input[type='text']{
-	width:65%;
+.form-task input[type='text']{
+	width: 55%;
 }
-#formTask input[type='date']{
-	width:15%;
+.form-task input[type='datetime-local']{
+	width:25%;
 }
-#formTask{
+.form-task{
 	position:relative;
 }
-#formTask #typeTask{
+.form-task #typeTask{
 	position:absolute;
 	right: 6px;
 	top: 14px;
@@ -246,7 +246,7 @@ footer > span{
 	height: 1.2em;
 }
 
-#formTask select{
+.form-task select{
 	position:absolute;
 	right:30px;
 	top: 5px;
@@ -257,7 +257,7 @@ footer > span{
 	border-radius:7px;
 	font-size:14px;
 }
-#formTask select:hover{
+.form-task select:hover{
 	border: 1px solid #f674e1;
 }
 /* endform */
