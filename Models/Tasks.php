@@ -2,29 +2,34 @@
 namespace Models;
 
 use \Core\{DB,App};
+use \Models\Task;
 
 abstract class Tasks{
     # получаем список всех заданий
     public static function getAll(int $status = 1): array
     {
-        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`title`, `projects`.`color` FROM `tasks` INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id` WHERE `tasks`.`status` = :status ORDER BY `tasks`.`importance` DESC, `tasks`.`time_create` DESC");
+        $tasks = [];
+        $q = DB::me()->prepare("SELECT `tasks`.`id` FROM `tasks` WHERE `tasks`.`status` = :status ORDER BY `tasks`.`deadlines` ASC, `tasks`.`importance` DESC, `tasks`.`time_create` DESC");
         $q->bindParam(':status', $status, \PDO::PARAM_INT);
         $q->execute();
-        if ($tasks = $q->fetchAll()) {
-            return $tasks;
+        $result = $q->fetchAll();
+        foreach ($result as $task) {
+            $tasks[] = new Task($task['id']);
         }
-        return [];
+        return $tasks;
     }
     public static function getByProject(int $id_project, int $status = 1): array
     {
-        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`title`, `projects`.`color` FROM `tasks` INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id` AND `projects`.`id` = :id_project AND `tasks`.`status` = :status ORDER BY `tasks`.`importance` DESC, `tasks`.`time_create` DESC");
+        $tasks = [];
+        $q = DB::me()->prepare("SELECT `tasks`.`id` FROM `tasks` WHERE `tasks`.`id_project` = :id_project AND `tasks`.`status` = :status ORDER BY `tasks`.`deadlines` ASC, `tasks`.`importance` DESC, `tasks`.`time_create` DESC");
         $q->bindParam(':id_project', $id_project, \PDO::PARAM_INT);
         $q->bindParam(':status', $status, \PDO::PARAM_INT);
         $q->execute();
-        if ($tasks = $q->fetchAll()) {
-            return $tasks;
+        $result = $q->fetchAll();
+        foreach ($result as $task) {
+            $tasks[] = new Task($task['id']);
         }
-        return [];
+        return $tasks;
     }
     # добавляем новое задание
     public static function create(string $message, int $deadlines, int $importance, int $id_project)

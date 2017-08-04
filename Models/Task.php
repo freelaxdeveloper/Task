@@ -68,6 +68,10 @@ class Task{
                 return 0; // по умолчанию не очень важно
         }
     }
+    public function lose(): bool
+    {
+        return TIME > $this->data['deadlines'] ? true : false;
+    }
     public function __set($name, $value)
     {
         $update_filds = ['deadlines', 'status', 'importance', 'message', 'id_project'];

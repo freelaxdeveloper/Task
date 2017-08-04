@@ -10,7 +10,7 @@ class MainController extends Controller{
     public function actionIndex()
     {
         $this->params['tasks'] = Tasks::getAll();
-
+        
         $this->display('main/index');
     }
 }

@@ -1,6 +1,6 @@
 {% for task in tasks %}
-    <div class="listing-post">
-        <span class="listing-status {{task.color}}"></span> {{task.message}}
+    <div class="listing-post {% if task.lose == 1 %}lose{% endif %}">
+        <span class="listing-status {{task.color}}"></span> {{task.message}} - {{task.deadlines}} - {{task.lose}}
         <div class="listing-right">
             <span class="project-name">{{task.title}}</span>
             <span class="listing-action {% if task.importance == 0 %}green{% elseif task.importance == 1 %}yellow{% elseif task.importance == 2 %}red{% endif %}"></span>
