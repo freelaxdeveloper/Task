@@ -23,6 +23,8 @@ return [
     ['pattern' => 'project/([0-9]+)','run' => 'project/view/$1','method' => 'GET'],
     # просмотр завершенных заданий
     ['pattern' => 'task/view/complete/([0-9]+)','run' => 'project/viewComplete/$1','method' => 'GET'],
+    # просмотр заданий на сегодня
+    ['pattern' => 'view/(today|week|month)','run' => 'main/last/$1','method' => 'GET'],
     # добавление проекта
     ['pattern' => 'project/new','run' => 'project/create','method' => 'POST'],
     # удаление проекта

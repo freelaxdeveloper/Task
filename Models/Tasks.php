@@ -18,6 +18,34 @@ abstract class Tasks{
         }
         return $tasks;
     }
+    /*
+    * получение заданий за интервал времени
+    * старт вывода - сегодняшний день
+    * конец вывода - @param $shit_days
+    * @param $shit_days - смещение дней за которые буду выводится задания
+    * Например:
+    * @param $shit_days = 1 - только за сегодня
+    * @param $shit_days = 7 - на неделю вперед
+    * @param $shit_days = 30 - на месяц вперед
+    */
+    public static function getAllForTime(int $shit_days = 1): array
+    {
+        $status = 1;
+        $time_start = mktime(0, 0, 0);
+        $time_end = $time_start + 3600 * 24 * $shit_days;
+        $tasks = [];
+
+        $q = DB::me()->prepare("SELECT `tasks`.`id` FROM `tasks` WHERE `tasks`.`status` = :status AND `tasks`.`deadlines` > :time_start AND `tasks`.`deadlines` < :time_end ORDER BY `tasks`.`deadlines` ASC, `tasks`.`importance` DESC, `tasks`.`time_create` DESC");
+        $q->bindParam(':status', $status, \PDO::PARAM_INT);
+        $q->bindParam(':time_start', $time_start, \PDO::PARAM_INT);
+        $q->bindParam(':time_end', $time_end, \PDO::PARAM_INT);
+        $q->execute();
+        $result = $q->fetchAll();
+        foreach ($result as $task) {
+            $tasks[] = new Task($task['id']);
+        }
+        return $tasks;
+    }
     public static function getByProject(int $id_project, int $status = 1): array
     {
         $tasks = [];
