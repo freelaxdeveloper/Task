@@ -9,16 +9,6 @@ class Controller{
     protected $params = [];
     protected $template_dir = 'default';
 
-    public function __construct()
-    {
-        # если по какой либо причине константа не опредена
-        # например этот файл не был открыв в корневом index.php
-        # то ничего не должно работать, защита 80lvl =)
-        if (!defined('TASK_ACCESS')) {
-            App::access_denied('ACCESS DENIED');
-        }
-    }
-
     protected function access_denied(string $msg)
     {
         $this->params['message'] = $msg;

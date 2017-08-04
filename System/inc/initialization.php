@@ -2,9 +2,7 @@
 session_start();
 define('H', $_SERVER['DOCUMENT_ROOT']);
 define('TIME', time());
-define('TASK_ACCESS', true);
 
-//ini_set('date.timezone', 'Europe/Madrid');
 date_default_timezone_set('Europe/Kiev');
 ini_set('display_errors', 1); // включаем показ ошибок
 error_reporting(E_ALL); // показываем ошибки любого уровня
