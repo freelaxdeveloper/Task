@@ -275,8 +275,8 @@ span.listing-status, span.listing-action{
 }
 span.listing-status{
 	vertical-align:middle;
-	border: 1px dotted #000;
-	border-radius:7px;
+	border: 1px solid #000;
+	border-radius:4px;
 }
 div.listing-right{
 	float:right;
@@ -291,11 +291,11 @@ div.listing-right span.project-name{
 .listing-post.lose{
 	background-color:red;
 	border-radius:7px;
-	color:#fff;
 }
-.listing-post.lose span.listing-status{
-	border: 1px solid #fff;
+.listing-post.lose hr{
+	border: 1px dotted #000;
 }
+
 .listing-post .listing-menu{
 	padding: 3px;
     cursor: pointer;
