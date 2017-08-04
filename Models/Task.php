@@ -92,6 +92,8 @@ class Task{
         switch ($name) {
             case 'deadlines':
                 return $this->getDeadlines();
+            case 'deadlines_list':
+                return $this->getDeadlines('Y-m-d H:i');
             case 'importance':
                 return $this->getImportance();
             default:
@@ -121,7 +123,13 @@ class Task{
     }
     public function __isset($name)
     {
-        return isset($this->data[$name]);
+        switch ($name) {
+            case 'deadlines_list':
+                return true;
+
+            default:
+                return isset($this->data[$name]);
+        }
     }
    public function __destruct()
    {

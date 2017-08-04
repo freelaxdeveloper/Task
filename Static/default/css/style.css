@@ -49,6 +49,7 @@ a{
 .header_title h1{
     display: inline-block;
     font-size: 17px;
+    margin-left:10px;
 }
 .header_title h1 + span{
     font-size: small;
@@ -62,14 +63,17 @@ a{
     background-color: #d5d9da;
     text-align: center;
 }
-.content{
+.container{
     display: inline-block;
     width: 60%;
     vertical-align: top;
     background-color: #fff;
-    padding: 15px;
-    min-height: calc(100vh - 130px);
+    min-height: calc(100vh - 100px);
     text-align: left;
+    border-radius: 5px 5px 0 0;
+}
+.content{
+	padding:10px;
 }
 /* endcontent */
 
@@ -321,13 +325,16 @@ div.listing-right span.project-name{
 /* notice */
 .messages{
 	text-align:center;
-	margin-top:-15px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color:#D5D9DA;
 }
 .messages .error, .messages .message{
+	border-radius:5px;
 	color:#fff;
 	height:35px;
 	line-height:35px;
 	margin-bottom:1px;
+	padding: 3px;
 }
 .messages .error{
 	background-color:#f41111;

@@ -66,7 +66,7 @@
                     </div>
                 {% endif %}
             </nav>
-            <div class="content">
+            <div class="container">
                 <div class="messages">
                     {% for error in errors %}
                         <div class="error">
@@ -79,14 +79,15 @@
                         </div>
                     {% endfor %}
                 </div>
-
+                
                 {% block header_title %}
                     <div class="header_title">
                         <h1>{{block('title')}}</h1>
                     </div>
                 {% endblock %}
-
-                {% block content %}{% endblock %}
+                <div class="content">
+                    {% block content %}{% endblock %}
+                </div>
             </div>
         </div>
         <footer>
