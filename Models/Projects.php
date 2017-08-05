@@ -8,10 +8,28 @@ use \Core\{DB,App};
  */
 abstract class Projects
 {
-    # получаем список всех проектов
+    /*
+    * получаем список всех проектов
+    - task_lose количество просроченных заданий
+    - task_active количество не выполненных заданий
+    */
     static function getAll(): array
     {
-        $q = DB::me()->query("SELECT * FROM `projects` ORDER BY `id` DESC");
+        $current_time = TIME;
+        $q = DB::me()->prepare("SELECT `t`.`id_project`, `p`.`title`, `p`.`id`, `p`.`color`, `t`.`task_count`,
+       `t`.`task_lose`, `t`.`task_active`
+  FROM (
+    SELECT `id_project`, COUNT(*) AS `task_count`,
+           SUM(`status` = '1' AND `deadlines` < :TIME) AS `task_lose`,
+           SUM(`status` = '1') AS `task_active`
+      FROM `tasks`
+      GROUP BY `id_project`
+  ) AS `t`
+  JOIN `projects` AS `p` ON `p`.`id` = `t`.`id_project`
+  ORDER BY `t`.`task_lose` DESC, `t`.`task_active` DESC,
+           `t`.`task_count` DESC");
+           $q->bindParam(':TIME', $current_time, \PDO::PARAM_INT);
+           $q->execute();
         if ($projects = $q->fetchAll()) {
             return $projects;
         }
