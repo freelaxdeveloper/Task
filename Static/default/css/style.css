@@ -94,10 +94,14 @@ nav li.sort-active{
 nav li.project-active{
 	background-color:rgb(55, 103, 250);
 }
-nav li.project-active a{
+nav li.project-lose{
+	background-color:#f6150a;
+    color: #fff;
+}
+nav li.project-active a, nav li.project-lose a{
 	color:#fff;
 }
-nav .project-active:hover > a{
+nav .project-active:hover > a, nav li.project-lose:hover a{
 	color:#eeec19;
 }
 nav li:hover > a{

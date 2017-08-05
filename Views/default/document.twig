@@ -22,7 +22,7 @@
                         <a href="/exit/">Выход</a>
                     {% endif %}
                     {% block complete %}
-                        <a href="/task/view/complete/0/" title="Выполненные задания"><i class="fa fa-check"></i></a>
+                        <a href="/task/view/complete/0/" title="Архив"><i class="fa fa-check"></i></a>
                     {% endblock %}
 
 
@@ -38,8 +38,8 @@
                 </ul>
                 <ul>
                     {% for project in projects %}
-                        <li class="{% if project.id == id_activePproject %}project-active{% endif %}">
-                            <a href="/project/{{project.id}}/"><span class="color_project {{project.color}}"></span> {{project.title}}</a>
+                        <li class="{% if project.id == id_activePproject %}project-active{% elseif project.task_lose %}project-lose{% endif %}">
+                            <a href="/project/{{project.id}}/"><span class="color_project {{project.color}}"></span> {{project.lose}} {{project.title}}</a>
                             {% if user.id %}
                                 <span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
                                 <ul class="display_none" id="action{{project.id}}">
