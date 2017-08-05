@@ -10,6 +10,7 @@ class MainController extends Controller{
     public function actionIndex()
     {
         $this->params['tasks'] = Tasks::getTasks();
+        $this->params['current_data'] = date('Y-m-d\TH:00');
 
         $this->display('main/index');
     }

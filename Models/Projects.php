@@ -25,15 +25,14 @@ abstract class Projects
       FROM `tasks`
       GROUP BY `id_project`
   ) AS `t`
-  JOIN `projects` AS `p` ON `p`.`id` = `t`.`id_project`
+  RIGHT JOIN `projects` AS `p` ON `p`.`id` = `t`.`id_project`
   ORDER BY `t`.`task_lose` DESC, `t`.`task_active` DESC,
-           `t`.`task_count` DESC");
+           `t`.`task_count` DESC, `p`.`id` DESC");
            $q->bindParam(':TIME', $current_time, \PDO::PARAM_INT);
            $q->execute();
         if ($projects = $q->fetchAll()) {
             return $projects;
         }
-        return [];
     }
     # получем проект по его ID
     public static function getOne(int $id_project): array
@@ -41,10 +40,7 @@ abstract class Projects
         $q = DB::me()->prepare("SELECT * FROM `projects` WHERE `id` = :id LIMIT 1");
         $q->bindParam(':id', $id_project, \PDO::PARAM_INT);
         $q->execute();
-        if ($project = $q->fetch()) {
-            return $project;
-        }
-        return [];
+        $project = $q->fetch();
     }
     # удаляем один проект
     public static function deleteOne(int $id_project): bool
