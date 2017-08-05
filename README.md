@@ -1,4 +1,5 @@
 Пример: http://gamer-play.ru/
+Техническое задание: http://gamer-play.ru/Static/task.pdf
 
 <b>Требования:</b>
  - PHP7.0 и выше
