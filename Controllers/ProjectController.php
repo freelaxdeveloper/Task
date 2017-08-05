@@ -50,10 +50,10 @@ class ProjectController extends Controller{
 
         if (!$project) {
             $project = ['title' => 'Весь список', 'id' => 0];
-            $tasks = Tasks::getTasks(['status' => 2]);
+            $tasks = Tasks::getTasks(['status' => 2, 'time_start' => 0]);
             $this->params['title'] = 'Весь список выполненных заданий';
         } else {
-            $tasks = Tasks::getTasks(['status' => 2, 'id_project' => $id_project]);
+            $tasks = Tasks::getTasks(['status' => 2, 'id_project' => $id_project, 'time_start' => 0]);
             $this->params['title'] = $project['title'] . ' - выполненные задания';
         }
 
