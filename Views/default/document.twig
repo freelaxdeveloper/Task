@@ -32,9 +32,9 @@
         <div id="container">
             <nav>
                 <ul>
-                    <li><a href="/view/today/">На сегодня</a></li>
-                    <li><a href="/view/week/">На неделю</a></li>
-                    <li><a href="/view/month/">На месяц</a></li>
+                    <li><a href="/view/today/{{id_activePproject}}/">Сегодня</a></li>
+                    <li><a href="/view/week/{{id_activePproject}}/">Неделя</a></li>
+                    <li><a href="/view/month/{{id_activePproject}}/">Месяц</a></li>
                 </ul>
                 <ul>
                     {% for project in projects %}
@@ -79,7 +79,7 @@
                         </div>
                     {% endfor %}
                 </div>
-                
+
                 {% block header_title %}
                     <div class="header_title">
                         <h1>{{block('title')}}</h1>

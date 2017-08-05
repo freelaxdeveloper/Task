@@ -33,6 +33,7 @@ abstract class Projects
         if ($projects = $q->fetchAll()) {
             return $projects;
         }
+        return [];
     }
     # получем проект по его ID
     public static function getOne(int $id_project): array
@@ -40,7 +41,10 @@ abstract class Projects
         $q = DB::me()->prepare("SELECT * FROM `projects` WHERE `id` = :id LIMIT 1");
         $q->bindParam(':id', $id_project, \PDO::PARAM_INT);
         $q->execute();
-        $project = $q->fetch();
+        if ($project = $q->fetch()) {
+            return $project;
+        }
+        return [];
     }
     # удаляем один проект
     public static function deleteOne(int $id_project): bool

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.4.1deb2ubuntu2
--- http://www.phpmyadmin.net
+-- version 4.6.6deb1+deb.cihar.com~xenial.2
+-- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Авг 03 2017 г., 05:27
+-- Время создания: Авг 05 2017 г., 21:10
 -- Версия сервера: 5.7.19-0ubuntu0.16.04.1
--- Версия PHP: 7.0.18-0ubuntu0.16.04.1
+-- Версия PHP: 7.1.8-2+ubuntu16.04.1+deb.sury.org+4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -45,9 +45,9 @@ CREATE TABLE `tasks` (
   `message` varchar(1024) NOT NULL,
   `time_create` int(11) NOT NULL,
   `id_project` int(11) NOT NULL,
-  `status` enum('0','1') NOT NULL DEFAULT '0' COMMENT 'не выполнено/выполнено',
-  `deadlines` date DEFAULT NULL COMMENT 'сроки выполнения',
-  `importance` enum('0','1','3') NOT NULL DEFAULT '0' COMMENT 'не очень важно/важно/очень важно',
+  `status` enum('1','2') NOT NULL DEFAULT '1' COMMENT 'не выполнено/выполнено',
+  `deadlines` bigint(20) NOT NULL COMMENT 'сроки выполнения',
+  `importance` int(11) NOT NULL DEFAULT '0' COMMENT 'важность выполнения',
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Список заданий';
 
@@ -81,7 +81,10 @@ ALTER TABLE `projects`
 ALTER TABLE `tasks`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_project` (`id_project`),
-  ADD KEY `id_user` (`id_user`);
+  ADD KEY `id_user` (`id_user`),
+  ADD KEY `id_project_2` (`id_project`),
+  ADD KEY `status` (`status`),
+  ADD KEY `deadlines` (`deadlines`);
 
 --
 -- Индексы таблицы `users`
@@ -98,12 +101,12 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 --
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=154;
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
