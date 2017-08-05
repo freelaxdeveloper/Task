@@ -1,4 +1,3 @@
-Описание: http://gamer-play.ru/Static/task.pdf
 Пример: http://gamer-play.ru/
 
 <b>Требования:</b>
