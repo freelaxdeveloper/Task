@@ -1,5 +1,7 @@
+Описание: http://gamer-play.ru/Static/task.pdf
+
 <b>Требования:</b>
  - PHP7.0 и выше
  - Драйвер PDO
- - возможность конфигурировать работу сервера через .htaccess
- - включен модуль rewrite
+ - поддержка .htaccess
+ - поддержка rewrite

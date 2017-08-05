@@ -1,6 +1,6 @@
 {% for task in tasks %}
     <div class="listing-post {% if task.lose == 1 %}lose{% endif %}">
-        <span class="listing-status {{task.color}}"></span> {{task.message}} - {{task.deadlines_list}}
+        <span class="listing-status {{task.color}}"></span> {{task.message}}
         <div class="listing-right">
             <span class="project-name">{{task.title}}</span>
             <span class="listing-action {{task.importance}}"></span>
@@ -15,7 +15,13 @@
                     <a href="/task/delete/{{task.id}}/">Удалить</a><br>
                 </span>
             {% endif %}
-
+            <span class="listing-info-menu">
+                <i class="fa fa-info-circle"></i>
+            </span>
+            <span class="listing-info">
+                {{task.login}}<br>
+                {{task.deadlines}}
+            </span>
         </div>
         <hr>
     </div>

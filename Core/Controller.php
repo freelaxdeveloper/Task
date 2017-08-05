@@ -31,6 +31,7 @@ class Controller{
     {
         $this->params['projects'] = Projects::getAll();
         $this->params['user'] = App::user();
+        $this->params['current_data'] = date('Y-m-d\TH:00');
     }
     # доступ только пользователю
     protected function access_user()

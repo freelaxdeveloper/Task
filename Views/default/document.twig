@@ -32,13 +32,13 @@
         <div id="container">
             <nav>
                 <ul>
-                    <li><a href="/view/today/{{id_activePproject}}/">Сегодня</a></li>
-                    <li><a href="/view/week/{{id_activePproject}}/">Неделя</a></li>
-                    <li><a href="/view/month/{{id_activePproject}}/">Месяц</a></li>
+                    <li class="{% if 1 == id_sort %}sort-active{% endif %}"><a href="/view/today/{{id_activePproject}}/">Сегодня</a></li>
+                    <li class="{% if 2 == id_sort %}sort-active{% endif %}"><a href="/view/week/{{id_activePproject}}/">Неделя</a></li>
+                    <li class="{% if 3 == id_sort %}sort-active{% endif %}"><a href="/view/month/{{id_activePproject}}/">Месяц</a></li>
                 </ul>
                 <ul>
                     {% for project in projects %}
-                        <li class="{% if project.id == id_activePproject %}active{% endif %}">
+                        <li class="{% if project.id == id_activePproject %}project-active{% endif %}">
                             <a href="/project/{{project.id}}/"><span class="color_project {{project.color}}"></span> {{project.title}}</a>
                             {% if user.id %}
                                 <span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
@@ -87,12 +87,37 @@
                 {% endblock %}
                 <div class="content">
                     {% block content %}{% endblock %}
+
+                    {% block add_task %}
+                        {% if user.id and projects %}
+                            <div>
+                                <a id="Task" href="#" class="btn">Добавить задание</a>
+                                <form id="formTask" class="form form-task" action="/task/new/" method="post">
+                                    <input type="text" name="message" value="" placeholder="Что Вам необходимо сделать" pattern="^[А-ЯA-Za-zа-яЁё0-9|\(|\)|\=]{3,1024}$">
+                                    <input type="datetime-local" name="deadlines" value="{{current_data}}"><br>
+                                    <!-- <span id="typeTask"><input class="typeTask" type="text" name="typeTask" value=""></span> -->
+                                    <select class="" name="id_project">
+                                    {% for project in projects %}
+                                        <option value="{{project.id}}"{% if project.id == id_activePproject %} selected{% endif %}>{{project.title}}</option>
+                                    {% endfor %}
+                                    </select>
+
+                                    <input type="hidden" name="color" value="red">
+                                    <span id="typeTask"></span>
+                                    <input type="submit" name="add" value="Добавить">
+                                    <a href="#" class="cancel">Отменить</a>
+                                </form>
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+
                 </div>
             </div>
         </div>
         <footer>
             &copy; by Sanek_OS9<span>@mail.ru</span>
         </footer>
-        <script src="/Static/default/js/test.js" charset="utf-8"></script>
+        <script src="/Static/default/js/action.js" charset="utf-8"></script>
+        <script src="/Static/default/js/form.js" charset="utf-8"></script>
     </body>
 </html>

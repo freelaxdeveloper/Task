@@ -41,7 +41,7 @@ a{
 }
 .header .right{
     float:right;
-    margin-right:11%;
+    margin-right: 12%;
 }
 .header a{
     color: #fff;
@@ -88,13 +88,16 @@ nav li{
 	border-radius:7px;
 	margin-bottom:1px;
 }
-nav li.active{
+nav li.sort-active{
+	background-color:#e6d820;
+}
+nav li.project-active{
 	background-color:rgb(55, 103, 250);
 }
-nav li.active a{
+nav li.project-active a{
 	color:#fff;
 }
-nav .active:hover > a{
+nav .project-active:hover > a{
 	color:#eeec19;
 }
 nav li:hover > a{
@@ -176,25 +179,25 @@ footer > span{
 	text-align:center;
 }
 .form input:hover{
-    border: 1px solid #f674e1;
+    border: 1px solid #5E81A8;
 }
 .form input[type=submit]{
 	color:#fff;
-	background-color:#f674e1;
+	background-color:#5E81A8;
 	width:100px;
 	cursor:pointer;
 }
 .form a, .btn{
-	display:inline-block;;
+	display:inline-block;
 	height:27px;
 	line-height:27px;
 	color:#fff;
-	background-color:#f674e1;
+	background-color: #5E81A8;
 	padding:0 5px 0 5px;
-    border-radius:7px;
+	border-radius:7px;
 }
 .form a:hover{
-	border: 1px solid #f674e1;
+	border: 1px solid #5E81A8;
 }
 
 #formProject, #formTask{
@@ -307,7 +310,7 @@ div.listing-right span.project-name{
 .listing-post .action_display{
 	position:absolute;
 	background-color:rgb(55, 103, 250);
-	right:10px;
+	right:30px;
 	top:0px;
 	border-radius:5px;
 	padding:3px 10px 3px 10px;
@@ -319,6 +322,19 @@ div.listing-right span.project-name{
 }
 .listing-post .action_display a:hover{
 	color:red;
+}
+.listing-info{
+	display:none;
+	background-color:rgb(55, 103, 250);
+	color:#fff;
+	padding:5px;
+	border-radius:7px;
+	width:200px;
+}
+.listing-info-menu:hover + .listing-info{
+	position:absolute;
+	display:block;
+	z-index:100;
 }
 /* endlisting*/
 

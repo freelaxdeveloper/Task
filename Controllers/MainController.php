@@ -10,7 +10,6 @@ class MainController extends Controller{
     public function actionIndex()
     {
         $this->params['tasks'] = Tasks::getTasks();
-        $this->params['current_data'] = date('Y-m-d\TH:00');
         $this->params['id_activePproject'] = 0;
 
         $this->display('main/index');
@@ -21,15 +20,18 @@ class MainController extends Controller{
             case 'week':
                 $title = 'Задания на неделю';
                 $shit_days = 7;
+                $id_sort = 2;
                 break;
             case 'month':
                 $title = 'Задания на месяц';
                 $shit_days = 30;
+                $id_sort = 3;
                 break;
 
             default:
                 $title = 'Задания на сегодня';
                 $shit_days = 1;
+                $id_sort = 1;
                 break;
         }
         $params = [];
@@ -42,6 +44,7 @@ class MainController extends Controller{
         }
 
         $this->params['title'] = $title;
+        $this->params['id_sort'] = $id_sort;
         $this->params['tasks'] = Tasks::getTasks($params);
         $this->display('main/index');
     }

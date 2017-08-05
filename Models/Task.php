@@ -2,6 +2,7 @@
 namespace Models;
 
 use \Core\DB;
+use \More\Misc;
 
 class Task{
     private $id;
@@ -15,23 +16,17 @@ class Task{
     }
     private function getData(): array
     {
-        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`title`, `projects`.`color` FROM `tasks` INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id` WHERE `tasks`.`id` = :id LIMIT 1");
+        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`title`, `projects`.`color`, `users`.`login`
+            FROM `tasks`
+            INNER JOIN `users` ON `tasks`.`id_user` = `users`.`id` 
+            INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id`
+            WHERE `tasks`.`id` = :id LIMIT 1");
         $q->bindParam(':id', $this->id, \PDO::PARAM_INT);
         $q->execute();
         if ($task = $q->fetch()) {
             return $task;
         }
         return ['id' => 0];
-    }
-    /*
-    * время в базе данных хранится в формате UNIX
-    * показывать будем в удобном для чтения виде
-    */
-    private function getDeadlines(string $format = 'Y-m-d\TH:i')
-    {
-        $date = new \DateTime();
-        $date->setTimestamp($this->data['deadlines']);
-        return $date->format($format);
     }
     /*
     * записыватся дата будет в формате Y-m-dTH:i
@@ -90,10 +85,12 @@ class Task{
     public function __get($name)
     {
         switch ($name) {
+            case 'time_create':
+                return Misc::getTime($this->data['time_create']);
+            case 'deadlines_form':
+                return Misc::getTime($this->data['deadlines'], 'Y-m-d\TH:i');
             case 'deadlines':
-                return $this->getDeadlines();
-            case 'deadlines_list':
-                return $this->getDeadlines('Y-m-d H:i');
+                return Misc::getTime($this->data['deadlines']);
             case 'importance':
                 return $this->getImportance();
             default:
@@ -124,7 +121,7 @@ class Task{
     public function __isset($name)
     {
         switch ($name) {
-            case 'deadlines_list':
+            case 'deadlines_form':
                 return true;
 
             default:

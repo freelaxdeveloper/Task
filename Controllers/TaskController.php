@@ -64,6 +64,7 @@ class TaskController extends Controller{
         $this->access_user(); # доступ только авторизированным
 
         $task = new Task($id_task);
+        
         if (!$task->id || $task->status == 2) {
             $this->access_denied('Задание не найдено');
         }
@@ -88,6 +89,7 @@ class TaskController extends Controller{
 
         $this->params['title'] = $task->message . ' - редактирование';
         $this->params['task'] = $task;
+        $this->params['id_activePproject'] = $task->id_project;
 
         $this->display('task/edit');
     }

@@ -5,24 +5,4 @@
     <div class="listing">
         {% include '.inc/list.tasks.twig' %}
     </div>
-    {% if user.id and projects %}
-        <div>
-            <a id="Task" href="#" class="btn">Добавить задание</a>
-            <form id="formTask" class="form form-task" action="/task/new/" method="post">
-                <input type="text" name="message" value="" placeholder="Что Вам необходимо сделать">
-                <input type="datetime-local" name="deadlines" value="{{current_data}}"><br>
-                <!-- <span id="typeTask"><input class="typeTask" type="text" name="typeTask" value=""></span> -->
-                <select class="" name="id_project">
-                {% for project in projects %}
-                    <option value="{{project.id}}">{{project.title}}</option>
-                {% endfor %}
-                </select>
-
-                <input type="hidden" name="color" value="red">
-                <span id="typeTask"></span>
-                <input type="submit" name="add" value="Добавить">
-                <a href="#" class="cancel">Отменить</a>
-            </form>
-        </div>
-    {% endif %}
 {% endblock %}
