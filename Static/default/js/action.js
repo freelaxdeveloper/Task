@@ -1,6 +1,6 @@
 $(function(){
     /* ловим наведение мыши на меню */
-    $('nav ul span, .listing-menu').mouseover(function(){
+    $('nav ul span.menu_action, .listing-menu').mouseover(function(){
         // узнали ID какого элемента будем показывать
         var action_id = $('#' + this.id).attr('data-action');
         // скрыли все элементы которые сейчас показываются
