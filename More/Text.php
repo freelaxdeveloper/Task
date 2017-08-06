@@ -1,6 +1,9 @@
 <?php
 namespace More;
 
+/*
+* ф-ции для работы с текстом
+*/
 abstract class Text{
     # убираем html теги
     public static function input_text(string $text): string

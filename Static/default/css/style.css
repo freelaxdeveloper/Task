@@ -302,13 +302,13 @@ div.listing-right span.project-name{
 .listing-post.lose{
 	background-color:red;
 	border-radius:7px;
+	color: #fff;
 }
 .listing-post.lose hr{
 	border: 1px dotted #000;
 }
 
 .listing-post .listing-menu{
-	padding: 3px;
     cursor: pointer;
 }
 .listing-post .action_display{

@@ -16,15 +16,16 @@ abstract class Authorize{
     {
         return self::getId() ? true : false;
     }
+    # получаем ID пользователя
     public static function getId(): int
     {
         return $_SESSION['id'] ?? 0;
     }
+    # получаем хэш его пароля
     public static function getHash(): string
     {
         return $_SESSION['what_is_it'] ?? 0;
     }
-
     # выходим с авторизации
     public static function exit()
     {

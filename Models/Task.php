@@ -14,11 +14,12 @@ class Task{
         $this->id = $id;
         $this->data = $this->getData();
     }
+    # получаем данные задания
     private function getData(): array
     {
         $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`title`, `projects`.`color`, `users`.`login`
             FROM `tasks`
-            INNER JOIN `users` ON `tasks`.`id_user` = `users`.`id` 
+            INNER JOIN `users` ON `tasks`.`id_user` = `users`.`id`
             INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id`
             WHERE `tasks`.`id` = :id LIMIT 1");
         $q->bindParam(':id', $this->id, \PDO::PARAM_INT);
@@ -37,6 +38,7 @@ class Task{
         $date = new \DateTime($data);
         return $date->format('U');
     }
+    # в зависимотси от важности определяем цвет
     public function getImportance()
     {
         switch ($this->data['importance']) {
@@ -50,6 +52,7 @@ class Task{
                 return 'green'; // по умолчанию не очень важно
         }
     }
+    # взависимости от цвета определяем его важность
     public static function setImportance(string $importance): int
     {
         switch ($importance) {
@@ -63,12 +66,15 @@ class Task{
                 return 0; // по умолчанию не очень важно
         }
     }
+    # проверяем истекло ли время выполнения задачи
     public function lose(): bool
     {
         return TIME > $this->data['deadlines'] ? true : false;
     }
+
     public function __set($name, $value)
     {
+        // поля, при изменении которых будут обновлятся данные в БД
         $update_filds = ['deadlines', 'status', 'importance', 'message', 'id_project'];
         if (in_array($name, $update_filds)) {
             $this->_update = true;
@@ -97,6 +103,17 @@ class Task{
                 return $this->data[$name] ?? '';
         }
     }
+    public function __isset($name)
+    {
+        switch ($name) {
+            case 'deadlines_form':
+                return true;
+
+            default:
+                return isset($this->data[$name]);
+        }
+    }
+    # обновляем данные в БД
     private function update()
     {
         if (!$this->_update) {
@@ -112,21 +129,12 @@ class Task{
         $q->execute();
         $this->_update = false;
     }
+    # удаление задачи
     public function delete()
     {
         $q = DB::me()->prepare("DELETE FROM `tasks` WHERE `id` = :id LIMIT 1");
         $q->bindParam(':id', $this->data['id'], \PDO::PARAM_INT);
         $q->execute();
-    }
-    public function __isset($name)
-    {
-        switch ($name) {
-            case 'deadlines_form':
-                return true;
-
-            default:
-                return isset($this->data[$name]);
-        }
     }
    public function __destruct()
    {

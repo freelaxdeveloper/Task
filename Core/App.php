@@ -10,12 +10,14 @@ abstract class App{
      */
     public static function access_denied($message = '')
     {
-        if (true) {
+        // поставить true для отладки
+        if (flase) {
             die($message);
         }
         header("HTTP/1.1 404 Not Found");
         exit;
     }
+    # авторизация пользователя
     public static function user()
     {
         static $_instance;

@@ -8,7 +8,7 @@ use \Models\{Projects};
 class Controller{
     protected $params = [];
     protected $template_dir = 'default';
-
+    
     protected function access_denied(string $msg)
     {
         $this->params['message'] = $msg;
