@@ -8,7 +8,7 @@ use \Models\{Projects};
 class Controller{
     protected $params = [];
     protected $template_dir = 'default';
-    
+
     protected function access_denied(string $msg)
     {
         $this->params['message'] = $msg;
@@ -32,6 +32,8 @@ class Controller{
         $this->params['projects'] = Projects::getAll();
         $this->params['user'] = App::user();
         $this->params['current_data'] = date('Y-m-d\TH:00');
+        if (empty($this->params['id_activePproject']))
+            $this->params['id_activePproject'] = 0;
     }
     # доступ только пользователю
     protected function access_user()

@@ -8,7 +8,7 @@
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="shortcut icon" href="/Static/default/favicon.ico">
 
-            <script type="text/javascript"src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+            <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
         {% endblock %}
     </head>
     <body>
@@ -51,19 +51,19 @@
                     {% endfor %}
                 </ul>
                 {% if user.id %}
-                    <div>
-                        <ul id="Project">
-                            <li><a href="#" class="btn">Добавить проект</a></li>
+                        <ul>
+                            <li id="Project"><a href="#" class="btn">Добавить проект</a></li>
+                            <li id="formProject">
+                                <form class="form" action="/project/new/" method="post">
+                                    <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
+                                    <span id="typeProject"></span>
+                                    <input type="hidden" name="color" value="red">
+                                    <input type="text" name="title" value="" placeholder="Название проекта" pattern="^[А-ЯA-Za-zа-яЁё0-9]{3,32}$"><br>
+                                    <input type="submit" name="add" value="Добавить">
+                                    <a href="#" class="cancel">Отменить</a>
+                                </form>
+                            </li>
                         </ul>
-                        <form class="form" id="formProject" action="/project/new/" method="post">
-                            <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
-                            <span id="typeProject"></span>
-                            <input type="hidden" name="color" value="red">
-                            <input type="text" name="title" value="" placeholder="Название проекта" pattern="^[А-ЯA-Za-zа-яЁё0-9]{3,32}$"><br>
-                            <input type="submit" name="add" value="Добавить">
-                            <a href="#" class="cancel">Отменить</a>
-                        </form>
-                    </div>
                 {% endif %}
             </nav>
             <div class="container">

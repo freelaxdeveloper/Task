@@ -9,10 +9,10 @@
                 <span class="listing-menu" id="listing{{task.id}}" data-action="listingAction{{task.id}}"> <i class="fa fa-ellipsis-v"></i> </span>
                 <span class="action_load display_none" id="listingAction{{task.id}}">
                     {% if task.status == 1 %}
-                        <a href="/task/complete/{{task.id}}/">Выполнить</a><br>
-                        <a href="/task/edit/{{task.id}}/">Изменить</a><br>
+                        <a href="/task/complete/{{task.id}}/">Выполнить</a>
+                        <a href="/task/edit/{{task.id}}/">Изменить</a>
                     {% endif %}
-                    <a href="/task/delete/{{task.id}}/">Удалить</a><br>
+                    <a href="/task/delete/{{task.id}}/">Удалить</a>
                 </span>
             {% endif %}
             <span class="listing-info-menu">
