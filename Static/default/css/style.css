@@ -24,6 +24,9 @@ a{
 .yellow{
     background-color: #e1f40f;
 }
+.orange{
+    background-color: #e4bd15;
+}
 /* endactions_colors*/
 
 /* header */
@@ -99,7 +102,11 @@ nav li:hover{
 	background-color:#efeaea;
 }
 nav li.sort-active{
-	background-color:#e6d820;
+	background-color:#3b57e4;
+	color:#fff;
+}
+nav li.sort-active a{
+	color:#fff;
 }
 nav li.project-active{
 	background-color:#3b57e4;
@@ -108,13 +115,13 @@ nav li.project-active:hover{
 	background-color:rgb(55, 103, 250);
 }
 nav li.project-lose:hover{
-	background-color:#ff0000;
+	background-color:#ca3333;
 }
 nav li.project-lose{
-	background-color:#f12218;
+	background-color:#bb2e2e;
     color: #fff;
 }
-nav .project-active a, nav li.project-lose a{
+nav .project-active a, nav .project-lose a{
 	color:#fff;
 }
 nav .project-active{
@@ -136,12 +143,13 @@ nav ul span{
 }
 nav ul span.menu_action{
 	float:right;
-	margin-right:15px;
+	margin-right:6px;
+	margin-top:3px
 }
 nav .color_project{
 	display:inline-block;
-	width:10px;
-	height:10px;
+	width:13px;
+	height:13px;
 	padding:0;
 	left:0;
 	border-radius:50%;
@@ -164,13 +172,25 @@ nav .action_display a{
 nav ul .action_display a:hover{
 	color:red;
 }
+nav .counter{
+	background-color:#e89696;
+	color:#fff;
+	padding:3px 7px;
+	border-radius:50%;
+	font-size:13px;
+	float:right;
+	margin-right:3px;
+}
 /* endnavigation */
 
 /* footer */
 footer{
     padding: 15px;
-    font-style: italic;
+    font-style: oblique;
     background-color: #c5cbcc;
+}
+footer .right{
+	float:right;
 }
 footer > span{
     font-size: small;
@@ -291,6 +311,7 @@ footer > span{
     margin-bottom: 5px;
 	position:relative;
 	padding:3px;
+	color:#565555;
 }
 span.listing-status, span.listing-action{
 	display:inline-block;
@@ -299,8 +320,7 @@ span.listing-status, span.listing-action{
 }
 span.listing-status{
 	vertical-align:middle;
-	border: 1px solid #000;
-	border-radius:4px;
+	border-radius:25px;
 }
 div.listing-right{
 	float:right;
@@ -313,7 +333,7 @@ div.listing-right span.project-name{
 
 }
 .listing-post.lose{
-	background-color:red;
+	background-color:#cc2828;
 	border-radius:7px;
 	color: #fff;
 }
@@ -322,6 +342,8 @@ div.listing-right span.project-name{
 }
 
 .listing-post .listing-menu{
+	position:relative;
+	right:7px;
     cursor: pointer;
 }
 .listing-post .action_display{
@@ -329,7 +351,7 @@ div.listing-right span.project-name{
 	background-color:#9e8484;
 	min-width:100px;
 	min-height:100px;
-	right:30px;
+	right:0;
 	top:0px;
 	border-radius:5px;
 	padding:7px;

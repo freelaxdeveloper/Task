@@ -17,7 +17,7 @@ $(function(){
         this.getColors = function()
         {
             if ('Task' == this.id) {
-                return ['red', 'green', 'yellow'];
+                return ['red', 'green', 'orange'];
             }
             return ['red', 'green', 'blue', 'yellow','black'];
         }

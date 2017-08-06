@@ -10,7 +10,7 @@ $(function(){
         console.log(this.id);
         switch (this.id) {
             case 'TaskEdit':
-                var colors = ['red', 'green', 'yellow'];
+                var colors = ['red', 'green', 'orange'];
                 break;
             default:
                 var colors = ['red', 'green', 'blue', 'yellow','black'];

@@ -40,6 +40,9 @@
                     {% for project in projects %}
                         <li class="{% if project.id == id_activePproject %}project-active{% elseif project.task_lose %}project-lose{% endif %}">
                             <a href="/project/{{project.id}}/{% if sorting %}{{sorting}}/{% endif %}"><span class="color_project {{project.color}}"></span> {{project.lose}} {{project.title}}</a>
+                            {% if project.task_active %}
+                                <span class="counter">{{project.task_active}}</span>
+                            {% endif %}
                             {% if user.id %}
                                 <span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
                                 <ul class="action_load display_none" id="action{{project.id}}">
@@ -115,7 +118,7 @@
             </div>
         </div>
         <footer>
-            &copy; by Sanek_OS9<span>@mail.ru</span>
+            &copy; <span>by</span> Sanek_OS9<span>@mail.ru</span> <span class="right">Шаповал Александр Александрович</span>
         </footer>
         <script src="/Static/default/js/action.js" charset="utf-8"></script>
         <script src="/Static/default/js/form.js" charset="utf-8"></script>

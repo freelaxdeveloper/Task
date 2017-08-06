@@ -45,11 +45,20 @@ class Task{
             case 0:
                 return 'green'; // не очень важно
             case 1:
-                return 'yellow'; // важно
+                return 'orange'; // важно
             case 2:
                 return 'red'; // очень важно
-            default:
-                return 'green'; // по умолчанию не очень важно
+        }
+    }
+    public function getStrImportance()
+    {
+        switch ($this->data['importance']) {
+            case 0:
+                return 'Не срочно'; // не очень важно
+            case 1:
+                return 'Срочно'; // важно
+            case 2:
+                return 'Очень срочно'; // очень важно
         }
     }
     # взависимости от цвета определяем его важность
@@ -58,7 +67,7 @@ class Task{
         switch ($importance) {
             case 'green':
                 return 0; // не очень важно
-            case 'yellow':
+            case 'orange':
                 return 1; // важно
             case 'red':
                 return 2; // очень важно
@@ -91,6 +100,8 @@ class Task{
     public function __get($name)
     {
         switch ($name) {
+            case 'importance_str':
+                return $this->getStrImportance();
             case 'time_create':
                 return Misc::getTime($this->data['time_create']);
             case 'deadlines_form':
@@ -107,6 +118,8 @@ class Task{
     {
         switch ($name) {
             case 'deadlines_form':
+                return true;
+            case 'importance_str':
                 return true;
 
             default:
