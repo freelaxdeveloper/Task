@@ -1,12 +1,12 @@
 {% extends 'document.twig' %}
 
-{% block title %}Регистрация{% endblock %}
+{% block title %}Create an Accaunt{% endblock %}
 
 {% block content %}
     <form class="form" action="/register/send/" method="post">
-        Логин:<br><input type="text" name="login" value="" placeholder="Введите логин"><br>
-        Пароль:<br><input type="password" name="password" value="" placeholder="Введите пароль"><br>
-        Пароль:<br><input type="password" name="password1" value="" placeholder="Повторите пароль"><br>
-        <input type="submit" name="register" value="Регистрация">
+        Login:<br><input type="text" name="login" value="" placeholder="Enter login"><br>
+        Password:<br><input type="password" name="password" value="" placeholder="Enter password"><br>
+        Password:<br><input type="password" name="password1" value="" placeholder="Confirm password"><br>
+        <input type="submit" name="register" value="Registration">
     </form>
 {% endblock %}

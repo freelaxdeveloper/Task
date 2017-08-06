@@ -39,14 +39,14 @@ class Controller{
     protected function access_user()
     {
         if (!App::user()->id) {
-            $this->access_denied('Для просмотра страницы необходимо авторизоваться');
+            $this->access_denied('You need to be logged in to view this page');
         }
     }
     # доступ только гостью
     protected function access_guest()
     {
         if (App::user()->id) {
-            $this->access_denied('Страница доступна только гостью');
+            $this->access_denied('Page is available only by guest');
         }
     }
 }

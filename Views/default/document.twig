@@ -3,7 +3,7 @@
     <head>
         {% block meta %}
             <meta charset="utf-8">
-            <title>{% block title %}{% if title %}{{title}}{% else %}Мои проекты{% endif %}{% endblock %}</title>
+            <title>{% block title %}{% if title %}{{title}}{% else %}Tasks for today{% endif %}{% endblock %}</title>
             <link rel="stylesheet" href="/Static/default/css/style.css">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="shortcut icon" href="/Static/default/favicon.ico">
@@ -17,24 +17,22 @@
                 <a href="/" id="logo" title="На главную">TODO</a>
                 <span class="right">
                     {% if user.id == 0 %}
-                        <a href="/register/">Регистрация</a> / <a href="/authorize/">Авторизация</a>
+                        <span class="action"><i class="fa fa-registered"></i> <a href="/register/">Create an Accaunt</a></span> / <span class="action"><i class="fa fa-sign-in"></i> <a href="/authorize/">Sign in</a></span>
                     {% else %}
-                        <a href="/exit/">Выход</a>
+                        <span class="action"><i class="fa fa-sign-out"></i> <a href="/exit/">Exit</a></span>
                     {% endif %}
                     {% block complete %}
-                        <a href="/task/view/complete/0/" title="Архив"><i class="fa fa-check"></i></a>
+                        <span class="action"><i class="fa fa-check"></i> <a href="/task/view/complete/0/" title="All archive">Archive</a></span>
                     {% endblock %}
-
-
                 </span>
             </div>
         </header>
         <div id="container">
             <nav>
                 <ul>
-                    <li class="{% if 'today' == sorting %}sort-active{% endif %}"><a href="/view/today/{{id_activePproject}}/">Сегодня</a></li>
-                    <li class="{% if 'week' == sorting %}sort-active{% endif %}"><a href="/view/week/{{id_activePproject}}/">Неделя</a></li>
-                    <li class="{% if 'month' == sorting %}sort-active{% endif %}"><a href="/view/month/{{id_activePproject}}/">Месяц</a></li>
+                    <li class="{% if 'today' == sorting %}sort-active{% endif %}"><a href="/view/today/{{id_activePproject}}/">Today</a></li>
+                    <li class="{% if 'week' == sorting %}sort-active{% endif %}"><a href="/view/week/{{id_activePproject}}/">Week</a></li>
+                    <li class="{% if 'month' == sorting %}sort-active{% endif %}"><a href="/view/month/{{id_activePproject}}/">Month</a></li>
                 </ul>
                 <ul>
                     {% for project in projects %}
@@ -46,8 +44,8 @@
                             {% if user.id %}
                                 <span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
                                 <ul class="action_load display_none" id="action{{project.id}}">
-                                    <li><a href="/project/edit/{{project.id}}/">Изменить</a></li>
-                                    <li><a href="/project/delete/{{project.id}}/">Удалить</a></li>
+                                    <li><a href="/project/edit/{{project.id}}/">Edit</a></li>
+                                    <li><a href="/project/delete/{{project.id}}/">Delete</a></li>
                                 </ul>
                             {% endif %}
                         </li>
@@ -55,15 +53,15 @@
                 </ul>
                 {% if user.id %}
                         <ul>
-                            <li id="Project"><a href="#" class="btn">Добавить проект</a></li>
+                            <li id="Project"><a href="#" class="btn">Add project</a></li>
                             <li id="formProject">
                                 <form class="form" action="/project/new/" method="post">
                                     <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
                                     <span id="typeProject"></span>
                                     <input type="hidden" name="color" value="red">
-                                    <input type="text" name="title" value="" placeholder="Название проекта" pattern="^[А-ЯA-Za-zа-яЁё0-9|\s]{3,32}$"><br>
-                                    <input type="submit" name="add" value="Добавить">
-                                    <a href="#" class="cancel">Отменить</a>
+                                    <input type="text" name="title" value="" placeholder="Project name" pattern="^[А-ЯA-Za-zа-яЁё0-9|\s]{3,32}$"><br>
+                                    <input type="submit" name="add" value="Add">
+                                    <a href="#" class="cancel">Cancel</a>
                                 </form>
                             </li>
                         </ul>
@@ -94,9 +92,9 @@
                     {% block add_task %}
                         {% if user.id and projects %}
                             <div>
-                                <a id="Task" href="#" class="btn">Добавить задание</a>
+                                <a id="Task" href="#" class="btn">Add task</a>
                                 <form id="formTask" class="form form-task" action="/task/new/" method="post">
-                                    <input type="text" name="message" value="" placeholder="Что Вам необходимо сделать" pattern="^[А-ЯA-Za-zа-яЁё0-9|\(|\)|\=]{3,1024}$">
+                                    <input type="text" name="message" value="" placeholder="What you need to do" pattern="^[А-ЯA-Za-zа-яЁё0-9|\(|\)|\=]{3,1024}$">
                                     <input type="datetime-local" name="deadlines" value="{{current_data}}"><br>
                                     <!-- <span id="typeTask"><input class="typeTask" type="text" name="typeTask" value=""></span> -->
                                     <select class="" name="id_project">
@@ -107,8 +105,8 @@
 
                                     <input type="hidden" name="color" value="red">
                                     <span id="typeTask"></span>
-                                    <input type="submit" name="add" value="Добавить">
-                                    <a href="#" class="cancel">Отменить</a>
+                                    <input type="submit" name="add" value="Add">
+                                    <a href="#" class="cancel">Cancel</a>
                                 </form>
                             </div>
                         {% endif %}

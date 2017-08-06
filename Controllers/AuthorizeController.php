@@ -24,10 +24,10 @@ class AuthorizeController extends Controller{
             if ($login && $password) {
                 if ($user = Users::getUserByPassword($login, $password)) {
                     Authorize::authorized($user['id'], $user['password']);
-                    $this->params['messages'][] = 'Вы успешно авторизовались';
+                    $this->params['messages'][] = 'You have been successfully authorized';
                     header('Refresh: 1; /');
                 } else {
-                    $this->params['errors'][] = 'Логин или пароль введены не верно';
+                    $this->params['errors'][] = 'Login or password entered incorrectly';
                 }
             }
         }
@@ -43,16 +43,16 @@ class AuthorizeController extends Controller{
             $password1 = Text::input_text($_POST['password1']);
 
             if (!$login) {
-                $this->params['errors'][] = 'Не правильный логин';
+                $this->params['errors'][] = 'Invalid username';
             }
             if (!$password || $password != $password1) {
-                $this->params['errors'][] = 'Не правильный пароль, или пароли не совпадают';
+                $this->params['errors'][] = 'Incorrect password or passwords do not match';
             }
             if (empty($this->params['errors'])) {
                 if (!Users::addUser($login, $password)) {
-                    $this->params['errors'][] = 'Пользователь с таким логином уже существует';
+                    $this->params['errors'][] = 'User with such login already exists';
                 } else {
-                    $this->params['messages'][] = 'Вы успешно зарегистрировались';
+                    $this->params['messages'][] = 'You have successfully registered';
                 }
             }
         }

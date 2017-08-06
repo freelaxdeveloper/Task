@@ -2,6 +2,7 @@
 body, html{
     margin: 0;
     padding:0;
+    overflow-x: hidden;
 }
 a{
     text-decoration: none;
@@ -43,8 +44,25 @@ a{
     left: 40px;
 }
 .header .right{
-    float:right;
+	position:absolute;
+	right:0;
     margin-right: 9%;
+}
+.header .right .action:hover{
+	background-color:#dcd4d4;
+	color:#655e5e;
+}
+
+.header .right .action{
+	padding:5px;
+	border-radius:5px;
+	background-color:#fff;
+	color:#000;
+	cursor:pointer;
+
+}
+.header .right .action a{
+	color:#000;
 }
 .header a{
     color: #fff;
@@ -350,7 +368,6 @@ div.listing-right span.project-name{
 	position:absolute;
 	background-color:#9e8484;
 	min-width:100px;
-	min-height:100px;
 	right:0;
 	top:0px;
 	border-radius:5px;
@@ -365,6 +382,7 @@ div.listing-right span.project-name{
 	background-color:#fff;
 	color:#352a2a;
 	border-radius:7px;
+	cursor:pointer;
 }
 .listing-post .action_display a:hover{
 	color:red;
@@ -418,3 +436,14 @@ div.listing-right span.project-name{
 	margin-bottom:15px;
 }
 /* endother */
+
+/* adaptive */
+@media (max-width: 930px) {
+	.container, nav{
+		width:100%;
+	}
+	nav ul .action_display{
+		left:inherit;
+		right:0;
+	}
+}

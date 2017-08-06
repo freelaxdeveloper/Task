@@ -3,9 +3,9 @@
 
 # PDO драйвер
 if (!class_exists('pdo')) {
-    die('Установите драйвер PDO');
+    die('Install the PDO driver');
 }
 # версия php не ниже 7.0
 if (!version_compare(PHP_VERSION, 7.0, '>=')) {
-    die('Требуется PHP 7.0 и выше. У Вас установлен PHP ' . phpversion());
+    die('Requires PHP 7.0 or higher. You have PHP installed ' . phpversion());
 }

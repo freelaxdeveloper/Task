@@ -24,7 +24,7 @@ class ProjectController extends Controller{
 
         $project = Projects::getOne($id_project);
         if (!$project) {
-            $this->access_denied('Проект не найден');
+            $this->access_denied('Project not found');
         }
         # получем список заданий
         $tasks = Tasks::getTasks(['id_project' => $project['id'], 'shit_days' => $shit_days]);
@@ -41,7 +41,7 @@ class ProjectController extends Controller{
     {
         $project = Projects::getOne($id_project);
         if (!$project) {
-            $this->access_denied('Проект не найден');
+            $this->access_denied('Project not found');
         }
         if (isset($_POST['title']) && isset($_POST['color_edit'])) {
             $title = Text::for_name($_POST['title']);
@@ -52,7 +52,7 @@ class ProjectController extends Controller{
                 header('Location: ' . App::referer());
             }
         }
-        $this->params['title'] = $project['title'] . ' - редактирование';
+        $this->params['title'] = $project['title'] . ' - editing';
         $this->params['project'] = $project;
 
         $this->display('project/edit');
@@ -63,12 +63,12 @@ class ProjectController extends Controller{
         $project = Projects::getOne($id_project);
 
         if (!$project) {
-            $project = ['title' => 'Весь список', 'id' => 0];
+            $project = ['title' => 'The whole list', 'id' => 0];
             $tasks = Tasks::getTasks(['status' => 2, 'time_start' => 0]);
-            $this->params['title'] = 'Весь список выполненных заданий';
+            $this->params['title'] = 'Complete list of completed tasks';
         } else {
             $tasks = Tasks::getTasks(['status' => 2, 'id_project' => $id_project, 'time_start' => 0]);
-            $this->params['title'] = $project['title'] . ' - выполненные задания';
+            $this->params['title'] = $project['title'] . ' - completed tasks';
         }
 
         $this->params['tasks'] = $tasks;
@@ -98,8 +98,8 @@ class ProjectController extends Controller{
         if (Projects::deleteOne($id_project)) {
             header('Location: ' . App::referer());
         } else {
-            $this->params['title'] = 'Ошибка удаления';
-            $this->access_denied('Проект не может быть удален пока в нем есть не выполненные задания');
+            $this->params['title'] = 'Uninstall error';
+            $this->access_denied('The project can not be deleted while there are uncompleted tasks in it');
         }
     }
 }

@@ -6,7 +6,6 @@ use \More\Text;
 use \Models\{Tasks};
 
 class MainController extends Controller{
-
     public function actionIndex()
     {
         $this->params['tasks'] = Tasks::getTasks();
@@ -19,18 +18,18 @@ class MainController extends Controller{
     {
         switch ($last) {
             case 'week':
-                $title = 'Задания на неделю';
+                $title = 'Tasks for the week';
                 $shit_days = 7;
                 $sorting = 'week';
                 break;
             case 'month':
-                $title = 'Задания на месяц';
+                $title = 'Tasks for the month';
                 $shit_days = 30;
                 $sorting = 'month';
                 break;
 
             default:
-                $title = 'Задания на сегодня';
+                $title = 'Tasks for today';
                 $shit_days = 1;
                 $sorting = 'today';
                 break;

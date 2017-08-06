@@ -4,7 +4,7 @@ namespace Core;
 class ErrorHandler
 {
     public $errors = [];
-    protected $message = 'Произошла ошибка, сообщите об этом администратору!';
+    protected $message = 'An error occurred, please report this to the administrator!';
 
     public function register()
     {
@@ -47,7 +47,7 @@ class ErrorHandler
         $log_path = H . '/System/errorLog.txt';
         $f = fopen($log_path, 'a+');
         for ($i = 0; $i < count($this->errors); $i++) {
-            $error = 'Ошибка: №' . $this->errors[$i]['errno'] . " (" . date('Y-m-d H:i:s') . ")\nОписание: " . $this->errors[$i]['errorstr'] . "\nФайл: " . $this->errors[$i]['file'] . "\nСтрока: " . $this->errors[$i]['line'] . "\n---------\n";
+            $error = 'Error: №' . $this->errors[$i]['errno'] . " (" . date('Y-m-d H:i:s') . ")\nDescription: " . $this->errors[$i]['errorstr'] . "\nFile: " . $this->errors[$i]['file'] . "\nLine: " . $this->errors[$i]['line'] . "\n---------\n";
             fwrite($f, $error);
         }
         fclose($f);

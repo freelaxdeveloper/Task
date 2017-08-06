@@ -14,7 +14,7 @@ class TaskController extends Controller{
         $task = new Task($id_task);
 
         if (!$task->id) {
-            $this->access_denied('Задание не найдено');
+            $this->access_denied('Quest not found');
         }
         $task->delete();
         header('Location: ' . App::referer());
@@ -52,7 +52,7 @@ class TaskController extends Controller{
         $task = new Task($id_task);
 
         if (!$task->id) {
-            $this->access_denied('Задание не найдено');
+            $this->access_denied('Quest not found');
         }
 
         $task->status = 2;
@@ -64,9 +64,9 @@ class TaskController extends Controller{
         $this->access_user(); # доступ только авторизированным
 
         $task = new Task($id_task);
-        
+
         if (!$task->id || $task->status == 2) {
-            $this->access_denied('Задание не найдено');
+            $this->access_denied('Quest not found');
         }
 
         if (isset($_POST['message']) && isset($_POST['deadlines']) && isset($_POST['color_edit']) && isset($_POST['id_project'])) {
@@ -87,7 +87,7 @@ class TaskController extends Controller{
             }
         }
 
-        $this->params['title'] = $task->message . ' - редактирование';
+        $this->params['title'] = $task->message . ' - editing';
         $this->params['task'] = $task;
         $this->params['id_activePproject'] = $task->id_project;
 
