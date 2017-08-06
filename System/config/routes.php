@@ -20,7 +20,7 @@ return [
     # выход с профиля
     ['pattern' => 'exit','run' => 'authorize/exit','method' => 'GET'],
     # просмотр заданий проекта
-    ['pattern' => 'project/([0-9]+)','run' => 'project/view/$1','method' => 'GET'],
+    ['pattern' => 'project/([0-9]+)/?(today|week|month)?','run' => 'project/view/$1/$2','method' => 'GET'],
     # просмотр завершенных заданий
     ['pattern' => 'task/view/complete/([0-9]+)','run' => 'project/viewComplete/$1','method' => 'GET'],
     # просмотр заданий на сегодня

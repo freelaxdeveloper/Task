@@ -7,19 +7,33 @@ use \More\Text;
 
 class ProjectController extends Controller{
 
-    public function actionView(int $id_project)
+    public function actionView(int $id_project, string $sorting = 'today')
     {
+        switch ($sorting) {
+            case 'week':
+                $shit_days = 7;
+                break;
+            case 'month':
+                $shit_days = 30;
+                break;
+
+            default:
+                $shit_days = 1;
+                break;
+        }
+
         $project = Projects::getOne($id_project);
         if (!$project) {
             $this->access_denied('Проект не найден');
         }
         # получем список заданий
-        $tasks = Tasks::getTasks(['id_project' => $project['id']]);
+        $tasks = Tasks::getTasks(['id_project' => $project['id'], 'shit_days' => $shit_days]);
 
         $this->params['title'] = $project['title'];
         $this->params['tasks'] = $tasks;
         $this->params['project'] = $project;
         $this->params['id_activePproject'] = $project['id'];
+        $this->params['sorting'] = $sorting;
 
         $this->display('project/view');
     }

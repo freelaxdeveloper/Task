@@ -32,14 +32,14 @@
         <div id="container">
             <nav>
                 <ul>
-                    <li class="{% if 1 == id_sort %}sort-active{% endif %}"><a href="/view/today/{{id_activePproject}}/">Сегодня</a></li>
-                    <li class="{% if 2 == id_sort %}sort-active{% endif %}"><a href="/view/week/{{id_activePproject}}/">Неделя</a></li>
-                    <li class="{% if 3 == id_sort %}sort-active{% endif %}"><a href="/view/month/{{id_activePproject}}/">Месяц</a></li>
+                    <li class="{% if 'today' == sorting %}sort-active{% endif %}"><a href="/view/today/{{id_activePproject}}/">Сегодня</a></li>
+                    <li class="{% if 'week' == sorting %}sort-active{% endif %}"><a href="/view/week/{{id_activePproject}}/">Неделя</a></li>
+                    <li class="{% if 'month' == sorting %}sort-active{% endif %}"><a href="/view/month/{{id_activePproject}}/">Месяц</a></li>
                 </ul>
                 <ul>
                     {% for project in projects %}
                         <li class="{% if project.id == id_activePproject %}project-active{% elseif project.task_lose %}project-lose{% endif %}">
-                            <a href="/project/{{project.id}}/"><span class="color_project {{project.color}}"></span> {{project.lose}} {{project.title}}</a>
+                            <a href="/project/{{project.id}}/{% if sorting %}{{sorting}}/{% endif %}"><span class="color_project {{project.color}}"></span> {{project.lose}} {{project.title}}</a>
                             {% if user.id %}
                                 <span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
                                 <ul class="action_load display_none" id="action{{project.id}}">
@@ -58,7 +58,7 @@
                                     <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
                                     <span id="typeProject"></span>
                                     <input type="hidden" name="color" value="red">
-                                    <input type="text" name="title" value="" placeholder="Название проекта" pattern="^[А-ЯA-Za-zа-яЁё0-9]{3,32}$"><br>
+                                    <input type="text" name="title" value="" placeholder="Название проекта" pattern="^[А-ЯA-Za-zа-яЁё0-9|\s]{3,32}$"><br>
                                     <input type="submit" name="add" value="Добавить">
                                     <a href="#" class="cancel">Отменить</a>
                                 </form>

@@ -20,18 +20,18 @@ class MainController extends Controller{
             case 'week':
                 $title = 'Задания на неделю';
                 $shit_days = 7;
-                $id_sort = 2;
+                $sorting = 'week';
                 break;
             case 'month':
                 $title = 'Задания на месяц';
                 $shit_days = 30;
-                $id_sort = 3;
+                $sorting = 'month';
                 break;
 
             default:
                 $title = 'Задания на сегодня';
                 $shit_days = 1;
-                $id_sort = 1;
+                $sorting = 'today';
                 break;
         }
         $params = [];
@@ -44,7 +44,7 @@ class MainController extends Controller{
         }
 
         $this->params['title'] = $title;
-        $this->params['id_sort'] = $id_sort;
+        $this->params['sorting'] = $sorting;
         $this->params['tasks'] = Tasks::getTasks($params);
         $this->display('main/index');
     }

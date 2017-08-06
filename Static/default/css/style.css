@@ -41,7 +41,7 @@ a{
 }
 .header .right{
     float:right;
-    margin-right: 12%;
+    margin-right: 9%;
 }
 .header a{
     color: #fff;
@@ -102,10 +102,16 @@ nav li.sort-active{
 	background-color:#e6d820;
 }
 nav li.project-active{
+	background-color:#3b57e4;
+}
+nav li.project-active:hover{
 	background-color:rgb(55, 103, 250);
 }
+nav li.project-lose:hover{
+	background-color:#ff0000;
+}
 nav li.project-lose{
-	background-color:#f6150a;
+	background-color:#f12218;
     color: #fff;
 }
 nav .project-active a, nav li.project-lose a{
@@ -113,9 +119,6 @@ nav .project-active a, nav li.project-lose a{
 }
 nav .project-active{
 	color:#fff;
-}
-nav .project-active:hover > a, nav li.project-lose:hover a{
-	color:#eeec19;
 }
 nav li a{
 	color:#000;
@@ -315,7 +318,7 @@ div.listing-right span.project-name{
 	color: #fff;
 }
 .listing-post.lose hr{
-	border: 1px dotted #000;
+	border: none;
 }
 
 .listing-post .listing-menu{
@@ -388,5 +391,8 @@ div.listing-right span.project-name{
 }
 .display_none {
     display: none;
+}
+.info{
+	margin-bottom:15px;
 }
 /* endother */
