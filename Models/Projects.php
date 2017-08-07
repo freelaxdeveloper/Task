@@ -16,7 +16,7 @@ abstract class Projects
     static function getAll(): array
     {
         $current_time = TIME;
-        $q = DB::me()->prepare("SELECT `t`.`id_project`, `p`.`title`, `p`.`id`, `p`.`color`, `t`.`task_count`,
+        $q = DB::me()->prepare("SELECT `t`.`id_project`, `p`.`title`, `p`.`id`, `p`.`color`, `p`.`id_user`, `t`.`task_count`,
        `t`.`task_lose`, `t`.`task_active`
   FROM (
     SELECT `id_project`, COUNT(*) AS `task_count`,

@@ -43,6 +43,11 @@ class ProjectController extends Controller{
         if (!$project) {
             $this->access_denied('Project not found');
         }
+        # недостаточно прав для редактирования, (можно только автору)
+        if ($project['id_user'] != App::user()->id) {
+            $this->access_denied('You do not have enough authority');
+        }
+
         if (isset($_POST['title']) && isset($_POST['color_edit'])) {
             $title = Text::for_name($_POST['title']);
             $color = Text::for_name($_POST['color_edit']);
@@ -95,9 +100,19 @@ class ProjectController extends Controller{
     public function actionDelete(int $id_project)
     {
         $this->access_user(); # доступ только авторизированным
-        if (Projects::deleteOne($id_project)) {
+
+        $project = Projects::getOne($id_project);
+        if (!$project) {
+            $this->access_denied('Project not found');
+        }
+        # недостаточно прав для удаления, (можно только автору)
+        if ($project['id_user'] != App::user()->id) {
+            $this->access_denied('You do not have enough authority');
+        }
+
+        if (Projects::deleteOne($project['id'])) {
             header('Location: ' . App::referer());
-        } else {
+        } else { # если удалить не смогли значит там есть незавершенные задачи
             $this->params['title'] = 'Uninstall error';
             $this->access_denied('The project can not be deleted while there are uncompleted tasks in it');
         }

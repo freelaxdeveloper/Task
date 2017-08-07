@@ -5,14 +5,18 @@
             <span class="project-name">{{task.title}}</span>
             <span class="listing-action {{task.importance}}" title="{{task.importance_str}}"></span>
 
-            {% if user.id %}
+            {% if task.status == 1 or task.id_user == user.id %}
                 <span class="listing-menu" id="listing{{task.id}}" data-action="listingAction{{task.id}}"> <i class="fa fa-ellipsis-v"></i> </span>
                 <span class="action_load display_none" id="listingAction{{task.id}}">
                     {% if task.status == 1 %}
                         <a href="/task/complete/{{task.id}}/">Execute</a>
-                        <a href="/task/edit/{{task.id}}/">Edit</a>
+                        {% if task.id_user == user.id %}
+                            <a href="/task/edit/{{task.id}}/">Edit</a>
+                        {% endif %}
                     {% endif %}
-                    <a href="/task/delete/{{task.id}}/">Delete</a>
+                    {% if task.id_user == user.id %}
+                        <a href="/task/delete/{{task.id}}/">Delete</a>
+                    {% endif %}
                 </span>
             {% endif %}
             <span class="listing-info-menu">
