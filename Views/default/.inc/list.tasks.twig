@@ -9,13 +9,13 @@
                 <span class="listing-menu" id="listing{{task.id}}" data-action="listingAction{{task.id}}"> <i class="fa fa-ellipsis-v"></i> </span>
                 <span class="action_load display_none" id="listingAction{{task.id}}">
                     {% if task.status == 1 %}
-                        <a href="/task/complete/{{task.id}}/">Execute</a>
+                        <a href="/task/complete/{{task.id}}/">Выполнено</a>
                         {% if task.id_user == user.id %}
-                            <a href="/task/edit/{{task.id}}/">Edit</a>
+                            <a href="/task/edit/{{task.id}}/">Изменить</a>
                         {% endif %}
                     {% endif %}
                     {% if task.id_user == user.id %}
-                        <a href="/task/delete/{{task.id}}/">Delete</a>
+                        <a href="/task/delete/{{task.id}}/">Удалить</a>
                     {% endif %}
                 </span>
             {% endif %}
@@ -32,6 +32,6 @@
 {% endfor %}
 {% if tasks == null %}
     <div class="info">
-        Tasks have not been added yet
+        Задачи еще не были добавлены
     </div>
 {% endif %}

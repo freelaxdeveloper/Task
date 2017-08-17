@@ -1,11 +1,11 @@
 {% extends 'document.twig' %}
 
-{% block title %}Authorization{% endblock %}
+{% block title %}Авторизация{% endblock %}
 
 {% block content %}
     <form class="form" action="/authorize/send/" method="post">
-        Login:<br><input type="text" name="login" value="" placeholder="Enter login"><br>
-        Password:<br><input type="password" name="password" value="" placeholder="Enter password"><br>
-        <input type="submit" name="authorize" value="To come in">
+        Логин:<br><input type="text" name="login" value="" placeholder="Введите логин"><br>
+        Пароль:<br><input type="password" name="password" value="" placeholder="Введите пароль"><br>
+        <input type="submit" name="authorize" value="Войти">
     </form>
 {% endblock %}
