@@ -14,11 +14,11 @@ class TaskController extends Controller{
         $task = new Task($id_task);
 
         if (!$task->id) {
-            $this->access_denied('Quest not found');
+            $this->access_denied('Задача не найдена');
         }
         # недостаточно прав для удаления, (можно только автору)
         if ($task->id_user != App::user()->id) {
-            $this->access_denied('You do not have enough authority');
+            $this->access_denied('У вас не достаточно прав');
         }
         $task->delete();
         header('Location: ' . App::referer());
@@ -56,7 +56,7 @@ class TaskController extends Controller{
         $task = new Task($id_task);
 
         if (!$task->id) {
-            $this->access_denied('Quest not found');
+            $this->access_denied('Задача не найдена');
         }
 
         $task->status = 2;
@@ -71,15 +71,15 @@ class TaskController extends Controller{
 
         # задачи не существует
         if (!$task->id) {
-            $this->access_denied('Quest not found');
+            $this->access_denied('Задача не найдена');
         }
         # задача уже выполена, не будем её больше трогать
         if ($task->status == 2) {
-            $this->access_denied('You can not edit a completed task');
+            $this->access_denied('Выполненную задачу редактировать нельзя');
         }
         # недостаточно прав для редактирования, (можно только автору)
         if ($task->id_user != App::user()->id) {
-            $this->access_denied('You do not have enough authority');
+            $this->access_denied('У вас не достаточно прав');
         }
 
         if (isset($_POST['message']) && isset($_POST['deadlines']) && isset($_POST['color_edit']) && isset($_POST['id_project'])) {

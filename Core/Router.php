@@ -39,16 +39,16 @@ class Router
                 # подключаем файл класса-контроллера если он есть
                 $controllerFile = str_replace('\\', '/', H . $controllName . '.php');
                 if (!file_exists($controllerFile)) {
-                    $this->access_denied('Missing file: ' . $controllerFile);
+                    $this->access_denied('Отсувствует файл: ' . $controllerFile);
                 }
                 require_once $controllerFile;
                 # проверяем существует ли класс который прописан в роутах
                 if (!class_exists($controllName)) {
-                    $this->access_denied('Missing class: ' . $controllName);
+                    $this->access_denied('Отсувствует класс: ' . $controllName);
                 }
                 # проверяем существует ли метод в этом классе который прописан в роутах
                 if (!method_exists($controllName, $actionName)) {
-                    $this->access_denied('Missing method: ' . $actionName . ' in class ' . $controllName);
+                    $this->access_denied('Отсувствует метод: ' . $actionName . ' in class ' . $controllName);
                 }
                 # если все ок - запускаем
                 $controllObject = new $controllName;
@@ -57,7 +57,7 @@ class Router
             }
         }
         if (!isset($controllObject)) {
-            $this->access_denied('You can not find a suitable page router: ' . $this->getURI());
+            $this->access_denied('Нету подходящего роута для: ' . $this->getURI());
         }
     }
     private function access_denied(string $error)

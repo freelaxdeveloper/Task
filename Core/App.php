@@ -11,7 +11,7 @@ abstract class App{
     public static function access_denied($message = '')
     {
         // поставить true для отладки
-        if (false) {
+        if (true) {
             die($message);
         }
         header("HTTP/1.1 404 Not Found");

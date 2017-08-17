@@ -24,7 +24,7 @@ class ProjectController extends Controller{
 
         $project = Projects::getOne($id_project);
         if (!$project) {
-            $this->access_denied('Project not found');
+            $this->access_denied('Проект не найден');
         }
         # получем список заданий
         $tasks = Tasks::getTasks(['id_project' => $project['id'], 'shit_days' => $shit_days]);
@@ -41,11 +41,11 @@ class ProjectController extends Controller{
     {
         $project = Projects::getOne($id_project);
         if (!$project) {
-            $this->access_denied('Project not found');
+            $this->access_denied('Проект не найден');
         }
         # недостаточно прав для редактирования, (можно только автору)
         if ($project['id_user'] != App::user()->id) {
-            $this->access_denied('You do not have enough authority');
+            $this->access_denied('У вас не достаточно прав');
         }
 
         if (isset($_POST['title']) && isset($_POST['color_edit'])) {
@@ -57,7 +57,7 @@ class ProjectController extends Controller{
                 header('Location: ' . App::referer());
             }
         }
-        $this->params['title'] = $project['title'] . ' - editing';
+        $this->params['title'] = $project['title'] . ' - редактирование';
         $this->params['project'] = $project;
 
         $this->display('project/edit');
@@ -70,10 +70,10 @@ class ProjectController extends Controller{
         if (!$project) {
             $project = ['title' => 'The whole list', 'id' => 0];
             $tasks = Tasks::getTasks(['status' => 2, 'time_start' => 0]);
-            $this->params['title'] = 'Complete list of completed tasks';
+            $this->params['title'] = 'Список выполненных задач';
         } else {
             $tasks = Tasks::getTasks(['status' => 2, 'id_project' => $id_project, 'time_start' => 0]);
-            $this->params['title'] = $project['title'] . ' - completed tasks';
+            $this->params['title'] = $project['title'] . ' - выполненные задачи';
         }
 
         $this->params['tasks'] = $tasks;
@@ -103,18 +103,18 @@ class ProjectController extends Controller{
 
         $project = Projects::getOne($id_project);
         if (!$project) {
-            $this->access_denied('Project not found');
+            $this->access_denied('Проект не найден');
         }
         # недостаточно прав для удаления, (можно только автору)
         if ($project['id_user'] != App::user()->id) {
-            $this->access_denied('You do not have enough authority');
+            $this->access_denied('У вас не достаточно прав');
         }
 
         if (Projects::deleteOne($project['id'])) {
             header('Location: ' . App::referer());
         } else { # если удалить не смогли значит там есть незавершенные задачи
-            $this->params['title'] = 'Uninstall error';
-            $this->access_denied('The project can not be deleted while there are uncompleted tasks in it');
+            $this->params['title'] = 'Ошибка при удалении';
+            $this->access_denied('Проект содержит невыполненные задачи');
         }
     }
 }

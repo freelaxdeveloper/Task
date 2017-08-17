@@ -54,11 +54,11 @@ class Task{
     {
         switch ($this->data['importance']) {
             case 0:
-                return 'Do not rush'; // не очень важно
+                return 'Не очень важно'; // не очень важно
             case 1:
-                return 'Quickly'; // важно
+                return 'Важно'; // важно
             case 2:
-                return 'Very urgent'; // очень важно
+                return 'Очень важно'; // очень важно
         }
     }
     # взависимости от цвета определяем его важность

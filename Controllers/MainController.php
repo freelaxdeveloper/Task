@@ -18,18 +18,18 @@ class MainController extends Controller{
     {
         switch ($last) {
             case 'week':
-                $title = 'Tasks for the week';
+                $title = 'Задачи на неделю';
                 $shit_days = 7;
                 $sorting = 'week';
                 break;
             case 'month':
-                $title = 'Tasks for the month';
+                $title = 'Задачи на месяц';
                 $shit_days = 30;
                 $sorting = 'month';
                 break;
 
             default:
-                $title = 'Tasks for today';
+                $title = 'Задачи на сегодня';
                 $shit_days = 1;
                 $sorting = 'today';
                 break;
