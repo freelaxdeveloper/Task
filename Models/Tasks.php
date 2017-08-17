@@ -40,7 +40,7 @@ abstract class Tasks{
         $status = $params['status'] ?? 1;
         $id_project = $params['id_project'] ?? false;
         $shit_days = $params['shit_days'] ?? 1;
-        $time_start = $params['time_start'] ?? mktime(0, 0, 0);
+        $time_start = $params['time_start'] ?? 0;
 
         # если время старта указано то берем задания за определенный интервал
         if ($time_start) {

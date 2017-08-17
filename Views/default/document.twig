@@ -3,7 +3,7 @@
     <head>
         {% block meta %}
             <meta charset="utf-8">
-            <title>{% block title %}{% if title %}{{title}}{% else %}Tasks for today{% endif %}{% endblock %}</title>
+            <title>{% block title %}{% if title %}{{title}}{% else %}Все задачи{% endif %}{% endblock %}</title>
             <link rel="stylesheet" href="/Static/default/css/style.css">
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="shortcut icon" href="/Static/default/favicon.ico">
@@ -60,7 +60,7 @@
                                     <span id="typeProject"></span>
                                     <input type="hidden" name="color" value="red">
                                     <input type="text" name="title" value="" placeholder="Введите название" pattern="^[А-ЯA-Za-zа-яЁё0-9|\s]{3,32}$"><br>
-                                    <input type="submit" name="add" value="Add">
+                                    <input type="submit" name="add" value="Добавить">
                                     <a href="#" class="cancel">Отмена</a>
                                 </form>
                             </li>
@@ -94,7 +94,7 @@
                             <div>
                                 <a id="Task" href="#" class="btn">Добавить задачу</a>
                                 <form id="formTask" class="form form-task" action="/task/new/" method="post">
-                                    <input type="text" name="message" value="" placeholder="What you need to do" pattern="^[А-ЯA-Za-zа-яЁё0-9|\(|\)|\=]{3,1024}$">
+                                    <input type="text" name="message" value="" placeholder="Что вам нужно сделать?" pattern="^[А-ЯA-Za-zа-яЁё0-9|\(|\)|\=]{3,1024}$">
                                     <input type="datetime-local" name="deadlines" value="{{current_data}}"><br>
                                     <select class="" name="id_project">
                                     {% for project in projects %}

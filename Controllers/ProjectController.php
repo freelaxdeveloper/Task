@@ -2,49 +2,55 @@
 namespace Controllers;
 
 use \Core\{Controller,App};
-use \Models\{Projects,Tasks};
+use \Models\{Project,Projects,Tasks};
 use \More\Text;
 
 class ProjectController extends Controller{
 
-    public function actionView(int $id_project, string $sorting = 'today')
+    public function actionView(int $id_project, string $sorting = 'all')
     {
         switch ($sorting) {
             case 'week':
                 $shit_days = 7;
+                $time_start = mktime(0, 0, 0);
                 break;
             case 'month':
                 $shit_days = 30;
+                $time_start = mktime(0, 0, 0);
+                break;
+            case 'today':
+                $shit_days = 1;
+                $time_start = mktime(0, 0, 0);
                 break;
 
             default:
                 $shit_days = 1;
-                break;
+                $time_start = 0;
         }
 
-        $project = Projects::getOne($id_project);
-        if (!$project) {
+        $project = new Project($id_project);
+        if (!$project->id) {
             $this->access_denied('Проект не найден');
         }
         # получем список заданий
-        $tasks = Tasks::getTasks(['id_project' => $project['id'], 'shit_days' => $shit_days]);
+        $tasks = Tasks::getTasks(['id_project' => $project->id, 'shit_days' => $shit_days, 'time_start' => $time_start]);
 
-        $this->params['title'] = $project['title'];
+        $this->params['title'] = $project->title;
         $this->params['tasks'] = $tasks;
         $this->params['project'] = $project;
-        $this->params['id_activePproject'] = $project['id'];
+        $this->params['id_activePproject'] = $project->id;
         $this->params['sorting'] = $sorting;
 
         $this->display('project/view');
     }
     public function actionEdit(int $id_project)
     {
-        $project = Projects::getOne($id_project);
-        if (!$project) {
+        $project = new Project($id_project);
+        if (!$project->id) {
             $this->access_denied('Проект не найден');
         }
         # недостаточно прав для редактирования, (можно только автору)
-        if ($project['id_user'] != App::user()->id) {
+        if ($project->id_user != App::user()->id) {
             $this->access_denied('У вас не достаточно прав');
         }
 
@@ -53,11 +59,11 @@ class ProjectController extends Controller{
             $color = Text::for_name($_POST['color_edit']);
 
             if ($title && $color) {
-                Projects::update($title, $color, $project['id']);
+                Projects::update($title, $color, $project->id);
                 header('Location: ' . App::referer());
             }
         }
-        $this->params['title'] = $project['title'] . ' - редактирование';
+        $this->params['title'] = $project->title . ' - редактирование';
         $this->params['project'] = $project;
 
         $this->display('project/edit');
@@ -65,15 +71,15 @@ class ProjectController extends Controller{
     # просмотр завершенных заданий
     public function actionViewComplete(int $id_project)
     {
-        $project = Projects::getOne($id_project);
+        $project = new Project($id_project);
 
-        if (!$project) {
-            $project = ['title' => 'The whole list', 'id' => 0];
+        if (!$project->id) {
+            $project = ['title' => 'Весь список', 'id' => 0];
             $tasks = Tasks::getTasks(['status' => 2, 'time_start' => 0]);
             $this->params['title'] = 'Список выполненных задач';
         } else {
             $tasks = Tasks::getTasks(['status' => 2, 'id_project' => $id_project, 'time_start' => 0]);
-            $this->params['title'] = $project['title'] . ' - выполненные задачи';
+            $this->params['title'] = $project->title . ' - выполненные задачи';
         }
 
         $this->params['tasks'] = $tasks;
@@ -101,16 +107,16 @@ class ProjectController extends Controller{
     {
         $this->access_user(); # доступ только авторизированным
 
-        $project = Projects::getOne($id_project);
-        if (!$project) {
+        $project = new Project($id_project);
+        if (!$project->id) {
             $this->access_denied('Проект не найден');
         }
         # недостаточно прав для удаления, (можно только автору)
-        if ($project['id_user'] != App::user()->id) {
+        if ($project->id_user != App::user()->id) {
             $this->access_denied('У вас не достаточно прав');
         }
 
-        if (Projects::deleteOne($project['id'])) {
+        if (Projects::deleteOne($project->id)) {
             header('Location: ' . App::referer());
         } else { # если удалить не смогли значит там есть незавершенные задачи
             $this->params['title'] = 'Ошибка при удалении';

@@ -1,4 +1,5 @@
 <?php
+
 namespace Controllers;
 
 use \Core\{Controller,Authorize,App};
@@ -10,7 +11,7 @@ class MainController extends Controller{
     {
         $this->params['tasks'] = Tasks::getTasks();
         $this->params['id_activePproject'] = 0;
-        $this->params['sorting'] = 'today';
+        //$this->params['sorting'] = 'today';
 
         $this->display('main/index');
     }
@@ -35,6 +36,7 @@ class MainController extends Controller{
                 break;
         }
         $params = [];
+        $params['time_start'] = mktime(0, 0, 0);
         $params['shit_days'] = $shit_days;
         if ($id_project) {
             $params['id_project'] = $id_project;
