@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use \Core\{Controller,App};
-use \Models\{Tasks,Task};
+use \Models\{Tasks,Task,Project};
 use \More\{Text,Misc};
 
 class TaskController extends Controller{
@@ -12,12 +12,13 @@ class TaskController extends Controller{
         $this->access_user(); # доступ только авторизированным
 
         $task = new Task($id_task);
+        $project = new Project($task->id_project);
 
         if (!$task->id) {
             $this->access_denied('Задача не найдена');
         }
-        # недостаточно прав для удаления, (можно только автору)
-        if ($task->id_user != App::user()->id) {
+        # недостаточно прав для удаления, (можно только автору задачи или владельцу проекта)
+        if ($task->id_user != App::user()->id && $project->id_user != App::user()->id) {
             $this->access_denied('У вас не достаточно прав');
         }
         $task->delete();
@@ -54,11 +55,15 @@ class TaskController extends Controller{
         $this->access_user(); # доступ только авторизированным
 
         $task = new Task($id_task);
+        $project = new Project($task->id_project);
 
         if (!$task->id) {
             $this->access_denied('Задача не найдена');
         }
-
+        # недостаточно прав для выполнения (зависит от настройки проекта)
+        if (!$project->management()) {
+            $this->access_denied('У вас не достаточно прав');
+        }
         $task->status = 2;
         header('Location: ' . App::referer());
     }
@@ -68,6 +73,7 @@ class TaskController extends Controller{
         $this->access_user(); # доступ только авторизированным
 
         $task = new Task($id_task);
+        $project = new Project($task->id_project);
 
         # задачи не существует
         if (!$task->id) {
@@ -77,10 +83,11 @@ class TaskController extends Controller{
         if ($task->status == 2) {
             $this->access_denied('Выполненную задачу редактировать нельзя');
         }
-        # недостаточно прав для редактирования, (можно только автору)
-        if ($task->id_user != App::user()->id) {
+        # недостаточно прав для редактирования (можно автору задачи или владельцу проекта)
+        if ($task->id_user != App::user()->id && $project->id_user != App::user()->id) {
             $this->access_denied('У вас не достаточно прав');
         }
+        # проверяем можно ли пользователю вести проект
 
         if (isset($_POST['message']) && isset($_POST['deadlines']) && isset($_POST['color_edit']) && isset($_POST['id_project'])) {
             # задание
@@ -100,7 +107,7 @@ class TaskController extends Controller{
             }
         }
 
-        $this->params['title'] = $task->message . ' - editing';
+        $this->params['title'] = $task->message . ' - редактирование';
         $this->params['task'] = $task;
         $this->params['id_activePproject'] = $task->id_project;
 

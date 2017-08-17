@@ -219,7 +219,7 @@ footer > span{
 .form{
 	position:relative;
 	background-color:#fff;
-	color:#fff;
+	color:#1d1b1b;
 	padding: 7px;
 	border-radius:7px;
 }
@@ -307,10 +307,7 @@ footer > span{
 	height: 1.2em;
 }
 
-.form-task select{
-	position:absolute;
-	right:30px;
-	top: 5px;
+.form select{
 	margin-top:3px;
 	height: 30px;
 	width:130px;
@@ -319,8 +316,13 @@ footer > span{
 	border-radius:7px;
 	font-size:14px;
 }
-.form-task select:hover{
+.form select:hover{
 	border: 1px solid #5E81A8;
+}
+.form-task select{
+	position:absolute;
+	right:30px;
+	top: 5px;
 }
 /* endform */
 

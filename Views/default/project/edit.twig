@@ -10,6 +10,11 @@
         <span id="ProjectEdit"></span>
         <input type="hidden" name="color_edit" value="{{project.color}}">
         <input type="text" name="title" value="{{project.title}}"><br>
+        Проект ведут:
+        <select name="set_management">
+            <option value="1"{% if project.set_management == 1 %} selected{% endif %}>Все</option>
+            <option value="2"{% if project.set_management == 2 %} selected{% endif %}>Только я</option>
+        </select><br>
         <input type="submit" name="save" value="Сохранить">
     </form>
 {% endblock %}

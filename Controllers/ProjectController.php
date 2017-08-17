@@ -50,16 +50,17 @@ class ProjectController extends Controller{
             $this->access_denied('Проект не найден');
         }
         # недостаточно прав для редактирования, (можно только автору)
-        if ($project->id_user != App::user()->id) {
+        if (!$project->management()) {
             $this->access_denied('У вас не достаточно прав');
         }
 
         if (isset($_POST['title']) && isset($_POST['color_edit'])) {
             $title = Text::for_name($_POST['title']);
             $color = Text::for_name($_POST['color_edit']);
+            $set_management = $_POST['set_management'] == 2 ? 2 : 1;
 
             if ($title && $color) {
-                Projects::update($title, $color, $project->id);
+                Projects::update($title, $color, $set_management, $project->id);
                 header('Location: ' . App::referer());
             }
         }
@@ -112,11 +113,11 @@ class ProjectController extends Controller{
             $this->access_denied('Проект не найден');
         }
         # недостаточно прав для удаления, (можно только автору)
-        if ($project->id_user != App::user()->id) {
+        if (!$project->management()) {
             $this->access_denied('У вас не достаточно прав');
         }
 
-        if (Projects::deleteOne($project->id)) {
+        if ($project->delete()) {
             header('Location: ' . App::referer());
         } else { # если удалить не смогли значит там есть незавершенные задачи
             $this->params['title'] = 'Ошибка при удалении';
