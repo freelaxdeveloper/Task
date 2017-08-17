@@ -7,5 +7,5 @@ php_flag register_globals off
 php_flag session.use_only_cookies on
 
 RewriteEngine On
-RewriteCond $1 !^(index\.php|Static|robots\.txt|sitemap\.xml)
+RewriteCond $1 !^(index\.php|Static|admin)
 RewriteRule ^(.*)$ /index.php/$1 [L]
