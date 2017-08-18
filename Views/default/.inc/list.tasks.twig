@@ -1,10 +1,11 @@
 {% for task in tasks %}
-    <div class="listing-post {% if task.lose == 1 %}lose{% endif %}">
+    <div class="listing-post {% if task.lose == 1 and task.status == 1 %}lose{% endif %}">
         <span class="listing-status {{task.importance}}" title="{{task.importance_str}}"></span> {{task.message}}
         <div class="listing-right">
-            <span class="project-name">{{task.title}}</span>
-            <span class="listing-action {{task.color}}"></span>
-
+            {% if project == null %}
+                <span class="project-name">{{task.title}}</span>
+                <span class="listing-action {{task.color}}"></span>
+            {% endif %}
             {% if task.status == 1 or task.id_user == user.id or project.id_user == user.id %}
                 <span class="listing-menu" id="listing{{task.id}}" data-action="listingAction{{task.id}}"> <i class="fa fa-ellipsis-v"></i> </span>
                 <span class="action_load display_none" id="listingAction{{task.id}}">
@@ -23,8 +24,8 @@
                 <i class="fa fa-info-circle"></i>
             </span>
             <span class="listing-info">
-                {{task.login}}<br>
-                {{task.deadlines}}
+                <span><i class="fa fa-user"></i> {{task.login}}</span>
+                <span><i class="fa fa-calendar"></i> {{task.deadlines}}</span>
             </span>
         </div>
     </div>

@@ -14,7 +14,7 @@
     <body>
         <header>
             <div class="header">
-                <a href="/" id="logo" title="На главную">TODO</a>
+                <a href="/" id="logo" title="На главную">Главная</a>
                 <span class="right">
                     {% if user.id == 0 %}
                         <span class="action"><i class="fa fa-registered"></i> <a href="/register/">Регистрация</a></span> / <span class="action"><i class="fa fa-sign-in"></i> <a href="/authorize/">Авторизация</a></span>
@@ -30,9 +30,9 @@
         <div id="container">
             <nav>
                 <ul>
-                    <li class="{% if 'today' == sorting %}sort-active{% endif %}"><a href="/view/today/{{id_activePproject}}/">Сегодня</a></li>
-                    <li class="{% if 'week' == sorting %}sort-active{% endif %}"><a href="/view/week/{{id_activePproject}}/">Неделя</a></li>
-                    <li class="{% if 'month' == sorting %}sort-active{% endif %}"><a href="/view/month/{{id_activePproject}}/">Месяц</a></li>
+                    <li class="{% if 'today' == sorting %}sort-active{% endif %}"><a href="/view/today/{{id_activePproject}}/"><i class="fa fa-calendar"></i> Сегодня</a></li>
+                    <li class="{% if 'week' == sorting %}sort-active{% endif %}"><a href="/view/week/{{id_activePproject}}/"><i class="fa fa-calendar"></i> Неделя</a></li>
+                    <li class="{% if 'month' == sorting %}sort-active{% endif %}"><a href="/view/month/{{id_activePproject}}/"><i class="fa fa-calendar"></i> Месяц</a></li>
                 </ul>
                 <ul>
                     {% for project in projects %}
@@ -66,6 +66,12 @@
                             </li>
                         </ul>
                 {% endif %}
+                <ul>
+                    <li>Команда</li>
+                    {% for user in users %}
+                        <li><a href="#"><i class="fa fa-user"></i> {{user.login}}</a></li>
+                    {% endfor %}
+                </ul>
             </nav>
             <div class="container">
                 <div class="messages">
@@ -114,9 +120,6 @@
                 </div>
             </div>
         </div>
-        <footer>
-            &copy; <span>by</span> Sanek_OS9<span>@mail.ru</span> <span class="right">Шаповал Александр Александрович</span>
-        </footer>
         <script src="/Static/default/js/action.js" charset="utf-8"></script>
         <script src="/Static/default/js/form.js" charset="utf-8"></script>
     </body>

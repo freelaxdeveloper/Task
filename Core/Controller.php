@@ -3,7 +3,7 @@ namespace Core;
 
 use \More\{Text,Pages};
 use \Core\{App};
-use \Models\{Projects};
+use \Models\{Projects,Users};
 
 class Controller{
     protected $params = [];
@@ -31,6 +31,7 @@ class Controller{
     {
         $this->params['projects'] = Projects::getAll();
         $this->params['user'] = App::user();
+        $this->params['users'] = Users::getAll();
         $this->params['current_data'] = date('Y-m-d\TH:00');
         if (empty($this->params['id_activePproject']))
             $this->params['id_activePproject'] = 0;

@@ -36,4 +36,12 @@ abstract class Users{
         }
         return $user;
     }
+    public static function getAll(): array
+    {
+        $q = DB::me()->query("SELECT * FROM `users` ORDER BY `id` DESC");
+        if ($users = $q->fetchAll()) {
+            return $users;
+        }
+        return [];
+    }
 }
