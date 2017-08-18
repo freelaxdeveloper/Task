@@ -1,14 +1,14 @@
 {% for task in tasks %}
     <div class="listing-post {% if task.lose == 1 %}lose{% endif %}">
-        <span class="listing-status {{task.color}}"></span> {{task.message}}
+        <span class="listing-status {{task.importance}}" title="{{task.importance_str}}"></span> {{task.message}}
         <div class="listing-right">
             <span class="project-name">{{task.title}}</span>
-            <span class="listing-action {{task.importance}}" title="{{task.importance_str}}"></span>
+            <span class="listing-action {{task.color}}"></span>
 
             {% if task.status == 1 or task.id_user == user.id or project.id_user == user.id %}
                 <span class="listing-menu" id="listing{{task.id}}" data-action="listingAction{{task.id}}"> <i class="fa fa-ellipsis-v"></i> </span>
                 <span class="action_load display_none" id="listingAction{{task.id}}">
-                    {% if task.status == 1 and project.management %}
+                    {% if task.status == 1 and (project.management or task.id_user_project == user.id) %}
                         <a href="/task/complete/{{task.id}}/">Выполнено</a>
                     {% endif %}
                     {% if task.id_user == user.id or project.id_user == user.id %}
@@ -27,7 +27,6 @@
                 {{task.deadlines}}
             </span>
         </div>
-        <hr>
     </div>
 {% endfor %}
 {% if tasks == null %}

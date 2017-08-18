@@ -17,7 +17,7 @@ class Task{
     # получаем данные задания
     private function getData(): array
     {
-        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`title`, `projects`.`color`, `users`.`login`
+        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`id_user` AS 'id_user_project', `projects`.`title`, `projects`.`color`, `users`.`login`
             FROM `tasks`
             INNER JOIN `users` ON `tasks`.`id_user` = `users`.`id`
             INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id`

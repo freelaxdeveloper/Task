@@ -34,7 +34,7 @@ a{
 .header{
     display: block;
     width: 100%;
-    background-color: rgb(55, 103, 250);
+    background-color: #4F5A6E;
     height: 50px;
     line-height: 50px;
     color: #fff;
@@ -107,51 +107,44 @@ nav{
 }
 nav ul{
     list-style-type: none;
-    position: relative;
+    background-color:#4F5A6E;
+    margin: 1px 0 5px 0;
+    padding:0;
+    border-radius:3px;
 }
 nav li{
 	position:relative;
 	padding: 7px;
 	border-radius:7px;
 	margin-bottom:1px;
-	background-color:#fff;
+	color:#fff;
 }
 nav li:hover{
-	background-color:#efeaea;
+	background-color:#606d86;
+}
+nav li a{
+	color:#fff;
 }
 nav li.sort-active{
-	background-color:#3b57e4;
-	color:#fff;
+	background-color:#424B5F;
+}
+nav li.sort-active:hover{
+	background-color:#606d86;
 }
 nav li.sort-active a{
 	color:#fff;
 }
 nav li.project-active{
-	background-color:#3b57e4;
+	background-color:#424B5F;
 }
 nav li.project-active:hover{
-	background-color:rgb(55, 103, 250);
+	background-color:#606d86;
 }
 nav li.project-lose:hover{
 	background-color:#ca3333;
 }
 nav li.project-lose{
 	background-color:#bb2e2e;
-    color: #fff;
-}
-nav .project-active a, nav .project-lose a{
-	color:#fff;
-}
-nav .project-active{
-	color:#fff;
-}
-nav li a{
-	color:#000;
-}
-nav ul li#Project{
-    background-color:#d5d9da;
-}
-nav ul li#Project:hover a{
     color: #fff;
 }
 nav ul span{
@@ -250,12 +243,12 @@ footer > span{
 	height:27px;
 	line-height:27px;
 	color:#fff;
-	background-color: #808182;
+	background-color: #65c178;
 	padding:0 5px 0 5px;
 	border-radius:7px;
 }
-.form a:hover{
-	background-color:#96a0ab;
+.form a:hover, .btn:hover{
+	background-color:#159776;
 }
 
 #formProject, #formTask{
@@ -330,8 +323,13 @@ footer > span{
 .listing-post{
     margin-bottom: 5px;
 	position:relative;
-	padding:3px;
-	color:#565555;
+	padding:10px;
+	color:#000000;
+	border-bottom: 1px solid #ece6e6;
+}
+.listing-post:hover{
+	background-color:#f3f0f0;
+	cursor:pointer;
 }
 span.listing-status, span.listing-action{
 	display:inline-block;
@@ -341,6 +339,7 @@ span.listing-status, span.listing-action{
 span.listing-status{
 	vertical-align:middle;
 	border-radius:25px;
+	cursor:pointer;
 }
 div.listing-right{
 	float:right;
@@ -350,30 +349,34 @@ span.listing-action{
 	border-radius:50%;
 }
 div.listing-right span.project-name{
-
+	font-size:15px;
+	color:#848181;
+	font-style:italic;
 }
 .listing-post.lose{
 	background-color:#cc2828;
 	border-radius:7px;
 	color: #fff;
 }
-.listing-post.lose hr{
-	border: none;
+.listing-post.lose span.project-name, .listing-post.lose span.listing-menu{
+	color: #fff;
 }
 
 .listing-post .listing-menu{
 	position:relative;
 	right:7px;
-    cursor: pointer;
+	color:#848181;
+	cursor:pointer;
+
 }
 .listing-post .action_display{
 	position:absolute;
-	background-color:#9e8484;
+	background-color:#967c7c;
 	min-width:100px;
 	right:0;
 	top:0px;
 	border-radius:5px;
-	padding:7px;
+	padding:5px;
     -webkit-transition:0.55s linear opacity;
     z-index:100;
 }
@@ -391,17 +394,21 @@ div.listing-right span.project-name{
 	background-color:#efeaea;
 }
 .listing-info{
+	position:absolute;
 	display:none;
-	background-color:#9e8484;
+	background-color:#967c7c;
 	color:#fff;
 	padding:5px;
 	border-radius:7px;
 	width:200px;
+	right:0;
 }
 .listing-info-menu:hover + .listing-info{
-	position:absolute;
 	display:block;
 	z-index:100;
+}
+.listing-info-menu{
+	cursor:pointer;
 }
 /* endlisting*/
 
