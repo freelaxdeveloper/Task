@@ -12,6 +12,9 @@ class AuthorizeController extends Controller{
     {
         $this->access_user(); # доступ только авторизированным
 
+        if (!App::user()->checkToken()) {
+            $this->access_denied('Не верный token');
+        }
         Authorize::exit();
         header('Location: /');
     }

@@ -18,7 +18,7 @@ return [
     # страница авторизации (отправка формы)
     ['pattern' => 'authorize/send','run' => 'authorize/authorize','method' => 'POST'],
     # выход с профиля
-    ['pattern' => 'exit','run' => 'authorize/exit','method' => 'GET'],
+    ['pattern' => 'exit/\?token\=([0-9a-z]+)','run' => 'authorize/exit','method' => 'GET'],
     # просмотр заданий проекта
     ['pattern' => 'project/([0-9]+)/?(today|week|month)?','run' => 'project/view/$1/$2','method' => 'GET'],
     # просмотр завершенных заданий
