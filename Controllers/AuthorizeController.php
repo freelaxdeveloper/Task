@@ -1,4 +1,5 @@
 <?php
+
 namespace Controllers;
 
 use \Core\{Controller,Authorize,App};
@@ -17,7 +18,6 @@ class AuthorizeController extends Controller{
     public function actionAuthorize()
     {
         $this->access_guest();
-
         if (isset($_POST['authorize'])) {
             $login = Text::for_name($_POST['login']);
             $password = Text::input_text($_POST['password']);
