@@ -15,6 +15,10 @@ class MainController extends Controller{
 
         $this->display('main/index');
     }
+    public function actionFaq()
+    {
+        $this->display('main/faq');
+    }
     public function actionLast(string $last, int $id_project)
     {
         switch ($last) {

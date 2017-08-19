@@ -5,13 +5,17 @@ use \Models\User;
 use \Core\Authorize;
 
 abstract class App{
+    const USER_GROUP_USER = 1;
+    const USER_GROUP_MODER = 2;
+    const USER_GROUP_ADMIN = 3;
+
     /*
      * в любой не понятной ситуации ошибка 404
      */
     public static function access_denied($message = '')
     {
-        // поставить true для отладки
-        if (true) {
+        // администратору/модератору можно показать ошибки
+        if (self::user()->group >= self::USER_GROUP_MODER) {
             die($message);
         }
         header("HTTP/1.1 404 Not Found");

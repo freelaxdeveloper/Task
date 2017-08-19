@@ -1,11 +1,12 @@
 <?php
 namespace Models;
 
-use Core\DB;
+use \Core\DB;
+use \Models\User;
 
 abstract class Users{
     # добавление нового пользвателя
-    public static function addUser(string $login, string $password): bool
+    public static function addUser(string $login, string $password): array
     {
         $password = password_hash($password, PASSWORD_DEFAULT);
         $time = TIME;
@@ -16,7 +17,10 @@ abstract class Users{
         $q->bindParam(':time_create', $time, \PDO::PARAM_INT);
         $q->execute();
 
-        return DB::me()->lastInsertId() ? true : false;
+        if ($id = DB::me()->lastInsertId()) {
+            return ['id' => $id, 'password' => $password];
+        }
+        return ['error' => 'Введенный вами логин уже существует'];
     }
     # получаем данные по логину и паролю
     /*
@@ -38,10 +42,12 @@ abstract class Users{
     }
     public static function getAll(): array
     {
-        $q = DB::me()->query("SELECT * FROM `users` ORDER BY `id` DESC");
-        if ($users = $q->fetchAll()) {
-            return $users;
+        $users = [];
+        $q = DB::me()->query("SELECT `id` FROM `users` ORDER BY `id` DESC");
+        $res = $q->fetchAll();
+        foreach ($res AS $user) {
+            $users[] = new User($user['id']);
         }
-        return [];
+        return $users;
     }
 }

@@ -50,4 +50,11 @@ class Controller{
             $this->access_denied('Страница доступна только гостью');
         }
     }
+    # доступ только по токену
+    protected function checkToken()
+    {
+        if (!App::user()->checkToken()) {
+            $this->access_denied('Не верный token');
+        }
+    }
 }

@@ -14,7 +14,11 @@
     <body>
         <header>
             <div class="header">
-                <a href="/" id="logo" title="На главную">Главная</a>
+                <span class="left">
+                    <a href="/" title="На главную">Главная</a>
+                    <a href="/faq/" title="На главную">F.A.Q</a>
+                </span>
+
                 <span class="right">
                     {% if user.id == 0 %}
                         <span class="action"><i class="fa fa-registered"></i> <a href="/register/">Регистрация</a></span> / <span class="action"><i class="fa fa-sign-in"></i> <a href="/authorize/">Авторизация</a></span>
@@ -30,11 +34,13 @@
         <div id="container">
             <nav>
                 <ul>
+                    <li class="title">Период</li>
                     <li class="{% if 'today' == sorting %}sort-active{% endif %}"><a href="/view/today/{{id_activePproject}}/"><i class="fa fa-calendar"></i> Сегодня</a></li>
                     <li class="{% if 'week' == sorting %}sort-active{% endif %}"><a href="/view/week/{{id_activePproject}}/"><i class="fa fa-calendar"></i> Неделя</a></li>
                     <li class="{% if 'month' == sorting %}sort-active{% endif %}"><a href="/view/month/{{id_activePproject}}/"><i class="fa fa-calendar"></i> Месяц</a></li>
                 </ul>
                 <ul>
+                    <li class="title">Проекты</li>
                     {% for project in projects %}
                         <li class="{% if project.id == id_activePproject %}project-active{% elseif project.task_lose %}project-lose{% endif %}">
                             <a href="/project/{{project.id}}/{% if sorting %}{{sorting}}/{% endif %}"><span class="color_project {{project.color}}"></span> {{project.lose}} {{project.title}}</a>
@@ -50,26 +56,33 @@
                             {% endif %}
                         </li>
                     {% endfor %}
-                </ul>
                 {% if user.id %}
-                        <ul>
-                            <li id="Project"><a href="#" class="btn">Добавить проект</a></li>
-                            <li id="formProject">
-                                <form class="form" action="/project/new/" method="post">
-                                    <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
-                                    <span id="typeProject"></span>
-                                    <input type="hidden" name="color" value="red">
-                                    <input type="text" name="title" value="" placeholder="Введите название" pattern="^[А-ЯA-Za-zа-яЁё0-9|\s]{3,32}$"><br>
-                                    <input type="submit" name="add" value="Добавить">
-                                    <a href="#" class="cancel">Отмена</a>
-                                </form>
-                            </li>
-                        </ul>
+                        <li id="Project"><a href="#" class="btn">Добавить проект</a></li>
+                        <li id="formProject">
+                            <form class="form" action="/project/new/" method="post">
+                                <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
+                                <span id="typeProject"></span>
+                                <input type="hidden" name="color" value="red">
+                                <input type="text" name="title" value="" placeholder="Введите название" pattern="^[А-ЯA-Za-zа-яЁё0-9|\s]{3,32}$"><br>
+                                <input type="submit" name="add" value="Добавить">
+                                <a href="#" class="cancel">Отмена</a>
+                            </form>
+                        </li>
                 {% endif %}
+                </ul>
                 <ul>
-                    <li>Команда</li>
-                    {% for user in users %}
-                        <li><a href="#"><i class="fa fa-user"></i> {{user.login}}</a></li>
+                    <li class="title">Команда</li>
+                    {% for ank in users %}
+                        <li>
+                            <a href="#"><i class="fa fa-user"></i> {{ank.login}}</a>
+                            <span class="counter" title="Проектов: {{ank.project_count}} | Задач: {{ank.task_count}}">{{ank.project_count}}/{{ank.task_count}}</span>
+                            {% if user.group >= 3 and user.id != ank.id %}
+                                <span id="menu{{ank.id}}" data-action="action{{ank.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
+                                <ul class="action_load display_none" id="action{{ank.id}}">
+                                    <li><a href="/user/delete/{{ank.id}}/?token={{user.url_token}}">Удалить</a></li>
+                                </ul>
+                            {% endif %}
+                        </li>
                     {% endfor %}
                 </ul>
             </nav>

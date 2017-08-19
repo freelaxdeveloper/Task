@@ -11,10 +11,8 @@ class AuthorizeController extends Controller{
     public function actionExit()
     {
         $this->access_user(); # доступ только авторизированным
+        $this->checkToken(); # доступ только по токену
 
-        if (!App::user()->checkToken()) {
-            $this->access_denied('Не верный token');
-        }
         Authorize::exit();
         header('Location: /');
     }
@@ -52,10 +50,13 @@ class AuthorizeController extends Controller{
                 $this->params['errors'][] = 'Пароли не совпадают';
             }
             if (empty($this->params['errors'])) {
-                if (!Users::addUser($login, $password)) {
-                    $this->params['errors'][] = 'Введенный вами логин уже существует';
+                $user = Users::addUser($login, $password);
+                if (isset($user['error'])) {
+                    $this->params['errors'][] = $user['error'];
                 } else {
+                    Authorize::authorized($user['id'], $user['password']);
                     $this->params['messages'][] = 'Вы успешно зарегистрировались';
+                    header('Refresh: 1; /');
                 }
             }
         }

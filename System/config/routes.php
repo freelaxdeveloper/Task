@@ -9,6 +9,8 @@ use \Core\App;
 return [
     # главная страница
     ['pattern' => '','run' => 'main/index','method' => 'GET'],
+    # F.A.Q
+    ['pattern' => 'faq','run' => 'main/faq','method' => 'GET'],
     # страница регистрации
     ['pattern' => 'register','run' => 'authorize/register','method' => 'GET'],
     # страница регистрации (отправка формы)
@@ -19,6 +21,8 @@ return [
     ['pattern' => 'authorize/send','run' => 'authorize/authorize','method' => 'POST'],
     # выход с профиля
     ['pattern' => 'exit/\?token\=([0-9a-z]+)','run' => 'authorize/exit','method' => 'GET'],
+    # удаление пользователя
+    ['pattern' => 'user/delete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'user/delete/$1','method' => 'GET'],
     # просмотр заданий проекта
     ['pattern' => 'project/([0-9]+)/?(today|week|month)?','run' => 'project/view/$1/$2','method' => 'GET'],
     # просмотр завершенных заданий

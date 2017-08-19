@@ -39,9 +39,19 @@ a{
     line-height: 50px;
     color: #fff;
 }
-.header #logo{
+.header .left{
     position: relative;
     left: 40px;
+}
+.header .left a:hover{
+	background-color:#6c7992;
+	color:#fff;
+}
+.header .left a{
+	padding:5px;
+    background-color:#606d86;
+    color:#fff;
+    border-radius:7px;
 }
 .header .right{
 	position:absolute;
@@ -121,7 +131,6 @@ nav ul{
 nav li{
 	position:relative;
 	padding: 7px;
-	border-radius:7px;
 	margin-bottom:1px;
 	color:#fff;
 }
@@ -131,6 +140,13 @@ nav li:hover{
 nav li a{
 	color:#fff;
 }
+nav li.title{
+	background-color:#606d86;
+}
+nav li#Project, nav li#formProject{
+	background-color:#4F5A6E;
+}
+
 nav li.sort-active{
 	background-color:#424B5F;
 }
@@ -256,12 +272,12 @@ footer > span{
 	height:27px;
 	line-height:27px;
 	color:#fff;
-	background-color: #65c178;
+	background-color: #676d88;
 	padding:0 5px 0 5px;
 	border-radius:7px;
 }
 .form a:hover, .btn:hover{
-	background-color:#159776;
+	background-color:#5f6480;
 }
 
 #formProject, #formTask{
