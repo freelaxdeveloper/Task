@@ -12,13 +12,16 @@ class TaskController extends Controller{
         $this->access_user(); # доступ только авторизированным
         $this->checkToken(); # доступ только по токену
 
-        $tasks = Tasks::getTasks(['id' => $id_task]);
+        if (!$tasks = Tasks::getTasks(['id' => $id_task])) {
+            $tasks = Tasks::getTasks(['id' => $id_task, 'status' => 2]);
+        }
         $task = new Task($tasks);
-        $project = new Project($task->id_project);
 
         if (!$task->id) {
             $this->access_denied('Задача не найдена');
         }
+
+        $project = new Project($task->id_project);
         # недостаточно прав для удаления, (можно только автору задачи или владельцу проекта)
         if ($task->id_user != App::user()->id && $project->id_user != App::user()->id) {
             $this->access_denied('У вас не достаточно прав');
@@ -31,7 +34,7 @@ class TaskController extends Controller{
     {
         $this->access_user(); # доступ только авторизированным
         $this->checkToken(); # доступ только по токену
-        
+
         if (isset($_POST['message']) && isset($_POST['deadlines']) && isset($_POST['color']) && isset($_POST['id_project'])) {
             # задание
             $message = Text::input_text($_POST['message']);
@@ -65,11 +68,11 @@ class TaskController extends Controller{
 
         $tasks = Tasks::getTasks(['id' => $id_task]);
         $task =  new Task($tasks);
-        $project = new Project($task->id_project);
-
         if (!$task->id) {
             $this->access_denied('Задача не найдена');
         }
+        $project = new Project($task->id_project);
+
         # недостаточно прав для выполнения (зависит от настройки проекта)
         if (!$project->management()) {
             $this->access_denied('У вас не достаточно прав');
@@ -85,12 +88,12 @@ class TaskController extends Controller{
         $tasks = Tasks::getTasks(['id' => $id_task]);
         $task = new Task($tasks);
 
-        $project = new Project($task->id_project);
-
         # задачи не существует
         if (!$task->id) {
             $this->access_denied('Задача не найдена');
         }
+
+        $project = new Project($task->id_project);
         # задача уже выполена, не будем её больше трогать
         if ($task->status == 2) {
             $this->access_denied('Выполненную задачу редактировать нельзя');
