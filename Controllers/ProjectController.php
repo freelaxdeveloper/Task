@@ -107,6 +107,7 @@ class ProjectController extends Controller{
     public function actionDelete(int $id_project)
     {
         $this->access_user(); # доступ только авторизированным
+        $this->checkToken(); # доступ только по токену
 
         $project = new Project($id_project);
         if (!$project->id) {

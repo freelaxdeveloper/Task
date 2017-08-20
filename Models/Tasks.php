@@ -41,18 +41,31 @@ abstract class Tasks{
         $id_project = $params['id_project'] ?? false;
         $shit_days = $params['shit_days'] ?? 1;
         $time_start = $params['time_start'] ?? 0;
+        $my_task = $params['my_task'] ?? false;
+        $id_task = $params['id'] ?? false;
 
         # если время старта указано то берем задания за определенный интервал
         if ($time_start) {
             $time_end = $time_start + 3600 * 24 * $shit_days;
-            $where .= ' AND `deadlines` < :time_end ';
+            $where .= ' AND `tasks`.`deadlines` < :time_end ';
         }
         # если указано ID проекта то берем задания этого проекта
         if ($id_project) {
-            $where .= ' AND `id_project` = :id_project ';
+            $where .= ' AND `tasks`.`id_project` = :id_project ';
+        }
+        # показываем только свои задачи
+        if ($my_task) {
+            $where .= ' AND (`tasks`.`id_user` = :id_user OR `projects`.`id_user` = :id_project_user) ';
+        }
+        # показываем выбранную задачу
+        if ($id_task) {
+            $where .= ' AND `tasks`.`id` = :id ';
         }
 
-        $q = DB::me()->prepare("SELECT `id` FROM `tasks` WHERE `status` = :status AND `deadlines` > :time_start $where ORDER BY `deadlines` ASC, `importance` DESC");
+        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`id_user` AS 'id_user_project', `projects`.`title`, `projects`.`color`, `users`.`login`
+            FROM `tasks`, `projects`, `users`
+            WHERE `users`.`id` = `tasks`.`id_user` AND `projects`.`id` = `tasks`.`id_project` AND `tasks`.`status` = :status AND `tasks`.`deadlines` > :time_start $where
+            ORDER BY `tasks`.`deadlines` ASC, `tasks`.`importance` DESC" . ($id_task ? ' LIMIT 1' : null));
         $q->bindParam(':status', $status, \PDO::PARAM_INT);
         $q->bindParam(':time_start', $time_start, \PDO::PARAM_INT);
 
@@ -60,11 +73,22 @@ abstract class Tasks{
             $q->bindParam(':time_end', $time_end, \PDO::PARAM_INT);
         if ($id_project)
             $q->bindParam(':id_project', $id_project, \PDO::PARAM_INT);
-
+        if ($my_task) {
+            $id_user = App::user()->id;
+            $q->bindParam(':id_user', $id_user, \PDO::PARAM_INT);
+            $q->bindParam(':id_project_user', $id_user, \PDO::PARAM_INT);
+        }
+        if ($id_task) {
+            $q->bindParam(':id', $id_task, \PDO::PARAM_INT);
+        }
         $q->execute();
+
+        if ($id_task && $task = $q->fetch()) {
+            return $task;
+        }
         $result = $q->fetchAll();
         foreach ($result as $task) {
-            $tasks[] = new Task($task['id']);
+            $tasks[] = new Task($task);
         }
         return $tasks;
     }

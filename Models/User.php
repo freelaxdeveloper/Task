@@ -11,6 +11,7 @@ class User{
     {
         $this->id = $id;
         $this->data = $this->getData();
+        $this->setToken();
     }
     private function getData(): array
     {
@@ -69,6 +70,6 @@ class User{
     }
     public function __destruct()
     {
-        $this->setToken();
+        
     }
 }

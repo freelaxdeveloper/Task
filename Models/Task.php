@@ -5,29 +5,12 @@ use \Core\DB;
 use \More\Misc;
 
 class Task{
-    private $id;
     private $data;
     private $_update = false; # метка, стоит ли обновлять данные в БД
 
-    public function __construct(int $id)
+    public function __construct(array $data)
     {
-        $this->id = $id;
-        $this->data = $this->getData();
-    }
-    # получаем данные задания
-    private function getData(): array
-    {
-        $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`id_user` AS 'id_user_project', `projects`.`title`, `projects`.`color`, `users`.`login`
-            FROM `tasks`
-            INNER JOIN `users` ON `tasks`.`id_user` = `users`.`id`
-            INNER JOIN `projects` ON `tasks`.`id_project` = `projects`.`id`
-            WHERE `tasks`.`id` = :id LIMIT 1");
-        $q->bindParam(':id', $this->id, \PDO::PARAM_INT);
-        $q->execute();
-        if ($task = $q->fetch()) {
-            return $task;
-        }
-        return ['id' => 0];
+        $this->data = $data;
     }
     /*
     * записыватся дата будет в формате Y-m-dTH:i

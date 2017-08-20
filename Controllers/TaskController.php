@@ -11,7 +11,8 @@ class TaskController extends Controller{
     {
         $this->access_user(); # доступ только авторизированным
 
-        $task = new Task($id_task);
+        $tasks = Tasks::getTasks(['id' => $id_task]);
+        $task = new Task($tasks);
         $project = new Project($task->id_project);
 
         if (!$task->id) {
@@ -39,11 +40,16 @@ class TaskController extends Controller{
             # ID проекта
             $id_project = (int) abs($_POST['id_project']);
 
-            if ($message && $deadlines && $id_project) {
+            $project = new Project($id_project);
+            # недостаточно прав для добавления задания (зависит от настройки проекта)
+            if (!$project->management()) {
+                $this->access_denied('У вас не достаточно прав');
+            }
+            if ($message && $deadlines && $project->id) {
                 # хранить дату будем в UNIX
                 $date = new \DateTime($deadlines);
                 if ($deadlines = $date->getTimestamp()) {
-                    Tasks::create($message, $deadlines, $importance, $id_project);
+                    Tasks::create($message, $deadlines, $importance, $project->id);
                 }
             }
         }
@@ -72,7 +78,9 @@ class TaskController extends Controller{
     {
         $this->access_user(); # доступ только авторизированным
 
-        $task = new Task($id_task);
+        $tasks = Tasks::getTasks(['id' => $id_task]);
+        $task = new Task($tasks);
+
         $project = new Project($task->id_project);
 
         # задачи не существует

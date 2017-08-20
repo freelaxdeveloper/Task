@@ -188,6 +188,7 @@ nav .color_project{
 	border-radius:50%;
 }
 nav ul .action_display{
+	display:none;
 	position:absolute;
 	min-width:100px;
 	top:-1px;
@@ -352,7 +353,7 @@ footer > span{
 .listing-post{
     margin-bottom: 5px;
 	position:relative;
-	padding:10px;
+	padding:10px 10px 3px;
 	color:#000000;
 	border-bottom: 1px solid #ece6e6;
 }
@@ -372,12 +373,21 @@ span.listing-status{
 }
 div.listing-right{
 	float:right;
+	vertical-align:top;
+}
+div.bottom{
+	text-align:right;
+	margin-top:5px;
+}
+div.message{
+	display:inline-block;
+	max-width:99%;
 }
 span.listing-action{
-	margin: 0 15px 0 15px;
 	border-radius:50%;
+	vertical-align:bottom;
 }
-div.listing-right span.project-name{
+span.project-name{
 	font-size:15px;
 	color:#848181;
 	font-style:italic;
@@ -399,25 +409,25 @@ div.listing-right span.project-name{
 
 }
 .listing-post .action_display{
+    display:none;
 	position:absolute;
 	background-color:#fff;
 	min-width:100px;
 	right:0;
 	top:0px;
-	border-radius:5px;
-    -webkit-transition:0.55s linear opacity;
     z-index:100;
 }
+
 .listing-post .action_display a{
 	display:block;
 	padding:12px;
 	background-color:#fff;
-    font-size: 14px;
+    font-size: 13px;
     color: #333;
 	cursor:pointer;
-	min-width:100px;
 	border-bottom: 1px solid #eae5e5;
 }
+
 .listing-post .action_display a:hover{
 	background-color:#EEF1F4;
 	-webkit-transition: all .3s ease-out;
@@ -438,6 +448,7 @@ div.listing-right span.project-name{
 	display:block;
 	border-bottom: 1px solid #747b88;
 	padding: 5px;
+	text-align:left;
 }
 .listing-info-menu:hover + .listing-info{
 	display:block;
@@ -445,6 +456,8 @@ div.listing-right span.project-name{
 }
 .listing-info-menu{
 	cursor:pointer;
+	position:relative;
+	bottom:-2px;
 }
 /* endlisting*/
 

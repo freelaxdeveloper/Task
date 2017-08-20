@@ -32,7 +32,7 @@ return [
     # добавление проекта
     ['pattern' => 'project/new','run' => 'project/create','method' => 'POST'],
     # удаление проекта
-    ['pattern' => 'project/delete/([0-9]+)','run' => 'project/delete/$1','method' => 'GET'],
+    ['pattern' => 'project/delete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'project/delete/$1','method' => 'GET'],
     # редактирование проекта
     ['pattern' => 'project/edit/([0-9]+)','run' => 'project/edit/$1','method' => 'GET'],
     # редактирование проекта (сохранение)

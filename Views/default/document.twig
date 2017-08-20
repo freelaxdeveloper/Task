@@ -15,8 +15,11 @@
         <header>
             <div class="header">
                 <span class="left">
-                    <a href="/" title="На главную">Главная</a>
+                    <a href="/" title="На главную"><i class="fa fa-home"></i> Главная</a>
                     <a href="/faq/" title="На главную">F.A.Q</a>
+                    {% block complete %}
+                        <a href="/task/view/complete/0/" title="Выполненные задачи">Архив</a>
+                    {% endblock %}
                 </span>
 
                 <span class="right">
@@ -25,9 +28,6 @@
                     {% else %}
                         <span class="action"><i class="fa fa-sign-out"></i> <a href="/exit/?token={{user.url_token}}">Выход</a></span>
                     {% endif %}
-                    {% block complete %}
-                        <span class="action"><i class="fa fa-check"></i> <a href="/task/view/complete/0/" title="All archive">Архив</a></span>
-                    {% endblock %}
                 </span>
             </div>
         </header>
@@ -45,13 +45,13 @@
                         <li class="{% if project.id == id_activePproject %}project-active{% elseif project.task_lose %}project-lose{% endif %}">
                             <a href="/project/{{project.id}}/{% if sorting %}{{sorting}}/{% endif %}"><span class="color_project {{project.color}}"></span> {{project.lose}} {{project.title}}</a>
                             {% if project.task_active %}
-                                <span class="counter">{{project.task_active}}</span>
+                                <span class="counter" title="Активных задач: {{project.task_active}}">{{project.task_active}}</span>
                             {% endif %}
                             {% if project.management %}
                                 <span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
-                                <ul class="action_load display_none" id="action{{project.id}}">
+                                <ul class="action_load action_display" id="action{{project.id}}">
                                     <li><a href="/project/edit/{{project.id}}/">Изменить</a></li>
-                                    <li><a href="/project/delete/{{project.id}}/">Удалить</a></li>
+                                    <li><a href="/project/delete/{{project.id}}/?token={{user.url_token}}">Удалить</a></li>
                                 </ul>
                             {% endif %}
                         </li>
@@ -116,7 +116,7 @@
                                     <input type="text" name="message" value="" placeholder="Что вам нужно сделать?" pattern="^[А-ЯA-Za-zа-яЁё0-9|\(|\)|\=]{3,1024}$">
                                     <input type="datetime-local" name="deadlines" value="{{current_data}}"><br>
                                     <select class="" name="id_project">
-                                    {% for project in projects %}
+                                    {% for project in projects if project.management %}
                                         <option value="{{project.id}}"{% if project.id == id_activePproject %} selected{% endif %}>{{project.title}}</option>
                                     {% endfor %}
                                     </select>
