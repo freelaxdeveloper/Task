@@ -11,7 +11,6 @@ class User{
     {
         $this->id = $id;
         $this->data = $this->getData();
-        $this->setToken();
     }
     private function getData(): array
     {
@@ -43,19 +42,25 @@ class User{
             return false;
         }
         $token = $_GET['token'] ?? $_POST['token'] ?? null;
-        if ($token == $this->data['url_token']) {
+        if ($token == $this->data['url_token'] && $this->getTokenSoil() == $this->data['token_ip']) {
             return true;
         }
         return false;
     }
     # переодически обновляем токен
-    private function setToken()
+    public function updateToken()
     {
-        if (!$this->id || $this->data['token_time_update'] > TIME) {
+        if ($this->data['token_time_update'] > TIME) {
             return;
         }
-        $q = DB::me()->prepare("UPDATE `users` SET `token_time_update` = ?, `url_token` = ? WHERE `id` = ? LIMIT 1");
-        $q->execute([TIME + self::TIME_UPDATE_TOKEN, bin2hex(random_bytes(32)), $this->id]);
+        $hash = bin2hex(random_bytes(32));
+
+        $q = DB::me()->prepare("UPDATE `users` SET `token_time_update` = ?, `url_token` = ?, `token_ip` = ? WHERE `id` = ? LIMIT 1");
+        $q->execute([TIME + self::TIME_UPDATE_TOKEN, $hash, $this->getTokenSoil(), $this->id]);
+    }
+    private function getTokenSoil()
+    {
+        return ip2long($_SERVER['REMOTE_ADDR']);
     }
     public function delete()
     {
@@ -70,6 +75,6 @@ class User{
     }
     public function __destruct()
     {
-        
+
     }
 }

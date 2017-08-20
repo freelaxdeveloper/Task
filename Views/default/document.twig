@@ -62,6 +62,7 @@
                             <form class="form" action="/project/new/" method="post">
                                 <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
                                 <span id="typeProject"></span>
+                                <input type="hidden" name="token" value="{{user.url_token}}">
                                 <input type="hidden" name="color" value="red">
                                 <input type="text" name="title" value="" placeholder="Введите название" pattern="^[А-ЯA-Za-zа-яЁё0-9|\s]{3,32}$"><br>
                                 <input type="submit" name="add" value="Добавить">
@@ -114,6 +115,7 @@
                                 <a id="Task" href="#" class="btn">Добавить задачу</a>
                                 <form id="formTask" class="form form-task" action="/task/new/" method="post">
                                     <input type="text" name="message" value="" placeholder="Что вам нужно сделать?" pattern="^[А-ЯA-Za-zа-яЁё0-9|\(|\)|\=]{3,1024}$">
+                                    <input type="hidden" name="token" value="{{user.url_token}}">
                                     <input type="datetime-local" name="deadlines" value="{{current_data}}"><br>
                                     <select class="" name="id_project">
                                     {% for project in projects if project.management %}

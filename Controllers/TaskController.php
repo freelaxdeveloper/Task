@@ -10,6 +10,7 @@ class TaskController extends Controller{
     public function actionDelete(int $id_task)
     {
         $this->access_user(); # доступ только авторизированным
+        $this->checkToken(); # доступ только по токену
 
         $tasks = Tasks::getTasks(['id' => $id_task]);
         $task = new Task($tasks);
@@ -29,7 +30,8 @@ class TaskController extends Controller{
     public function actionCreate()
     {
         $this->access_user(); # доступ только авторизированным
-
+        $this->checkToken(); # доступ только по токену
+        
         if (isset($_POST['message']) && isset($_POST['deadlines']) && isset($_POST['color']) && isset($_POST['id_project'])) {
             # задание
             $message = Text::input_text($_POST['message']);
@@ -59,8 +61,10 @@ class TaskController extends Controller{
     public function actionComplete(int $id_task)
     {
         $this->access_user(); # доступ только авторизированным
+        $this->checkToken(); # доступ только по токену
 
-        $task = new Task($id_task);
+        $tasks = Tasks::getTasks(['id' => $id_task]);
+        $task =  new Task($tasks);
         $project = new Project($task->id_project);
 
         if (!$task->id) {

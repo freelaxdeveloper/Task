@@ -20,7 +20,7 @@ return [
     # страница авторизации (отправка формы)
     ['pattern' => 'authorize/send','run' => 'authorize/authorize','method' => 'POST'],
     # выход с профиля
-    ['pattern' => 'exit/\?token\=([0-9a-z]+)','run' => 'authorize/exit','method' => 'GET'],
+    ['pattern' => 'exit/\?token\=[0-9a-z]+','run' => 'authorize/exit','method' => 'GET'],
     # удаление пользователя
     ['pattern' => 'user/delete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'user/delete/$1','method' => 'GET'],
     # просмотр заданий проекта
@@ -40,9 +40,9 @@ return [
     # добавление задания
     ['pattern' => 'task/new','run' => 'task/create','method' => 'POST'],
     # удаление задания
-    ['pattern' => 'task/delete/([0-9]+)','run' => 'task/delete/$1','method' => 'GET'],
+    ['pattern' => 'task/delete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'task/delete/$1','method' => 'GET'],
     # завершение задания
-    ['pattern' => 'task/complete/([0-9]+)','run' => 'task/complete/$1','method' => 'GET'],
+    ['pattern' => 'task/complete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'task/complete/$1','method' => 'GET'],
     # редактирование задания
     ['pattern' => 'task/edit/([0-9]+)','run' => 'task/edit/$1','method' => 'GET'],
     # редактирование задания (сохранение)

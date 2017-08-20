@@ -92,7 +92,8 @@ class ProjectController extends Controller{
     public function actionCreate()
     {
         $this->access_user(); # доступ только авторизированным
-
+        $this->checkToken(); # доступ только по токену
+        
         if (isset($_POST['title']) && isset($_POST['color'])) {
             $title = Text::for_name($_POST['title']);
             $color = Text::for_name($_POST['color']);

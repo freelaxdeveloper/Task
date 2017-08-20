@@ -27,6 +27,7 @@ abstract class App{
         static $_instance;
         if (!$_instance) {
             $_instance = new User(Authorize::getId());
+            $_instance->updateToken();
             # если почему-то хэш пользователя не совпадает с тем что в сессии
             # сбрасываем авторизацию
             if ($_instance->password != Authorize::getHash()) {
