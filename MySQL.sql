@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost
--- Время создания: Авг 19 2017 г., 00:12
+-- Время создания: Авг 21 2017 г., 01:32
 -- Версия сервера: 5.7.19-0ubuntu0.16.04.1
 -- Версия PHP: 7.1.8-2+ubuntu16.04.1+deb.sury.org+4
 
@@ -32,7 +32,7 @@ CREATE TABLE `projects` (
   `time_create` int(11) NOT NULL,
   `color` varchar(16) NOT NULL,
   `id_user` int(11) NOT NULL,
-  `set_management` enum('1','2') NOT NULL DEFAULT '2' COMMENT '0 - проект ведут все, 1 - только автор'
+  `set_management` enum('1','2') NOT NULL DEFAULT '2' COMMENT '1 - проект ведут все, 2 - только автор'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Проекты';
 
 -- --------------------------------------------------------
@@ -64,7 +64,9 @@ CREATE TABLE `users` (
   `password` varchar(64) NOT NULL,
   `time_create` int(11) NOT NULL,
   `url_token` varchar(64) DEFAULT NULL,
-  `token_time_update` int(11) NOT NULL
+  `token_time_update` int(11) NOT NULL,
+  `group` enum('1','2','3') NOT NULL DEFAULT '1' COMMENT 'Пользователь/Модератор/Администратор',
+  `token_ip` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Пользователи';
 
 --
@@ -104,17 +106,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `projects`
 --
 ALTER TABLE `projects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT для таблицы `tasks`
 --
 ALTER TABLE `tasks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=210;
 --
 -- AUTO_INCREMENT для таблицы `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- Ограничения внешнего ключа сохраненных таблиц
 --

@@ -5,7 +5,7 @@ use \Core\DB;
 
 class User{
     private $id;
-    private const TIME_UPDATE_TOKEN = 1800;
+    const TIME_UPDATE_TOKEN = 1800;
 
     public function __construct(int $id)
     {
@@ -42,7 +42,7 @@ class User{
             return false;
         }
         $token = $_GET['token'] ?? $_POST['token'] ?? null;
-        if ($token == $this->data['url_token'] && $this->getTokenSoil() == $this->data['token_ip']) {
+        if ($token == $this->data['url_token']) {
             return true;
         }
         return false;

@@ -18,7 +18,7 @@ class ErrorHandler
         # записываем в лог
         $this->setErrors($errno, $errorstr, $file, $line);
         # выводим сообщение на экран
-        $this->showMessage($this->message);
+        $this->showMessage($file . ' - ' . $line . ' - ' . $errorstr . ' -- <br>');
     }
     public function exceptionErrorHandler($e)
     {

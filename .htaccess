@@ -1,4 +1,3 @@
-AddHandler application/x-lsphp70 .php5 .phtml .php
 # устанавливаем нужную кодировку
 php_value default_charset UTF-8
 # так безопаснее
