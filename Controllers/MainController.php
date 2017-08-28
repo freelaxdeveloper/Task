@@ -19,6 +19,8 @@ class MainController extends Controller{
     }
     public function actionFaq()
     {
+        echo $sdsd;
+        echo $sdsdfd;
         $this->display('main/faq');
     }
     public function actionLast(string $last, int $id_project)

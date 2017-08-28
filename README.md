@@ -1,4 +1,4 @@
-Тех.задание: http://скачай-ка.рф/Static/task.pdf
+Тех.задание: http://скачай-ка.рф/Static/task.pdf<br>
 Пример: http://gamer-play.ru
 
 <b>Дополнительный функционал:</b>

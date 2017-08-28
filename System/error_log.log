@@ -1,0 +1,11 @@
+Error: №8 (2017-08-28 20:29:10)
+Description: Undefined variable: sdsd
+File: /var/www/task/Controllers/MainController.php
+Line: 22
+---------
+
+Error: №8 (2017-08-28 20:29:10)
+Description: Undefined variable: sdsdfd
+File: /var/www/task/Controllers/MainController.php
+Line: 23
+---------

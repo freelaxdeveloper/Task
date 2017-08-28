@@ -18,7 +18,7 @@ class ErrorHandler
         # записываем в лог
         $this->setErrors($errno, $errorstr, $file, $line);
         # выводим сообщение на экран
-        $this->showMessage($file . ' - ' . $line . ' - ' . $errorstr . ' -- <br>');
+        $this->showMessage($this->message);
     }
     public function exceptionErrorHandler($e)
     {
@@ -44,13 +44,12 @@ class ErrorHandler
     # сохраням ошибки в лог
     private function log()
     {
-        $log_path = H . '/System/errorLog.txt';
-        $f = fopen($log_path, 'a+');
+        $log_path = H . '/System/error_log.log';
+        $errors = [];
         for ($i = 0; $i < count($this->errors); $i++) {
-            $error = 'Error: №' . $this->errors[$i]['errno'] . " (" . date('Y-m-d H:i:s') . ")\nDescription: " . $this->errors[$i]['errorstr'] . "\nFile: " . $this->errors[$i]['file'] . "\nLine: " . $this->errors[$i]['line'] . "\n---------\n";
-            fwrite($f, $error);
+            $errors[] = 'Error: №' . $this->errors[$i]['errno'] . " (" . date('Y-m-d H:i:s') . ")\nDescription: " . $this->errors[$i]['errorstr'] . "\nFile: " . $this->errors[$i]['file'] . "\nLine: " . $this->errors[$i]['line'] . "\n---------\n";
         }
-        fclose($f);
+        error_log(implode("\n", $errors), 3, $log_path);
         chmod($log_path, 0777);
     }
     public function __destruct()
