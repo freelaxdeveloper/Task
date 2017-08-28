@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use \Core\{Controller,Authorize,App};
-use \Models\{Users};
+use \Models\{Users,Captcha};
 use \More\Text;
 
 class AuthorizeController extends Controller{
@@ -43,6 +43,9 @@ class AuthorizeController extends Controller{
             $password = Text::input_text($_POST['password']);
             $password1 = Text::input_text($_POST['password1']);
 
+            if (!Captcha::check()) {
+                $this->params['errors'][] = 'Не верно введен проверочный код';
+            }
             if (!$login) {
                 $this->params['errors'][] = 'Введите логин';
             }

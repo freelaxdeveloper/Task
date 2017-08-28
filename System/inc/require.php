@@ -3,9 +3,13 @@
 
 # PDO драйвер
 if (!class_exists('pdo')) {
-    die('Install the PDO driver');
+    die('Установите PDO драйвер');
 }
 # версия php не ниже 7.0
 if (!version_compare(PHP_VERSION, 7.0, '>=')) {
-    die('Requires PHP 7.0 or higher. You have PHP installed ' . phpversion());
+    die('Требуется версия PHP не ниже 7.0. Ваша версия PHP ' . phpversion());
+}
+# библиотека GD
+if (!in_array('gd', get_loaded_extensions())) {
+    die('Требуется поддержка GD');
 }

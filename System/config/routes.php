@@ -7,6 +7,8 @@ use \Core\App;
  @param method - способ передачи данных POST/GET
 */
 return [
+    # каптча
+    ['pattern' => 'captcha\.jpg','run' => 'captcha/view','method' => 'GET'],
     # главная страница
     ['pattern' => '','run' => 'main/index','method' => 'GET'],
     # F.A.Q
