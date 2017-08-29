@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use \Core\{Controller,App};
-use \Models\{Project,Projects,Tasks};
+use \Models\{Project,Projects,Tasks,Form};
 use \More\Text;
 
 class ProjectController extends Controller{
@@ -67,6 +67,17 @@ class ProjectController extends Controller{
         $this->params['title'] = $project->title . ' - редактирование';
         $this->params['project'] = $project;
 
+        $form = new Form('/project/edit/' . $project->id . '/save/');
+        $form->html('<span id="ProjectEdit"></span>');
+        $form->input(['name' => 'color_edit', 'type' => 'hidden', 'value' => $project->color, 'br' => false]);
+        $form->input(['name' => 'title', 'value' => $project->title]);
+        $options = [];
+        $options[] = ['value' => 1, 'title' => 'Все', 'selected' => 1 == $project->set_management ? 'selected' : ''];
+        $options[] = ['value' => 2, 'title' => 'Только я', 'selected' => 2 == $project->set_management ? 'selected' : ''];
+        $form->select(['name' => 'set_management', 'title' => 'Проект ведут', 'options' => $options]);
+        $form->submit(['name' => 'save', 'value' => 'Сохранить']);
+        $this->params['form_project_edit'] = $form->display();
+
         $this->display('project/edit');
     }
     # просмотр завершенных заданий
@@ -93,7 +104,7 @@ class ProjectController extends Controller{
     {
         $this->access_user(); # доступ только авторизированным
         $this->checkToken(); # доступ только по токену
-        
+
         if (isset($_POST['title']) && isset($_POST['color'])) {
             $title = Text::for_name($_POST['title']);
             $color = Text::for_name($_POST['color']);

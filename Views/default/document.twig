@@ -59,15 +59,7 @@
                 {% if user.id %}
                         <li id="Project"><a href="#" class="btn">Добавить проект</a></li>
                         <li id="formProject">
-                            <form class="form" action="/project/new/" method="post">
-                                <!-- <span id="typeProject"><input class="typeProject" type="text" name="typeProject" value="" disabled></span> -->
-                                <span id="typeProject"></span>
-                                <input type="hidden" name="token" value="{{user.url_token}}">
-                                <input type="hidden" name="color" value="red">
-                                <input type="text" name="title" value="" placeholder="Введите название" pattern="^[А-ЯA-Za-zа-яЁё0-9|\s]{3,32}$"><br>
-                                <input type="submit" name="add" value="Добавить">
-                                <a href="#" class="cancel">Отмена</a>
-                            </form>
+                            {{form_project|raw}}
                         </li>
                 {% endif %}
                 </ul>

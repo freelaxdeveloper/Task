@@ -15,6 +15,10 @@ abstract class Projects
     */
     static function getAll(): array
     {
+        static $projects;
+        if ($projects) {
+            return $projects;
+        }
         $projects = [];
         $count['tasc_active'] = $count['task_lose'] = $count['task_count'] = [];
         $q = DB::me()->query("SELECT `id` FROM `projects`");
@@ -29,23 +33,6 @@ abstract class Projects
         }
         array_multisort($count['task_lose'], SORT_DESC, $count['tasc_active'], SORT_DESC, $count['task_count'], SORT_DESC, $projects);        return $projects;
     }
-    # удаляем один проект
-    // public static function deleteOne(int $id_project): bool
-    // {
-    //     // удаляем все завершенные заказы с проекта
-    //     $q = DB::me()->prepare("DELETE FROM `tasks` WHERE `id_project` = :id_project AND `status` = '2'");
-    //     $q->bindParam(':id_project', $id_project, \PDO::PARAM_INT);
-    //     $q->execute();
-    //     // удаляем проект
-    //     try {
-    //         $q = DB::me()->prepare("DELETE FROM `projects` WHERE `id` = :id LIMIT 1");
-    //         $q->bindParam(':id', $id_project, \PDO::PARAM_INT);
-    //         $q->execute();
-    //     } catch (\Exception $e) {
-    //         return false;
-    //     }
-    //     return true;
-    // }
     # создаем проект
     public static function create(string $title, string $color)
     {

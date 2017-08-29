@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use \Core\{Controller,App};
-use \Models\{Tasks,Task,Project};
+use \Models\{Tasks,Task,Project,Form,Projects};
 use \More\{Text,Misc};
 
 class TaskController extends Controller{
@@ -125,6 +125,21 @@ class TaskController extends Controller{
         $this->params['title'] = $task->message . ' - редактирование';
         $this->params['task'] = $task;
         $this->params['id_activePproject'] = $task->id_project;
+
+        $form = new Form('/task/edit/' . $task->id . '/save/');
+        $form->class = 'form-task';
+        $form->html('<span id="TaskEdit"></span>');
+        $form->input(['name' => 'color_edit', 'type' => 'hidden', 'value' => $task->importance, 'br' => false]);
+        $form->input(['name' => 'message', 'value' => $task->message, 'br' => false]);
+        $form->input(['name' => 'deadlines', 'value' => $task->deadlines_form, 'type' => 'datetime-local']);
+        $options = [];
+        $projects = Projects::getAll();
+        foreach ($projects AS $project) {
+            $options[] = ['value' => $project->id, 'title' => $project->title, 'selected' => $project->id == $task->id_project ? 'selected' : ''];
+        }
+        $form->select(['name' => 'id_project', 'options' => $options]);
+        $form->submit(['name' => 'save', 'value' => 'Сохранить']);
+        $this->params['form_task_edit'] = $form->display();
 
         $this->display('task/edit');
     }
