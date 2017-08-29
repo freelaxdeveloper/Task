@@ -39,16 +39,20 @@ class Captcha{
     public function show()
     {
         $this->generate();
-        $image = imagecreatetruecolor(110, 40);
+        $image = imagecreatetruecolor($this->getCaptchaWidtch(), 40);
         $color = imagecolorallocatealpha($image, 0, 0, 0, 127);
         imagefill($image, 0, 0, $color);
         imagesavealpha($image, true);
-        $colour = imagecolorallocate($image, 0, 0, 250);
+        $colour = imagecolorallocate($image, mt_rand(0, 176), mt_rand(0, 176), 250);
         $rotate = rand(-2, 3);
         $font_size = mt_rand(15, 19);
         imagettftext($image, $font_size, $rotate, 6, 30 , $colour, $this->font, $this->text);
         header('Content-Type: image/png');
         ImagePNG($image);
+    }
+    private function getCaptchaWidtch(): int
+    {
+        return strlen($this->text) * 20;
     }
     # проверяем правильность ввода капчи
     public static function check(): bool
