@@ -7,6 +7,8 @@ use \Models\Captcha;
 class CaptchaController extends Controller{
     public function actionView()
     {
-        echo Captcha::image();
+        $captcha = new Captcha;
+        //$captcha->length = 2;
+        echo $captcha->show();
     }
 }

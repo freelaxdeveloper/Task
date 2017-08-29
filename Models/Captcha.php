@@ -1,48 +1,65 @@
 <?php
 namespace Models;
 
-abstract class Captcha{
-    private static function generate(): string
+class Captcha{
+    public $font; // шрифт
+    public $text; // отображаемый текст
+    public $string = 'qwertyuipasdfghjklzxcvbnm123456789'; // текст, с которого будет формироватся капча
+    public $length; // количество символов в капче
+
+    public function __construct()
     {
-        $chars = 'abdefhknrstyz23456789';
-        $length = rand(4, 7); // длина капчи
-        $numChars = strlen($chars); // Узнаем, сколько у нас задано символов
-        $str = '';
-        for ($i = 0; $i < $length; $i++) {
-            $str .= substr($chars, mt_rand(0, $numChars), 1);
-        }
-        // Перемешиваем, на всякий случай
-        $array_mix = preg_split('//', $str, -1, PREG_SPLIT_NO_EMPTY);
-        srand((float)microtime() * 1000000);
-        shuffle($array_mix);
-        $captcha = implode('', $array_mix);
-        $_SESSION['captcha'] = $captcha;
-        return $captcha;
+        $this->font = $this->getFont();
+        $this->length = $this->getLength();
     }
-    private static function getFont(): string
+    # генерируем строку для капчи
+    private function generate()
+    {
+        for ($i = 0; $i < $this->length; $i++) {
+            $this->text .= $this->getSymbol();
+        }
+    }
+    # получем длину капчи
+    private function getLength(): int
+    {
+        return mt_rand(4, 7);
+    }
+    # получаем случайный символ
+    private function getSymbol()
+    {
+        return substr($this->string, mt_rand(0, strlen($this->string)), 1);
+    }
+    # получаем случайный шрифт
+    private function getFont(): string
     {
         $fonts = glob(H . '/Static/fonts/*.ttf');
         return $fonts[mt_rand(0, count($fonts) - 1)];
     }
-    public static function image()
+    # показываем капчу
+    public function show()
     {
-        $captcha_font = self::getFont();
-        $captcha_text = self::generate();
-        //$captcha_text = basename($captcha_font);
-
+        $this->generate();
         $image = imagecreatetruecolor(110, 40);
         $color = imagecolorallocatealpha($image, 0, 0, 0, 127);
         imagefill($image, 0, 0, $color);
         imagesavealpha($image, true);
         $colour = imagecolorallocate($image, 0, 0, 250);
         $rotate = rand(-2, 3);
-        imagettftext($image, 19, $rotate, 6, 30 , $colour, $captcha_font, $captcha_text);
+        $font_size = mt_rand(15, 19);
+        imagettftext($image, $font_size, $rotate, 6, 30 , $colour, $this->font, $this->text);
         header('Content-Type: image/png');
         ImagePNG($image);
     }
+    # проверяем правильность ввода капчи
     public static function check(): bool
     {
         $send_captcha = mb_strtolower($_POST['captcha']) ?? '';
-        return $send_captcha == $_SESSION['captcha'] ? true : false;
+        $captcha = $_SESSION['captcha'];
+        unset($_SESSION['captcha']);
+        return $send_captcha == $captcha ? true : false;
+    }
+    public function __destruct()
+    {
+        $_SESSION['captcha'] = $this->text;
     }
 }

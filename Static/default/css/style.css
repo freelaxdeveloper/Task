@@ -493,6 +493,13 @@ span.project-name{
 .info{
 	margin-bottom:15px;
 }
+#captcha{
+    cursor: pointer;
+    opacity: 0.7;
+}
+#captcha:hover{
+    opacity: 1;
+}
 /* endother */
 
 /* adaptive */
