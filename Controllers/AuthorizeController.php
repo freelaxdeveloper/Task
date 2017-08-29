@@ -3,7 +3,7 @@
 namespace Controllers;
 
 use \Core\{Controller,Authorize,App};
-use \Models\{Users,Captcha};
+use \Models\{Users,Captcha,Form};
 use \More\Text;
 
 class AuthorizeController extends Controller{
@@ -32,6 +32,12 @@ class AuthorizeController extends Controller{
                 }
             }
         }
+        $form = new Form('/authorize/send/');
+        $form->input(['name' => 'login',    'title' => 'Логин',  'holder' => 'Введите логин']);
+        $form->input(['name' => 'password', 'title' => 'Пароль', 'holder' => 'Введите пароль', 'type' => 'password']);
+        $form->input(['name' => 'authorize', 'value' => 'Войти', 'type' => 'submit']);
+        $this->params['form_authorize'] = $form->display();
+
         $this->display('main/authorize');
     }
     public function actionRegister()

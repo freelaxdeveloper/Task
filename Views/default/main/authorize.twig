@@ -3,9 +3,5 @@
 {% block title %}Авторизация{% endblock %}
 
 {% block content %}
-    <form class="form" action="/authorize/send/" method="post">
-        Логин:<br><input type="text" name="login" value="" placeholder="Введите логин"><br>
-        Пароль:<br><input type="password" name="password" value="" placeholder="Введите пароль"><br>
-        <input type="submit" name="authorize" value="Войти">
-    </form>
+    {{form_authorize|raw}}
 {% endblock %}
