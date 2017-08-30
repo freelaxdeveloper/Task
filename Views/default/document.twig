@@ -26,6 +26,7 @@
                     {% if user.id == 0 %}
                         <span class="action"><i class="fa fa-registered"></i> <a href="/register/">Регистрация</a></span> / <span class="action"><i class="fa fa-sign-in"></i> <a href="/authorize/">Авторизация</a></span>
                     {% else %}
+                        <span><i class="fa fa-user"></i> {{user.login}}</span>
                         <span class="action"><i class="fa fa-sign-out"></i> <a href="/exit/?token={{user.url_token}}">Выход</a></span>
                     {% endif %}
                 </span>
@@ -71,8 +72,8 @@
                             <span class="counter" title="Проектов: {{ank.project_count}} | Задач: {{ank.task_count}}">{{ank.project_count}}/{{ank.task_count}}</span>
                             {% if user.group >= 3 and user.id != ank.id %}
                                 <span id="menu{{ank.id}}" data-action="action{{ank.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
-                                <ul class="action_load display_none" id="action{{ank.id}}">
-                                    <li><a href="/user/delete/{{ank.id}}/?token={{user.url_token}}">Удалить</a></li>
+                                <ul class="action_load action_display" id="action{{ank.id}}">
+                                    <li><a href="/user/delete/{{ank.id}}/">Удалить</a></li>
                                 </ul>
                             {% endif %}
                         </li>
@@ -101,14 +102,12 @@
                 <div class="content">
                     {% block content %}{% endblock %}
 
-                    {% block add_task %}
-                        {% if user.id and projects %}
-                            <div>
-                                <a id="Task" href="#" class="btn">Добавить задачу</a>
-                                {{form_task_new|raw}}
-                            </div>
-                        {% endif %}
-                    {% endblock %}
+                    {% if user.id and projects and add_task %}
+                        <div>
+                            <a id="Task" href="#" class="btn">Добавить задачу</a>
+                            {{form_task_new|raw}}
+                        </div>
+                    {% endif %}
 
                 </div>
             </div>

@@ -9,6 +9,7 @@ class ProjectController extends Controller{
 
     public function actionView(int $id_project, string $sorting = 'all')
     {
+        $this->params['add_task'] = true; // показываем форму добавления задачи
         switch ($sorting) {
             case 'week':
                 $shit_days = 7;

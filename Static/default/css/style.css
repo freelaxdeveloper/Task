@@ -265,7 +265,7 @@ footer > span{
 .form input[type=submit]{
 	color:#fff;
 	background-color:#5a8abb;
-	width:100px;
+	min-width:100px;
 	cursor:pointer;
 }
 .form a, .btn{

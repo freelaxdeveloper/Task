@@ -32,7 +32,7 @@ abstract class App{
             }
             # если почему-то хэш пользователя не совпадает с тем что в сессии
             # сбрасываем авторизацию
-            if ($_instance->password != Authorize::getHash()) {
+            if ($_instance->id && $_instance->password != Authorize::getHash()) {
                 Authorize::exit();
                 self::access_denied('Ошибка авторизации', true);
             }

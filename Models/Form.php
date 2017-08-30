@@ -2,19 +2,20 @@
 namespace Models;
 
 class Form{
-    public $action;
-    public $method = 'POST';
-    public $form;
-    public $input;
-    public $submit;
-    public $captcha = false;
-    public $class;
-    public $id;
+    public $action; // экшен (string)
+    public $method = 'POST'; // метод передачи данных (string)
+    public $html_form; // итоговый HTML код формы (string)
+    public $input; // содержимое формы (array)
+    public $submit; // кнопки формы (array)
+    public $captcha = false; // отображение капчи в форме (bool)
+    public $class; // стили формы  (string)
+    public $id; // ID формы  (string)
 
     public function __construct(string $action)
     {
         $this->action = $action;
     }
+    # формируем поля типа text, password, hidden...
     public function input(array $params)
     {
         extract($params);
@@ -25,10 +26,12 @@ class Form{
         $br = $br ?? true;
         $this->input[] = ($title ? $title . ':<br />' : '') . '<input type="' . $type . '" name="' . $name . '" value="' . $value . '" placeholder="' . $holder . '">' . ($br ? '<br />' : '');
     }
-    public function html(string $html)
+    # формируем любую строку для отображения в форме
+    public function html(string $html, bool $br = true)
     {
-        $this->input[] = $html;
+        $this->input[] = $html . ($br ? '<br />' : '');
     }
+    # формируем выпадающий список типа select
     public function select(array $params)
     {
         extract($params);
@@ -41,6 +44,7 @@ class Form{
         $select .= '</select>' . ($br ? '<br />' : '');
         $this->input[] = $select;
     }
+    # формируем кнопки типа submit
     public function submit(array $params)
     {
         extract($params);
@@ -50,23 +54,29 @@ class Form{
         $br = $br ?? true;
         $this->submit[] = '<input class="' . $class . '" type="submit" name="' . $name . '" value="' . $value . '">' . ($br ? '<br />' : '');
     }
+    # возвращаем итоговый html код
     public function display(): string
     {
         $id = $this->id ? 'id="' . $this->id . '" ' : '';
-        $this->form = '<form ' . $id . 'class="form ' . $this->class . '" action="' . $this->action . '" method="' . $this->method . '">';
+        $this->html_form = '<form ' . $id . 'class="form ' . $this->class . '" action="' . $this->action . '" method="' . $this->method . '">';
         for ($i = 0; $i < count($this->input); $i++) {
-            $this->form .= $this->input[$i];
+            $this->html_form .= $this->input[$i];
         }
         if ($this->captcha) {
-            $this->form .= '<div class="captcha-form">';
-                $this->form .= '<div class="captcha-input"><input type="text" name="captcha" placeholder="Введите капчу" size="11"></div>';
-                $this->form .= '<div class="captcha-img"><img src="/captcha.jpg" alt="captcha" id="captcha" title="Нажмите для обновления капчи" /></div>';
-            $this->form .= '</div>';
+            $this->html_form .= $this->captcha();
         }
         for ($i = 0; $i < count($this->submit); $i++) {
-            $this->form .= $this->submit[$i];
+            $this->html_form .= $this->submit[$i];
         }
-        $this->form .= '</form>';
-        return $this->form;
+        $this->html_form .= '</form>';
+        return $this->html_form;
+    }
+    private function captcha(): string
+    {
+        $captcha = '<div class="captcha-form">';
+        $captcha .= '<div class="captcha-input"><input type="text" name="captcha" placeholder="Введите капчу" size="11"></div>';
+        $captcha .= '<div class="captcha-img"><img src="/captcha.jpg" alt="captcha" id="captcha" title="Нажмите для обновления капчи" /></div>';
+        $captcha .= '</div>';
+        return $captcha;
     }
 }

@@ -8,6 +8,11 @@ use \Models\{Tasks,Captcha};
 
 class MainController extends Controller{
 
+    public function __construct()
+    {
+        $this->params['add_task'] = true; // показываем форму добавления задачи
+    }
+
     public function actionIndex()
     {
         $this->params['tasks'] = Tasks::getTasks(['my_task' => true]);
@@ -19,6 +24,7 @@ class MainController extends Controller{
     }
     public function actionFaq()
     {
+        $this->params['add_task'] = false; // не показываем форму добавления задачи
         $this->display('main/faq');
     }
     public function actionLast(string $last, int $id_project)
