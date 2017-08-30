@@ -105,21 +105,7 @@
                         {% if user.id and projects %}
                             <div>
                                 <a id="Task" href="#" class="btn">Добавить задачу</a>
-                                <form id="formTask" class="form form-task" action="/task/new/" method="post">
-                                    <input type="text" name="message" value="" placeholder="Что вам нужно сделать?" pattern="^[А-ЯA-Za-zа-яЁё0-9|\(|\)|\=]{3,1024}$">
-                                    <input type="hidden" name="token" value="{{user.url_token}}">
-                                    <input type="datetime-local" name="deadlines" value="{{current_data}}"><br>
-                                    <select class="" name="id_project">
-                                    {% for project in projects if project.management %}
-                                        <option value="{{project.id}}"{% if project.id == id_activePproject %} selected{% endif %}>{{project.title}}</option>
-                                    {% endfor %}
-                                    </select>
-
-                                    <input type="hidden" name="color" value="red">
-                                    <span id="typeTask"></span>
-                                    <input type="submit" name="add" value="Добавить">
-                                    <a href="#" class="cancel">Отмена</a>
-                                </form>
+                                {{form_task_new|raw}}
                             </div>
                         {% endif %}
                     {% endblock %}

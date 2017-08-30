@@ -45,6 +45,24 @@ class Controller{
             $form->submit(['name' => 'add', 'value' => 'Добавить', 'br' => false]);
             $form->submit(['name' => 'cancel', 'value' => 'Отмена', 'class' => 'cancel']);
             $this->params['form_project'] = $form->display();
+
+            $form = new Form('/task/new/');
+            $form->class = 'form-task';
+            $form->id = 'formTask';
+            $form->html('<span id="typeTask"></span>');
+            $form->input(['name' => 'token', 'value' => App::user()->url_token, 'type' => 'hidden', 'br' => false]);
+            $form->input(['name' => 'color', 'type' => 'hidden', 'value' => 'red', 'br' => false]);
+            $form->input(['name' => 'message', 'holder' => 'Что вам нужно сделать?', 'br' => false]);
+            $form->input(['name' => 'deadlines', 'type' => 'datetime-local', 'value' => date('Y-m-d\TH:00'), 'br' => false]);
+            $options = [];
+            $projects = Projects::getAll();
+            foreach ($projects AS $project) {
+                $options[] = ['value' => $project->id, 'title' => $project->title, 'selected' => $this->params['id_activePproject'] == $project->id ? 'selected' : ''];
+            }
+            $form->select(['name' => 'id_project', 'options' => $options]);
+            $form->submit(['name' => 'add', 'value' => 'Добавить', 'br' => false]);
+            $form->submit(['name' => 'cancel', 'value' => 'Отмена', 'class' => 'cancel']);
+            $this->params['form_task_new'] = $form->display();
         }
     }
     # доступ только пользователю

@@ -9,6 +9,7 @@ class Form{
     public $submit;
     public $captcha = false;
     public $class;
+    public $id;
 
     public function __construct(string $action)
     {
@@ -51,7 +52,8 @@ class Form{
     }
     public function display(): string
     {
-        $this->form = '<form class="form ' . $this->class . '" action="' . $this->action . '" method="' . $this->method . '">';
+        $id = $this->id ? 'id="' . $this->id . '" ' : '';
+        $this->form = '<form ' . $id . 'class="form ' . $this->class . '" action="' . $this->action . '" method="' . $this->method . '">';
         for ($i = 0; $i < count($this->input); $i++) {
             $this->form .= $this->input[$i];
         }
