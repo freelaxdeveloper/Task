@@ -38,11 +38,15 @@ class User{
     # проверяем токен
     public function checkToken(): bool
     {
+        if (!$this->data['id']) {
+            return false;
+        }
         if (!isset($_GET['token']) && !isset($_POST['token'])) {
             return false;
         }
         $token = $_GET['token'] ?? $_POST['token'] ?? null;
         if ($token == $this->data['url_token']) {
+            $this->updateToken();
             return true;
         }
         return false;
@@ -50,9 +54,6 @@ class User{
     # переодически обновляем токен
     public function updateToken()
     {
-        if ($this->data['token_time_update'] > TIME) {
-            return;
-        }
         $hash = bin2hex(random_bytes(32));
 
         $q = DB::me()->prepare("UPDATE `users` SET `token_time_update` = ?, `url_token` = ?, `token_ip` = ? WHERE `id` = ? LIMIT 1");
