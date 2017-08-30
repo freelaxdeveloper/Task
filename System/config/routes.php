@@ -24,7 +24,7 @@ return [
     # выход с профиля
     ['pattern' => 'exit/\?token\=[0-9a-z]+','run' => 'authorize/exit','method' => 'GET'],
     # удаление пользователя
-    ['pattern' => 'user/delete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'user/delete/$1','method' => 'GET'],
+    ['pattern' => 'user/delete/([0-9]+)','run' => 'user/delete/$1','method' => 'GET|POST'],
     # просмотр заданий проекта
     ['pattern' => 'project/([0-9]+)/?(today|week|month)?','run' => 'project/view/$1/$2','method' => 'GET'],
     # просмотр завершенных заданий

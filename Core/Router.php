@@ -21,7 +21,7 @@ class Router
     {
         foreach ($this->routes AS $path) {
             # сравниваем метод передачи данных
-            if ($_SERVER['REQUEST_METHOD'] != $path['method']) {
+            if (strpos($path['method'], $_SERVER['REQUEST_METHOD']) === false) {
                 continue;
             }
             # ищем подходящий роут подходящий согласно правилу паттерна
