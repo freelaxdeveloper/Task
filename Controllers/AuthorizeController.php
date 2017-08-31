@@ -2,8 +2,8 @@
 
 namespace Controllers;
 
-use \Core\{Controller,Authorize,App};
-use \Models\{Users,Captcha,Form};
+use \Core\{Controller,Authorize,App,Captcha,Form};
+use \Models\{Users};
 use \More\Text;
 
 class AuthorizeController extends Controller{
@@ -26,14 +26,14 @@ class AuthorizeController extends Controller{
             $password = Text::input_text($_POST['password']);
             if ($login && $password) {
                 if (isset($_SESSION['count_error_authorize']) && $_SESSION['count_error_authorize'] >= self::COUNT_ERROR_CAPTCHA && !Captcha::check()) {
-                    $this->params['errors'][] = 'Не верно введен проверочный код';
+                    $this->params['errors'][] = __('Не верно введен проверочный код');
                 } elseif ($user = Users::getUserByPassword($login, $password)) {
                     Authorize::authorized($user['id'], $user['password']);
-                    $this->params['messages'][] = 'Вы успешно авторизованы';
+                    $this->params['messages'][] = __('Вы успешно авторизованы');
                     unset($_SESSION['count_error_authorize']);
                     header('Refresh: 1; /');
                 } else {
-                    $this->params['errors'][] = 'Вы ошиблись при вводе логина или пароля';
+                    $this->params['errors'][] = __('Вы ошиблись при вводе логина или пароля');
 
                     if (!isset($_SESSION['count_error_authorize'])) {
                         $_SESSION['count_error_authorize'] = 1;
@@ -47,9 +47,9 @@ class AuthorizeController extends Controller{
         if (isset($_SESSION['count_error_authorize']) && $_SESSION['count_error_authorize'] >= self::COUNT_ERROR_CAPTCHA) {
             $form->captcha = true;
         }
-        $form->input(['name' => 'login',    'title' => 'Логин',  'holder' => 'Введите логин']);
-        $form->input(['name' => 'password', 'title' => 'Пароль', 'holder' => 'Введите пароль', 'type' => 'password']);
-        $form->submit(['name' => 'authorize', 'value' => 'Войти']);
+        $form->input(['name' => 'login',    'title' => __('Логин'),  'holder' => __('Введите логин')]);
+        $form->input(['name' => 'password', 'title' => __('Пароль'), 'holder' => __('Введите пароль'), 'type' => 'password']);
+        $form->submit(['name' => 'authorize', 'value' => __('Войти')]);
         $this->params['form_authorize'] = $form->display();
 
         $this->display('main/authorize');
@@ -64,13 +64,13 @@ class AuthorizeController extends Controller{
             $password1 = Text::input_text($_POST['password1']);
 
             if (!Captcha::check()) {
-                $this->params['errors'][] = 'Не верно введен проверочный код';
+                $this->params['errors'][] = __('Не верно введен проверочный код');
             }
             if (!$login) {
-                $this->params['errors'][] = 'Введите логин';
+                $this->params['errors'][] = __('Введите логин');
             }
             if (!$password || $password != $password1) {
-                $this->params['errors'][] = 'Пароли не совпадают';
+                $this->params['errors'][] = __('Пароли не совпадают');
             }
             if (empty($this->params['errors'])) {
                 $user = Users::addUser($login, $password);
@@ -78,17 +78,17 @@ class AuthorizeController extends Controller{
                     $this->params['errors'][] = $user['error'];
                 } else {
                     Authorize::authorized($user['id'], $user['password']);
-                    $this->params['messages'][] = 'Вы успешно зарегистрировались';
+                    $this->params['messages'][] = __('Вы успешно зарегистрировались');
                     header('Refresh: 1; /');
                 }
             }
         }
         $form = new Form('/register/send/');
         $form->captcha = true;
-        $form->input(['name' => 'login',    'title' => 'Логин',  'holder' => 'Введите логин']);
-        $form->input(['name' => 'password', 'title' => 'Пароль', 'holder' => 'Введите пароль', 'type' => 'password']);
-        $form->input(['name' => 'password1', 'title' => 'Пароль', 'holder' => 'Повторите пароль', 'type' => 'password']);
-        $form->submit(['name' => 'register', 'value' => 'Регистрация']);
+        $form->input(['name' => 'login',    'title' => __('Логин'),  'holder' => __('Введите логин')]);
+        $form->input(['name' => 'password', 'title' => __('Пароль'), 'holder' => __('Введите пароль'), 'type' => 'password']);
+        $form->input(['name' => 'password1', 'title' => __('Пароль'), 'holder' => __('Повторите пароль'), 'type' => 'password']);
+        $form->submit(['name' => 'register', 'value' => __('Регистрация')]);
         $this->params['form_register'] = $form->display();
 
 

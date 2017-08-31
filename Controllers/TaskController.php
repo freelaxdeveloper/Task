@@ -1,8 +1,8 @@
 <?php
 namespace Controllers;
 
-use \Core\{Controller,App};
-use \Models\{Tasks,Task,Project,Form,Projects};
+use \Core\{Controller,App,Form};
+use \Models\{Tasks,Task,Project,Projects};
 use \More\{Text,Misc};
 
 class TaskController extends Controller{
@@ -18,13 +18,13 @@ class TaskController extends Controller{
         $task = new Task($tasks);
 
         if (!$task->id) {
-            $this->access_denied('Задача не найдена');
+            $this->access_denied(__('Задача не найдена'));
         }
 
         $project = new Project($task->id_project);
         # недостаточно прав для удаления, (можно только автору задачи или владельцу проекта)
         if ($task->id_user != App::user()->id && $project->id_user != App::user()->id) {
-            $this->access_denied('У вас не достаточно прав');
+            $this->access_denied(__('У вас не достаточно прав'));
         }
         $task->delete();
         header('Location: ' . App::referer());
@@ -48,7 +48,7 @@ class TaskController extends Controller{
             $project = new Project($id_project);
             # недостаточно прав для добавления задания (зависит от настройки проекта)
             if (!$project->management()) {
-                $this->access_denied('У вас не достаточно прав');
+                $this->access_denied(__('У вас не достаточно прав'));
             }
             if ($message && $deadlines && $project->id) {
                 # хранить дату будем в UNIX
@@ -69,13 +69,13 @@ class TaskController extends Controller{
         $tasks = Tasks::getTasks(['id' => $id_task]);
         $task =  new Task($tasks);
         if (!$task->id) {
-            $this->access_denied('Задача не найдена');
+            $this->access_denied(__('Задача не найдена'));
         }
         $project = new Project($task->id_project);
 
         # недостаточно прав для выполнения (зависит от настройки проекта)
         if (!$project->management()) {
-            $this->access_denied('У вас не достаточно прав');
+            $this->access_denied(__('У вас не достаточно прав'));
         }
         $task->status = 2;
         header('Location: ' . App::referer());
@@ -90,17 +90,17 @@ class TaskController extends Controller{
 
         # задачи не существует
         if (!$task->id) {
-            $this->access_denied('Задача не найдена');
+            $this->access_denied(__('Задача не найдена'));
         }
 
         $project = new Project($task->id_project);
         # задача уже выполена, не будем её больше трогать
         if ($task->status == 2) {
-            $this->access_denied('Выполненную задачу редактировать нельзя');
+            $this->access_denied(__('Выполненную задачу редактировать нельзя'));
         }
         # недостаточно прав для редактирования (можно автору задачи или владельцу проекта)
         if ($task->id_user != App::user()->id && $project->id_user != App::user()->id) {
-            $this->access_denied('У вас не достаточно прав');
+            $this->access_denied(__('У вас не достаточно прав'));
         }
         # проверяем можно ли пользователю вести проект
 
@@ -122,7 +122,7 @@ class TaskController extends Controller{
             }
         }
 
-        $this->params['title'] = $task->message . ' - редактирование';
+        $this->params['title'] = __('%s - редактирование', $task->message);
         $this->params['task'] = $task;
         $this->params['id_activePproject'] = $task->id_project;
 
@@ -138,7 +138,7 @@ class TaskController extends Controller{
             $options[] = ['value' => $project->id, 'title' => $project->title, 'selected' => $project->id == $task->id_project ? 'selected' : ''];
         }
         $form->select(['name' => 'id_project', 'options' => $options]);
-        $form->submit(['name' => 'save', 'value' => 'Сохранить']);
+        $form->submit(['name' => 'save', 'value' => __('Сохранить')]);
         $this->params['form_task_edit'] = $form->display();
 
         $this->display('task/edit');

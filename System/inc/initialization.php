@@ -24,3 +24,27 @@ function printr($array)
     print_r($array);
     echo '</pre>';
 }
+function __(): string
+{
+    $args = func_get_args();
+    $args_num = count($args);
+    if (!$args_num) {
+        return '';
+    }
+    static $language;
+    $string = $args[0];
+    if (!$language) {
+        $language = new \Core\Language(\Core\App::user()->lang);
+    }
+    $string = $language->translate($string);
+
+    if ($args_num == 1) {
+        return $string; // строка без параметров
+    }
+    // строка с параметрами
+    $args4eval = array();
+    for ($i = 1; $i < $args_num; $i++) {
+        $args4eval[] = '$args[' . $i . ']';
+    }
+    return eval('return sprintf($string,' . implode(',', $args4eval) . ');');
+}

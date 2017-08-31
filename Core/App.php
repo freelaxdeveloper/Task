@@ -34,7 +34,7 @@ abstract class App{
             # сбрасываем авторизацию
             if ($_instance->id && $_instance->password != Authorize::getHash()) {
                 Authorize::exit();
-                self::access_denied('Ошибка авторизации', true);
+                self::access_denied(__('Ошибка авторизации'), true);
             }
         }
         return $_instance;

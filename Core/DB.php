@@ -36,10 +36,6 @@ abstract class DB
      */
     public static function me()
     {
-        if (!class_exists('pdo') || array_search('mysql', \PDO::getAvailableDrivers()) === false) {
-            die("Установите PDO драйвер");
-        }
-
         $args = self::getConfig();
         self::$host = $args['host'];
         self::$db_name = $args['db_name'];
@@ -48,7 +44,7 @@ abstract class DB
 
         if (!self::$_instance) {
             if (!self::$db_name || !self::$user || !self::$host) {
-                die('Введите параметры для подключения к базе данных');
+                die(__('Введите параметры для подключения к базе данных'));
             }
             $dsn = 'mysql:host=' . self::$host . ';dbname=' . self::$db_name . ';charset=utf8';
             $opt = [

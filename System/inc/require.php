@@ -2,7 +2,7 @@
 # то, что требуется для работы нашего скрипта
 
 # PDO драйвер
-if (!class_exists('pdo')) {
+if (!class_exists('pdo') || array_search('mysql', \PDO::getAvailableDrivers()) === false) {
     die('Установите PDO драйвер');
 }
 # версия php не ниже 7.0

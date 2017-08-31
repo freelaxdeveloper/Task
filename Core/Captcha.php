@@ -1,5 +1,5 @@
 <?php
-namespace Models;
+namespace Core;
 
 class Captcha{
     public $font; // шрифт

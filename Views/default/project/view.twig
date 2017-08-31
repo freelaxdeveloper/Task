@@ -1,7 +1,7 @@
 {% extends 'document.twig' %}
 
 {% block complete %}
-    <a href="/task/view/complete/{{project.id}}/" title="Выполненные задачи - {{project.title}}">Архив</a>
+    <a href="/task/view/complete/{{project.id}}/" title="{{__('Выполненные задачи - %s', project.title)}}">{{__('Архив')}}</a>
 {% endblock %}
 
 {% block content %}

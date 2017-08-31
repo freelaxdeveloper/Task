@@ -1,8 +1,7 @@
 <?php
 namespace Controllers;
 
-use \Core\Controller;
-use \Models\Captcha;
+use \Core\{Controller,Captcha};
 
 class CaptchaController extends Controller{
     public function actionView()

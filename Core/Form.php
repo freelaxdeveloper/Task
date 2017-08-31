@@ -1,5 +1,5 @@
 <?php
-namespace Models;
+namespace Core;
 
 class Form{
     public $action; // экшен (string)
@@ -48,7 +48,7 @@ class Form{
     public function submit(array $params)
     {
         extract($params);
-        $value = $value ?? 'Отправить';
+        $value = $value ?? __('Отправить');
         $name = $name ?? 'send';
         $class = $class ?? '';
         $br = $br ?? true;
@@ -74,8 +74,8 @@ class Form{
     private function captcha(): string
     {
         $captcha = '<div class="captcha-form">';
-        $captcha .= '<div class="captcha-input"><input type="text" name="captcha" placeholder="Введите капчу" size="11"></div>';
-        $captcha .= '<div class="captcha-img"><img src="/captcha.jpg" alt="captcha" id="captcha" title="Нажмите для обновления капчи" /></div>';
+        $captcha .= '<div class="captcha-input"><input type="text" name="captcha" placeholder="' . __('Введите капчу') . '" size="11"></div>';
+        $captcha .= '<div class="captcha-img"><img src="/captcha.jpg" alt="captcha" id="captcha" title="' . __('Нажмите для обновления капчи') . '" /></div>';
         $captcha .= '</div>';
         return $captcha;
     }

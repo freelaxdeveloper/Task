@@ -2,9 +2,9 @@
 
 namespace Controllers;
 
-use \Core\{Controller,Authorize,App};
+use \Core\{Controller,Authorize,App,Captcha};
 use \More\Text;
-use \Models\{Tasks,Captcha};
+use \Models\{Tasks};
 
 class MainController extends Controller{
 
@@ -31,18 +31,18 @@ class MainController extends Controller{
     {
         switch ($last) {
             case 'week':
-                $title = 'Задачи на неделю';
+                $title = __('Задачи на неделю');
                 $shit_days = 7;
                 $sorting = 'week';
                 break;
             case 'month':
-                $title = 'Задачи на месяц';
+                $title = __('Задачи на месяц');
                 $shit_days = 30;
                 $sorting = 'month';
                 break;
 
             default:
-                $title = 'Задачи на сегодня';
+                $title = __('Задачи на сегодня');
                 $shit_days = 1;
                 $sorting = 'today';
                 break;
@@ -57,7 +57,6 @@ class MainController extends Controller{
         } else {
             $this->params['id_activePproject'] = 0;
         }
-
         $this->params['title'] = $title;
         $this->params['sorting'] = $sorting;
         $this->params['tasks'] = Tasks::getTasks($params);

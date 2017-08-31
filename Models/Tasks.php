@@ -69,7 +69,7 @@ abstract class Tasks{
         $q = DB::me()->prepare("SELECT `tasks`.*, `projects`.`id_user` AS 'id_user_project', `projects`.`title`, `projects`.`color`, `users`.`login`
             FROM `tasks`, `projects`, `users`
             WHERE `users`.`id` = `tasks`.`id_user` AND `projects`.`id` = `tasks`.`id_project` AND `tasks`.`deadlines` > :time_start $where
-            ORDER BY `tasks`.`deadlines` ASC, `tasks`.`importance` DESC" . ($id_task ? ' LIMIT 1' : null));
+            ORDER BY `tasks`.`deadlines` ASC, `tasks`.`importance` DESC, `tasks`.`id` DESC" . ($id_task ? ' LIMIT 1' : null));
         $q->bindParam(':time_start', $time_start, \PDO::PARAM_INT);
 
         if ($status)

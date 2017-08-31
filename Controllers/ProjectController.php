@@ -1,8 +1,8 @@
 <?php
 namespace Controllers;
 
-use \Core\{Controller,App};
-use \Models\{Project,Projects,Tasks,Form};
+use \Core\{Controller,App,Form};
+use \Models\{Project,Projects,Tasks};
 use \More\Text;
 
 class ProjectController extends Controller{
@@ -31,7 +31,7 @@ class ProjectController extends Controller{
 
         $project = new Project($id_project);
         if (!$project->id) {
-            $this->access_denied('Проект не найден');
+            $this->access_denied(__('Проект не найден'));
         }
         # получем список заданий
         $tasks = Tasks::getTasks(['id_project' => $project->id, 'shit_days' => $shit_days, 'time_start' => $time_start, 'status' => 1]);
@@ -48,11 +48,11 @@ class ProjectController extends Controller{
     {
         $project = new Project($id_project);
         if (!$project->id) {
-            $this->access_denied('Проект не найден');
+            $this->access_denied(__('Проект не найден'));
         }
         # недостаточно прав для редактирования, (можно только автору)
         if (!$project->management()) {
-            $this->access_denied('У вас не достаточно прав');
+            $this->access_denied(__('У вас не достаточно прав'));
         }
 
         if (isset($_POST['title']) && isset($_POST['color_edit'])) {
@@ -65,7 +65,7 @@ class ProjectController extends Controller{
                 header('Location: ' . App::referer());
             }
         }
-        $this->params['title'] = $project->title . ' - редактирование';
+        $this->params['title'] = __('%s - редактирование', $project->title);
         $this->params['project'] = $project;
 
         $form = new Form('/project/edit/' . $project->id . '/save/');
@@ -73,10 +73,10 @@ class ProjectController extends Controller{
         $form->input(['name' => 'color_edit', 'type' => 'hidden', 'value' => $project->color, 'br' => false]);
         $form->input(['name' => 'title', 'value' => $project->title]);
         $options = [];
-        $options[] = ['value' => 1, 'title' => 'Все', 'selected' => 1 == $project->set_management ? 'selected' : ''];
-        $options[] = ['value' => 2, 'title' => 'Только я', 'selected' => 2 == $project->set_management ? 'selected' : ''];
-        $form->select(['name' => 'set_management', 'title' => 'Проект ведут', 'options' => $options]);
-        $form->submit(['name' => 'save', 'value' => 'Сохранить']);
+        $options[] = ['value' => 1, 'title' => __('Все'), 'selected' => 1 == $project->set_management ? 'selected' : ''];
+        $options[] = ['value' => 2, 'title' => __('Только я'), 'selected' => 2 == $project->set_management ? 'selected' : ''];
+        $form->select(['name' => 'set_management', 'title' => __('Проект ведут'), 'options' => $options]);
+        $form->submit(['name' => 'save', 'value' => __('Сохранить')]);
         $this->params['form_project_edit'] = $form->display();
 
         $this->display('project/edit');
@@ -87,12 +87,12 @@ class ProjectController extends Controller{
         $project = new Project($id_project);
 
         if (!$project->id) {
-            $project = ['title' => 'Весь список', 'id' => 0];
+            $project = ['title' => __('Весь список'), 'id' => 0];
             $tasks = Tasks::getTasks(['status' => 2, 'time_start' => 0]);
-            $this->params['title'] = 'Список выполненных задач';
+            $this->params['title'] = __('Список выполненных задач');
         } else {
             $tasks = Tasks::getTasks(['status' => 2, 'id_project' => $id_project, 'time_start' => 0]);
-            $this->params['title'] = $project->title . ' - выполненные задачи';
+            $this->params['title'] = __('%s - выполненные задачи', $project->title);
         }
 
         $this->params['tasks'] = $tasks;
@@ -124,18 +124,18 @@ class ProjectController extends Controller{
 
         $project = new Project($id_project);
         if (!$project->id) {
-            $this->access_denied('Проект не найден');
+            $this->access_denied(__('Проект не найден'));
         }
         # недостаточно прав для удаления, (можно только автору)
         if (!$project->management()) {
-            $this->access_denied('У вас не достаточно прав');
+            $this->access_denied(__('У вас не достаточно прав'));
         }
 
         if ($project->delete()) {
             header('Location: ' . App::referer());
         } else { # если удалить не смогли значит там есть незавершенные задачи
-            $this->params['title'] = 'Ошибка при удалении';
-            $this->access_denied('Проект содержит невыполненные задачи');
+            $this->params['title'] = __('Ошибка при удалении');
+            $this->access_denied(__('Проект содержит невыполненные задачи'));
         }
     }
 }

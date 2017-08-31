@@ -39,7 +39,7 @@ class ErrorHandler
     # вывод сообщения на экран
     protected function showMessage(string $message)
     {
-        echo $message;
+        echo __($message);
     }
     # сохраням ошибки в лог
     private function log()

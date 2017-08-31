@@ -29,6 +29,9 @@ class User{
     }
     public function __get($name)
     {
+        if ($name == 'lang') {
+            return 'en';
+        }
         return $this->data[$name] ?? '';
     }
     public function __isset($name): bool
