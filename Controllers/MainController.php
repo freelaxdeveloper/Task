@@ -15,7 +15,7 @@ class MainController extends Controller{
 
     public function actionIndex()
     {
-        $this->params['tasks'] = Tasks::getTasks(['my_task' => true]);
+        $this->params['tasks'] = Tasks::getTasks(['my_task' => true, 'status' => 1]);
 
         $this->params['id_activePproject'] = 0;
         //$this->params['sorting'] = 'today';
@@ -50,6 +50,7 @@ class MainController extends Controller{
         $params = [];
         $params['time_start'] = mktime(0, 0, 0);
         $params['shit_days'] = $shit_days;
+        $params['status'] = 2;
         if ($id_project) {
             $params['id_project'] = $id_project;
             $this->params['id_activePproject'] = $id_project;

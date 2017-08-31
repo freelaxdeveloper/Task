@@ -50,7 +50,7 @@ class Controller{
                 $form = new Form('/task/new/');
                 $form->class = 'form-task';
                 $form->id = 'formTask';
-                $form->html('<span id="typeTask"></span>');
+                $form->html('<span id="typeTask"></span>', false);
                 $form->input(['name' => 'token', 'value' => App::user()->url_token, 'type' => 'hidden', 'br' => false]);
                 $form->input(['name' => 'color', 'type' => 'hidden', 'value' => 'red', 'br' => false]);
                 $form->input(['name' => 'message', 'holder' => 'Что вам нужно сделать?', 'br' => false]);

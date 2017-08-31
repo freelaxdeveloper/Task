@@ -128,10 +128,10 @@ class TaskController extends Controller{
 
         $form = new Form('/task/edit/' . $task->id . '/save/');
         $form->class = 'form-task';
-        $form->html('<span id="TaskEdit"></span>');
+        $form->html('<span id="TaskEdit"></span>', false);
         $form->input(['name' => 'color_edit', 'type' => 'hidden', 'value' => $task->importance, 'br' => false]);
         $form->input(['name' => 'message', 'value' => $task->message, 'br' => false]);
-        $form->input(['name' => 'deadlines', 'value' => $task->deadlines_form, 'type' => 'datetime-local']);
+        $form->input(['name' => 'deadlines', 'value' => $task->deadlines_form, 'type' => 'datetime-local', 'br' => false]);
         $options = [];
         $projects = Projects::getAll();
         foreach ($projects AS $project) {

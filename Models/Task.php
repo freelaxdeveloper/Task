@@ -63,7 +63,18 @@ class Task{
     {
         return TIME > $this->data['deadlines'] ? true : false;
     }
-
+    # css классы
+    public function cssClass(): string
+    {
+        $classes = [];
+        if ($this->lose() && $this->data['status'] == 1) {
+            $classes[] = 'lose';
+        }
+        if ($this->data['status'] == 2) {
+            $classes[] = 'complete';
+        }
+        return implode(' ', $classes);
+    }
     public function __set($name, $value)
     {
         // поля, при изменении которых будут обновлятся данные в БД

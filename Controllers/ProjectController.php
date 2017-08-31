@@ -34,7 +34,7 @@ class ProjectController extends Controller{
             $this->access_denied('Проект не найден');
         }
         # получем список заданий
-        $tasks = Tasks::getTasks(['id_project' => $project->id, 'shit_days' => $shit_days, 'time_start' => $time_start]);
+        $tasks = Tasks::getTasks(['id_project' => $project->id, 'shit_days' => $shit_days, 'time_start' => $time_start, 'status' => 1]);
 
         $this->params['title'] = $project->title;
         $this->params['tasks'] = $tasks;
@@ -69,7 +69,7 @@ class ProjectController extends Controller{
         $this->params['project'] = $project;
 
         $form = new Form('/project/edit/' . $project->id . '/save/');
-        $form->html('<span id="ProjectEdit"></span>');
+        $form->html('<span id="ProjectEdit"></span>', false);
         $form->input(['name' => 'color_edit', 'type' => 'hidden', 'value' => $project->color, 'br' => false]);
         $form->input(['name' => 'title', 'value' => $project->title]);
         $options = [];

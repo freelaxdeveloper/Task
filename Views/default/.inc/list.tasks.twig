@@ -1,5 +1,5 @@
 {% for task in tasks %}
-    <div class="listing-post {% if task.lose == 1 and task.status == 1 %}lose{% endif %}">
+    <div class="listing-post {{task.cssClass}}">
         <div class="message">
             <span class="listing-status {{task.importance}}" title="{{task.importance_str}}"></span> {{task.message}}
         </div>
@@ -9,7 +9,7 @@
                     {% if task.status == 1 and (project.management or task.id_user_project == user.id) %}
                         <a href="/task/complete/{{task.id}}/?token={{user.url_token}}">Выполнено</a>
                     {% endif %}
-                    {% if task.id_user == user.id or project.id_user == user.id %}
+                    {% if task.status == 1 and (task.id_user == user.id or project.id_user == user.id) %}
                         <a href="/task/edit/{{task.id}}/">Изменить</a>
                     {% endif %}
                     {% if task.id_user == user.id or project.id_user == user.id %}
