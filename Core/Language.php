@@ -14,16 +14,31 @@ class Language{
     }
     public function translate(string $string): string
     {
+        if ($this->lang == 'ru') {
+            return $string;
+        }
         if (isset($this->words[$string])) {
+            if ($this->words[$string] == $string) {
+                $this->words[$string] = $this->autoTranslate($string);
+            }
             return $this->words[$string];
         }
         $this->addWord($string);
         return $string;
     }
+    private function autoTranslate(string $string): string
+    {
+        $data = file_get_contents('https://api.multillect.com/translate/json/1.0/561?method=translate/api/translate&from=ru&to=' . $this->lang . '&text=' . $string . '&sig=1b779fccacb995e5971cbb7e1adc371f');
+        $data = json_decode($data);
+        $translated = trim($data->result->translated);
+        return $translated ?? $string;
+    }
+    # добавление нового слова в словарь
     private function addWord(string $string)
     {
         $this->words[$string] = $string;
     }
+    # получение списка слов
     private function getBaseWords()
     {
         static $words;
@@ -32,12 +47,17 @@ class Language{
         }
         return $words;
     }
+    # файл локализации
     private function getFileLocalize()
     {
         return H . '/Static/languages/' . $this->lang . '.ini';
     }
+    # обновляем список локализации
     private function update()
     {
+        if ($this->lang == 'ru') {
+            return;
+        }
         if (!file_exists($this->getFileLocalize())) {
             touch($this->getFileLocalize());
             chmod($this->getFileLocalize(), 0777);

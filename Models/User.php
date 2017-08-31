@@ -30,7 +30,7 @@ class User{
     public function __get($name)
     {
         if ($name == 'lang') {
-            return 'en';
+            return $_SESSION['lang'] ?? $this->data['lang'] ?? 'ru';
         }
         return $this->data[$name] ?? '';
     }
