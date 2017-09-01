@@ -67,6 +67,10 @@ a{
 	border-radius:5px;
 	background-color:#606d86;
 	color:#fff;
+	cursor:pointer;
+}
+.header .right .action-user:hover{
+	background-color:#5c6575;
 }
 
 .header .right .action{
@@ -85,6 +89,12 @@ a{
 }
 .header .right .action:hover a{
 	color:#fff;
+}
+.header .right .current_lang{
+	cursor:pointer;
+}
+.header .right .localize{
+	display:none;
 }
 .header a{
     color: #fff;
@@ -253,12 +263,12 @@ footer > span{
 	border-radius:7px;
 }
 .form input{
-	height:30px;
+	height: 40px;
 	/*width:30%;*/
 	margin-bottom:5px;
-	font-size:13px;
+	font-size: 14px;
 	border: 1px solid #ececec;
-	padding-left:5px;
+	/* padding-left:5px; */
 	border-radius:7px;
 	text-align:center;
 }
@@ -273,6 +283,9 @@ footer > span{
 	background-color:#5a8abb;
 	min-width:100px;
 	cursor:pointer;
+}
+.form .padding-left{
+	padding-left:25px;
 }
 .form a, .btn{
 	display:inline-block;
@@ -338,7 +351,7 @@ footer > span{
 
 .form select{
 	margin-top:3px;
-	height: 30px;
+	height: 40px;
 	width:130px;
 	background-color:#fff;
 	border: 1px solid #ececec;
@@ -358,11 +371,13 @@ footer > span{
 /* listing */
 .listing-post{
     margin-bottom: 5px;
-	position:relative;
-	padding:10px 10px 3px;
-	color:#000000;
-	border-bottom: 1px solid #ece6e6;
-	border-radius:7px;
+    position:relative;
+    padding:10px 10px 3px;
+    color:#000000;
+    border-bottom: 1px solid #ece6e6;
+    border-radius:7px;
+    font-size: 18px;
+    line-height: 26px; */
 }
 .listing-post:hover{
 	background-color:#f3f0f0;
@@ -518,12 +533,6 @@ span.project-name{
 }
 .captcha-img{
 	position:absolute;
-}
-.current_lang{
-	cursor:pointer;
-}
-.localize{
-	display:none;
 }
 /* endother */
 
