@@ -1,6 +1,8 @@
 <?php
 namespace Core;
 
+use \Core\App;
+
 class Form{
     public $action; // экшен (string)
     public $method = 'POST'; // метод передачи данных (string)
@@ -58,7 +60,7 @@ class Form{
     public function display(): string
     {
         $id = $this->id ? 'id="' . $this->id . '" ' : '';
-        $this->html_form = '<form ' . $id . 'class="form ' . $this->class . '" action="' . $this->action . '" method="' . $this->method . '">';
+        $this->html_form = '<form ' . $id . 'class="form ' . $this->class . '" action="' . App::url($this->action) . '" method="' . $this->method . '">';
         for ($i = 0; $i < count($this->input); $i++) {
             $this->html_form .= $this->input[$i];
         }

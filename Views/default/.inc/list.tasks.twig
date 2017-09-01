@@ -7,13 +7,13 @@
             {% if task.status == 1 or task.id_user == user.id or project.id_user == user.id %}
                 <span class="action_load action_display" id="listingAction{{task.id}}">
                     {% if task.status == 1 and (project.management or task.id_user_project == user.id) %}
-                        <a href="/task/complete/{{task.id}}/?token={{user.url_token}}">{{__('Выполнено')}}</a>
+                        <a href="{{url('/task/complete/' ~ task.id ~ '/?token=' ~ user.url_token)}}">{{__('Выполнено')}}</a>
                     {% endif %}
                     {% if task.status == 1 and (task.id_user == user.id or project.id_user == user.id) %}
-                        <a href="/task/edit/{{task.id}}/">{{__('Изменить')}}</a>
+                        <a href="{{url('/task/edit/' ~ task.id ~ '/')}}">{{__('Изменить')}}</a>
                     {% endif %}
                     {% if task.id_user == user.id or project.id_user == user.id %}
-                        <a href="/task/delete/{{task.id}}/?token={{user.url_token}}">{{__('Удалить')}}</a>
+                        <a href="{{url('/task/delete/' ~ task.id ~ '/?token=' ~ user.url_token)}}">{{__('Удалить')}}</a>
                     {% endif %}
                 </span>
                 <span class="listing-menu" id="listing{{task.id}}" data-action="listingAction{{task.id}}"> <i class="fa fa-ellipsis-v"></i> </span>

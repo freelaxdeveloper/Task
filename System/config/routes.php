@@ -10,43 +10,43 @@ return [
     # каптча
     ['pattern' => 'captcha\.jpg','run' => 'captcha/view','method' => 'GET'],
     # главная страница
-    ['pattern' => '','run' => 'main/index','method' => 'GET'],
+    ['pattern' => '[a-z]{2}','run' => 'main/index','method' => 'GET'],
     # F.A.Q
-    ['pattern' => 'faq','run' => 'main/faq','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/faq','run' => 'main/faq','method' => 'GET'],
     # страница регистрации
-    ['pattern' => 'register','run' => 'authorize/register','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/register','run' => 'authorize/register','method' => 'GET'],
     # страница регистрации (отправка формы)
-    ['pattern' => 'register/send','run' => 'authorize/register','method' => 'POST'],
+    ['pattern' => '[a-z]{2}/register/send','run' => 'authorize/register','method' => 'POST'],
     # страница авторизации
-    ['pattern' => 'authorize','run' => 'authorize/authorize','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/authorize','run' => 'authorize/authorize','method' => 'GET'],
     # страница авторизации (отправка формы)
-    ['pattern' => 'authorize/send','run' => 'authorize/authorize','method' => 'POST'],
+    ['pattern' => '[a-z]{2}/authorize/send','run' => 'authorize/authorize','method' => 'POST'],
     # выход с профиля
-    ['pattern' => 'exit/\?token\=[0-9a-z]+','run' => 'authorize/exit','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/exit/\?token\=[0-9a-z]+','run' => 'authorize/exit','method' => 'GET'],
     # удаление пользователя
-    ['pattern' => 'user/delete/([0-9]+)','run' => 'user/delete/$1','method' => 'GET|POST'],
+    ['pattern' => '[a-z]{2}/user/delete/([0-9]+)','run' => 'user/delete/$1','method' => 'GET|POST'],
     # просмотр заданий проекта
-    ['pattern' => 'project/([0-9]+)/?(today|week|month)?','run' => 'project/view/$1/$2','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/project/([0-9]+)/?(today|week|month)?','run' => 'project/view/$1/$2','method' => 'GET'],
     # просмотр завершенных заданий
-    ['pattern' => 'task/view/complete/([0-9]+)','run' => 'project/viewComplete/$1','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/task/view/complete/([0-9]+)','run' => 'project/viewComplete/$1','method' => 'GET'],
     # просмотр заданий на сегодня
-    ['pattern' => 'view/(today|week|month)/([0-9]+)','run' => 'main/last/$1/$2','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/view/(today|week|month)/([0-9]+)','run' => 'main/last/$1/$2','method' => 'GET'],
     # добавление проекта
-    ['pattern' => 'project/new','run' => 'project/create','method' => 'POST'],
+    ['pattern' => '[a-z]{2}/project/new','run' => 'project/create','method' => 'POST'],
     # удаление проекта
-    ['pattern' => 'project/delete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'project/delete/$1','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/project/delete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'project/delete/$1','method' => 'GET'],
     # редактирование проекта
-    ['pattern' => 'project/edit/([0-9]+)','run' => 'project/edit/$1','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/project/edit/([0-9]+)','run' => 'project/edit/$1','method' => 'GET'],
     # редактирование проекта (сохранение)
-    ['pattern' => 'project/edit/([0-9]+)/save','run' => 'project/edit/$1','method' => 'POST'],
+    ['pattern' => '[a-z]{2}/project/edit/([0-9]+)/save','run' => 'project/edit/$1','method' => 'POST'],
     # добавление задания
-    ['pattern' => 'task/new','run' => 'task/create','method' => 'POST'],
+    ['pattern' => '[a-z]{2}/task/new','run' => 'task/create','method' => 'POST'],
     # удаление задания
-    ['pattern' => 'task/delete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'task/delete/$1','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/task/delete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'task/delete/$1','method' => 'GET'],
     # завершение задания
-    ['pattern' => 'task/complete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'task/complete/$1','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/task/complete/([0-9]+)/\?token\=[0-9a-z]+','run' => 'task/complete/$1','method' => 'GET'],
     # редактирование задания
-    ['pattern' => 'task/edit/([0-9]+)','run' => 'task/edit/$1','method' => 'GET'],
+    ['pattern' => '[a-z]{2}/task/edit/([0-9]+)','run' => 'task/edit/$1','method' => 'GET'],
     # редактирование задания (сохранение)
-    ['pattern' => 'task/edit/([0-9]+)/save','run' => 'task/edit/$1','method' => 'POST'],
+    ['pattern' => '[a-z]{2}/task/edit/([0-9]+)/save','run' => 'task/edit/$1','method' => 'POST'],
 ];

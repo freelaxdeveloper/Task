@@ -27,6 +27,9 @@ class Controller{
         $twig->addFunction(new \Twig_Function('__', function (string $string, string $param1 = '', string $param2 = '') {
           return __($string, $param1, $param2);
         }));
+        $twig->addFunction(new \Twig_Function('url', function (string $url) {
+          return App::url($url);
+        }));
         $template = $twig->loadTemplate('/' . $filename . '.twig');
         echo $template->render($this->params);
     }
@@ -34,6 +37,7 @@ class Controller{
     {
         $this->params['projects'] = Projects::getAll();
         $this->params['user'] = App::user();
+        $this->params['language'] = App::language();
         $this->params['users'] = Users::getAll();
         $this->params['current_data'] = date('Y-m-d\TH:00');
         if (empty($this->params['id_activePproject']))

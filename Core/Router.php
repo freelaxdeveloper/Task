@@ -11,12 +11,6 @@ class Router
     {
         $this->routes = include_once(H . '/System/config/routes.php');
     }
-    private function getURI()
-    {
-        if (!empty($_SERVER['REQUEST_URI'])) {
-            return trim($_SERVER['REQUEST_URI'], '/');
-        }
-    }
     public function run()
     {
         foreach ($this->routes AS $path) {
@@ -25,9 +19,9 @@ class Router
                 continue;
             }
             # ищем подходящий роут подходящий согласно правилу паттерна
-            if (preg_match('~^' . $path['pattern'] . '$~', $this->getURI())) {
+            if (preg_match('~^' . $path['pattern'] . '$~', App::getURI())) {
                 # получаем внутренний путь из внешнего согласно правилу
-                $internalRoute = preg_replace("~" . $path['pattern'] . "~", $path['run'], $this->getURI());
+                $internalRoute = preg_replace("~" . $path['pattern'] . "~", $path['run'], App::getURI());
 
                 # разбиваем переданные параметры на сегменты
                 $segments = explode('/', $internalRoute);
@@ -57,7 +51,7 @@ class Router
             }
         }
         if (!isset($controllObject)) {
-            $this->access_denied(__('Нету подходящего роута для: %s', $this->getURI()));
+            $this->access_denied(__('Нету подходящего роута для: %s', App::getURI()));
         }
     }
     private function access_denied(string $error)

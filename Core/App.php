@@ -2,7 +2,7 @@
 namespace Core;
 
 use \Models\User;
-use \Core\Authorize;
+use \Core\{Authorize,Language};
 
 abstract class App{
     const USER_GROUP_USER = 1;
@@ -43,5 +43,33 @@ abstract class App{
     public static function referer(string $link = '/'): string
     {
         return $_SERVER['HTTP_REFERER'] ?? $link;
+    }
+    public static function language()
+    {
+        static $language;
+
+        if (!$language) {
+            $language = new Language(self::current_language());
+        }
+        return $language;
+    }
+    # текущий язык сайта
+    private static function current_language(): string
+    {
+        $language_current = explode('/', self::getURI())[0];
+        if (in_array($language_current, ['en', 'ru', 'uk'])) {
+            return $language_current;
+        }
+        return 'ru';
+    }
+    public static function getURI()
+    {
+        if (!empty($_SERVER['REQUEST_URI'])) {
+            return trim($_SERVER['REQUEST_URI'], '/');
+        }
+    }
+    public static function url(string $url): string
+    {
+        return '/' . self::current_language() . $url;
     }
 }

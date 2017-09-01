@@ -12,6 +12,11 @@ $(function(){
     });
 
 
+    $('.current_lang').click(function(){
+        $('.localize').fadeIn();
+        $('.current_lang').fadeOut();
+    });
+
     $('#captcha').click(function(){
         console.log('Клик по капче');
         document.getElementById('captcha').src='/captcha.jpg';

@@ -4,7 +4,7 @@ namespace Core;
 class ErrorHandler
 {
     public $errors = [];
-    protected $message = 'Произошла ошибка на сайте, сообщите о ней администрации!';
+    protected $message = 'Произошла ошибка на сайте, сообщите о ней администрации';
 
     public function register()
     {

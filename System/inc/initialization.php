@@ -17,7 +17,7 @@ spl_autoload_register(function ($name) {
 # подключаем шаблонизатор Twig
 require_once H . '/Libraries/twig/autoload.php';
 
-use \Core\{Language,App};
+use \Core\App;
 
 # ф-ция для отладки
 function printr($array)
@@ -26,6 +26,7 @@ function printr($array)
     print_r($array);
     echo '</pre>';
 }
+# мультиязычность
 function __(): string
 {
     $args = func_get_args();
@@ -33,13 +34,7 @@ function __(): string
     if (!$args_num) {
         return '';
     }
-    static $language;
-    $string = $args[0];
-
-    if (!$language) {
-        $language = new Language(App::user()->lang);
-    }
-    $string = $language->translate($string);
+    $string = App::language()->translate($args[0]);
 
     if ($args_num == 1) {
         return $string; // строка без параметров

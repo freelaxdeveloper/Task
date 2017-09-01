@@ -29,14 +29,11 @@ class User{
     }
     public function __get($name)
     {
-        if ($name == 'lang') {
-            return $_SESSION['lang'] ?? $this->data['lang'] ?? 'ru';
-        }
         return $this->data[$name] ?? '';
     }
     public function __isset($name): bool
     {
-        return isset($this->data[$name]) ? true : false;
+        return isset($this->data[$name]) || in_array($name, []) ? true : false;
     }
     # проверяем токен
     public function checkToken(): bool

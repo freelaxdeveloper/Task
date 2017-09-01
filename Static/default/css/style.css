@@ -362,6 +362,7 @@ footer > span{
 	padding:10px 10px 3px;
 	color:#000000;
 	border-bottom: 1px solid #ece6e6;
+	border-radius:7px;
 }
 .listing-post:hover{
 	background-color:#f3f0f0;
@@ -407,6 +408,7 @@ span.project-name{
 	opacity: 0.5;
 }
 .listing-post.complete:hover{
+	transition: 0.5s;
 	opacity: 1;
 }
 .listing-post.lose span.project-name, .listing-post.lose span.listing-menu{
@@ -516,6 +518,12 @@ span.project-name{
 }
 .captcha-img{
 	position:absolute;
+}
+.current_lang{
+	cursor:pointer;
+}
+.localize{
+	display:none;
 }
 /* endother */
 

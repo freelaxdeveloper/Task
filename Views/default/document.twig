@@ -15,19 +15,25 @@
         <header>
             <div class="header">
                 <span class="left">
-                    <a href="/" title="На главную"><i class="fa fa-home"></i> {{__('Главная')}}</a>
-                    <a href="/faq/" title="На главную">F.A.Q</a>
+                    <a href="{{url('/')}}" title="На главную"><i class="fa fa-home"></i> {{__('Главная')}}</a>
+                    <a href="{{url('/faq/')}}" title="F.A.Q">F.A.Q</a>
                     {% block complete %}
-                        <a href="/task/view/complete/0/" title="Выполненные задачи">{{__('Архив')}}</a>
+                        <a href="{{url('/task/view/complete/0/')}}" title="Выполненные задачи">{{__('Архив')}}</a>
                     {% endblock %}
                 </span>
 
                 <span class="right">
                     {% if user.id == 0 %}
-                        <span class="action"><i class="fa fa-registered"></i> <a href="/register/">{{__('Регистрация')}}</a></span> / <span class="action"><i class="fa fa-sign-in"></i> <a href="/authorize/">{{__('Авторизация')}}</a></span>
+                        <span class="action"><i class="fa fa-registered"></i> <a href="{{url('/register/')}}">{{__('Регистрация')}}</a></span> / <span class="action"><i class="fa fa-sign-in"></i> <a href="{{url('/authorize/')}}">{{__('Авторизация')}}</a></span>
                     {% else %}
+                        <span class="localize">
+                            <span class="action-user"><i class="fa fa-language"></i> <a href="/uk/">{{__('Украинский')}}</a></span>
+                            <span class="action-user"><i class="fa fa-language"></i> <a href="/en/">{{__('Английский')}}</a></span>
+                            <span class="action-user"><i class="fa fa-language"></i> <a href="/ru/">{{__('Русский')}}</a></span>
+                        </span>
+                        <span class="action-user current_lang"><i class="fa fa-language"></i> {{language.name}}</span>
                         <span class="action-user"><i class="fa fa-user"></i> {{user.login}}</span>
-                        <span class="action"><i class="fa fa-sign-out"></i> <a href="/exit/?token={{user.url_token}}">{{__('Выход')}}</a></span>
+                        <span class="action"><i class="fa fa-sign-out"></i> <a href="{{url('/exit/?token=' ~ user.url_token)}}">{{__('Выход')}}</a></span>
                     {% endif %}
                 </span>
             </div>
@@ -36,23 +42,23 @@
             <nav>
                 <ul>
                     <li class="title">{{__('Период')}}</li>
-                    <li class="{% if 'today' == sorting %}sort-active{% endif %}"><a href="/view/today/{{id_activePproject}}/"><i class="fa fa-calendar"></i> {{__('Сегодня')}}</a></li>
-                    <li class="{% if 'week' == sorting %}sort-active{% endif %}"><a href="/view/week/{{id_activePproject}}/"><i class="fa fa-calendar"></i> {{__('Неделя')}}</a></li>
-                    <li class="{% if 'month' == sorting %}sort-active{% endif %}"><a href="/view/month/{{id_activePproject}}/"><i class="fa fa-calendar"></i> {{__('Месяц')}}</a></li>
+                    <li class="{% if 'today' == sorting %}sort-active{% endif %}"><a href="{{url('/view/today/' ~ id_activePproject ~ '/')}}"><i class="fa fa-calendar"></i> {{__('Сегодня')}}</a></li>
+                    <li class="{% if 'week' == sorting %}sort-active{% endif %}"><a href="{{url('/view/week/' ~ id_activePproject ~ '/')}}"><i class="fa fa-calendar"></i> {{__('Неделя')}}</a></li>
+                    <li class="{% if 'month' == sorting %}sort-active{% endif %}"><a href="{{url('/view/month/' ~ id_activePproject ~ '/')}}"><i class="fa fa-calendar"></i> {{__('Месяц')}}</a></li>
                 </ul>
                 <ul>
                     <li class="title">{{__('Проекты')}}</li>
                     {% for project in projects %}
                         <li class="{% if project.id == id_activePproject %}project-active{% elseif project.task_lose %}project-lose{% endif %}">
-                            <a href="/project/{{project.id}}/{% if sorting %}{{sorting}}/{% endif %}"><span class="color_project {{project.color}}"></span> {{project.lose}} {{project.title}}</a>
+                            <a href="{{url('/project/' ~ project.id ~ '/')}}{% if sorting %}{{sorting}}/{% endif %}"><span class="color_project {{project.color}}"></span> {{project.lose}} {{project.title}}</a>
                             {% if project.task_active %}
                                 <span class="counter" title="{{__('Активных задач: %s', project.task_active)}}">{{project.task_active}}</span>
                             {% endif %}
                             {% if project.management %}
                                 <span id="menu{{project.id}}" data-action="action{{project.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
                                 <ul class="action_load action_display" id="action{{project.id}}">
-                                    <li><a href="/project/edit/{{project.id}}/">{{__('Изменить')}}</a></li>
-                                    <li><a href="/project/delete/{{project.id}}/?token={{user.url_token}}">{{__('Удалить')}}</a></li>
+                                    <li><a href="{{url('/project/edit/' ~ project.id ~ '/')}}">{{__('Изменить')}}</a></li>
+                                    <li><a href="{{url('/project/delete/' ~ project.id ~ '/?token=' ~ user.url_token)}}">{{__('Удалить')}}</a></li>
                                 </ul>
                             {% endif %}
                         </li>
@@ -73,7 +79,7 @@
                             {% if user.group >= 3 and user.id != ank.id %}
                                 <span id="menu{{ank.id}}" data-action="action{{ank.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
                                 <ul class="action_load action_display" id="action{{ank.id}}">
-                                    <li><a href="/user/delete/{{ank.id}}/">{{__('Удалить')}}</a></li>
+                                    <li><a href="{{url('/user/delete/' ~ ank.id ~ '/')}}">{{__('Удалить')}}</a></li>
                                 </ul>
                             {% endif %}
                         </li>
