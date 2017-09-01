@@ -25,8 +25,9 @@ class Form{
         $holder = $holder ?? '';
         $value = $value ?? '';
         $type = $type ?? 'text';
+        $class = $class ?? '';
         $br = $br ?? true;
-        $this->input[] = ($title ? $title . ':<br />' : '') . '<input type="' . $type . '" name="' . $name . '" value="' . $value . '" placeholder="' . $holder . '">' . ($br ? '<br />' : '');
+        $this->input[] = ($title ? $title . ':<br />' : '') . '<input' . ($class ? ' class="' . $class . '"' : '') . ' type="' . $type . '" name="' . $name . '" value="' . $value . '" placeholder="' . $holder . '">' . ($br ? '<br />' : '');
     }
     # формируем любую строку для отображения в форме
     public function html(string $html, bool $br = true)

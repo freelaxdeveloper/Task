@@ -35,6 +35,7 @@ class Controller{
     }
     private function _inicialization()
     {
+        $this->params['uri'] = str_replace(['uk', 'en', 'ru'], '', App::getURI());
         $this->params['projects'] = Projects::getAll();
         $this->params['user'] = App::user();
         $this->params['language'] = App::language();
@@ -45,7 +46,7 @@ class Controller{
 
         if (App::user()->id) {
             $form = new Form('/project/new/');
-            $form->html('<span id="typeProject"></span>');
+            $form->html('<span id="typeProject"></span>', false);
             $form->input(['name' => 'token', 'value' => App::user()->url_token, 'type' => 'hidden', 'br' => false]);
             $form->input(['name' => 'color', 'value' => 'red', 'type' => 'hidden', 'br' => false]);
             $form->input(['name' => 'title', 'holder' => __('Введите название')]);

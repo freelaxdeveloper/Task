@@ -11,6 +11,7 @@ use \Core\DB;
 class Language{
     public $lang;
     private $words;
+    private $is_update = false;
 
     public function __construct(string $lang)
     {
@@ -25,6 +26,7 @@ class Language{
         if (isset($this->words[$string])) {
             # если перевод совпадает с исходным текстом, пробуем его переводить
             if ($this->words[$string] == $string) {
+                $this->is_update = true;
                 $this->words[$string] = $this->autoTranslate($string);
             }
             # если переведено как ***, возвращаем исходный текст
@@ -34,6 +36,7 @@ class Language{
             return $this->words[$string];
         }
         # добавли новое слово в словарь
+        $this->is_update = true;
         $this->addWord($string);
         return $string;
     }
@@ -80,7 +83,7 @@ class Language{
     # обновляем список локализации
     private function update()
     {
-        if ($this->lang == 'ru') {
+        if ($this->lang == 'ru' || !$this->is_update) {
             return;
         }
         if (!file_exists($this->getFileLocalize())) {
@@ -92,6 +95,7 @@ class Language{
             $result[] = $key . ' = "' . $value . '";';
         }
         file_put_contents($this->getFileLocalize(), implode("\r\n", $result));
+        $this->is_update = true;
         return;
     }
     public function __destruct()

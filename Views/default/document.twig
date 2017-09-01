@@ -23,15 +23,15 @@
                 </span>
 
                 <span class="right">
+                    <span class="localize">
+                        <span class="action-user"><i class="fa fa-language"></i> <a href="/uk{{uri}}/">{{__('Украинский')}}</a></span>
+                        <span class="action-user"><i class="fa fa-language"></i> <a href="/en{{uri}}/">{{__('Английский')}}</a></span>
+                        <span class="action-user"><i class="fa fa-language"></i> <a href="/ru{{uri}}/">{{__('Русский')}}</a></span>
+                    </span>
+                    <span class="action-user current_lang"><i class="fa fa-language"></i> {{language.name}}</span>
                     {% if user.id == 0 %}
                         <span class="action"><i class="fa fa-registered"></i> <a href="{{url('/register/')}}">{{__('Регистрация')}}</a></span> / <span class="action"><i class="fa fa-sign-in"></i> <a href="{{url('/authorize/')}}">{{__('Авторизация')}}</a></span>
                     {% else %}
-                        <span class="localize">
-                            <span class="action-user"><i class="fa fa-language"></i> <a href="/uk/">{{__('Украинский')}}</a></span>
-                            <span class="action-user"><i class="fa fa-language"></i> <a href="/en/">{{__('Английский')}}</a></span>
-                            <span class="action-user"><i class="fa fa-language"></i> <a href="/ru/">{{__('Русский')}}</a></span>
-                        </span>
-                        <span class="action-user current_lang"><i class="fa fa-language"></i> {{language.name}}</span>
                         <span class="action-user"><i class="fa fa-user"></i> {{user.login}}</span>
                         <span class="action"><i class="fa fa-sign-out"></i> <a href="{{url('/exit/?token=' ~ user.url_token)}}">{{__('Выход')}}</a></span>
                     {% endif %}

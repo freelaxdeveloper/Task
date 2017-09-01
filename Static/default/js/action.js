@@ -14,7 +14,7 @@ $(function(){
 
     $('.current_lang').click(function(){
         $('.localize').fadeIn();
-        $('.current_lang').fadeOut();
+        $(this).fadeOut();
     });
 
     $('#captcha').click(function(){

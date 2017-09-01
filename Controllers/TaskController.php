@@ -130,7 +130,7 @@ class TaskController extends Controller{
         $form->class = 'form-task';
         $form->html('<span id="TaskEdit"></span>', false);
         $form->input(['name' => 'color_edit', 'type' => 'hidden', 'value' => $task->importance, 'br' => false]);
-        $form->input(['name' => 'message', 'value' => $task->message, 'br' => false]);
+        $form->input(['name' => 'message', 'value' => $task->message, 'class' => 'padding-left', 'br' => false]);
         $form->input(['name' => 'deadlines', 'value' => $task->deadlines_form, 'type' => 'datetime-local', 'br' => false]);
         $options = [];
         $projects = Projects::getAll();
