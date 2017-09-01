@@ -6,5 +6,9 @@ php_flag register_globals off
 php_flag session.use_only_cookies on
 
 RewriteEngine On
+# если язык сайта не задан, перенаправляем на ru
+RewriteCond %{QUERY_STRING} ^$ [NC]
+RewriteRule ^$ /ru/? [R=301,L]
+
 RewriteCond $1 !^(index\.php|Static)
 RewriteRule ^(.*)$ /index.php/$1 [L]
