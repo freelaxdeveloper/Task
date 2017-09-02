@@ -54,11 +54,14 @@ class Language{
     {
         $data = file_get_contents('https://api.multillect.com/translate/json/1.0/561?method=translate/api/translate&from=ru&to=' . $this->lang . '&text=' . $string . '&sig=1b779fccacb995e5971cbb7e1adc371f');
         $data = json_decode($data);
-        $translated = trim($data->result->translated);
+        if (!$translated = $data->result->translated) {
+            return $string;
+        }
+        $translated = trim($translated);
         if ($translated == $string) {
             $translated = '***';
         }
-        return $translated ?? $string;
+        return $translated;
     }
     # добавление нового слова в словарь
     private function addWord(string $string)

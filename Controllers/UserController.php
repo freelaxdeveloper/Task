@@ -36,8 +36,8 @@ class UserController extends Controller{
         $form = new Form('/user/delete/' . $user->id . '/');
         $form->captcha = true;
         $form->input(['name' => 'token', 'value' => App::user()->url_token, 'type' => 'hidden', 'br' => false]);
-        $form->input(['name' => 'task_count', 'title' => __('Сколько у пользователя добавлено задач?')]);
-        $form->html(__('Удалится вся информация связанная с данным профилем!'));
+        $form->input(['name' => 'task_count', 'title' => __('Сколько у пользователя добавлено задач')]);
+        $form->html(__('Удалится вся информация связанная с данным профилем'));
         $form->submit(['name' => 'delete', 'value' => __('Подтверждаю удаление')]);
         $this->params['form_delete_user'] = $form->display();
 
