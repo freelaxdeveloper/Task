@@ -17,8 +17,16 @@ class Language{
     public function __construct(string $lang)
     {
         $this->lang = $lang;
-        $this->config = App::config('languages', true);
+        $this->config = $this->getConfig();
         $this->words = $this->getBaseWords();
+    }
+    private function getConfig()
+    {
+        static $config;
+        if (!$config) {
+            $config = App::config('languages', true);
+        }
+        return $config;
     }
     private function is_lang(): bool
     {
@@ -54,7 +62,7 @@ class Language{
     # автоперевод с попмощю API сервиса multillect.com
     private function autoTranslate(string $string): string
     {
-        $data = file_get_contents('https://api.multillect.com/translate/json/1.0/' . $this->config['set']['id'] . '?method=translate/api/translate&from=ru&to=' . $this->lang . '&text=' . $string . '&sig=' . $this->$config['set']['sig']);
+        $data = file_get_contents('https://api.multillect.com/translate/json/1.0/' . $this->config['set']['id'] . '?method=translate/api/translate&from=ru&to=' . $this->lang . '&text=' . $string . '&sig=' . $this->config['set']['sig']);
         $data = json_decode($data);
         if (!$translated = $data->result->translated) {
             return $string;
@@ -88,7 +96,7 @@ class Language{
     # обновляем список локализации
     private function update()
     {
-        if ($this->lang == 'ru' || !$this->is_update) {
+        if ($this->lang == 'ru' || !$this->is_update || !$this->is_lang()) {
             return;
         }
         if (!file_exists($this->getFileLocalize())) {
@@ -97,7 +105,7 @@ class Language{
         }
         $result = [];
         foreach ($this->words AS $key => $value) {
-            $result[] = $key . ' = "' . $value . '";';
+            $result[] = $key . ' = "' . $value . '"';
         }
         file_put_contents($this->getFileLocalize(), implode("\r\n", $result));
         $this->is_update = true;
