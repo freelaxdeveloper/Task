@@ -3,59 +3,62 @@ namespace Core;
 
 use \Core\App;
 
-class Router
-{
-    private $routes = [];
+class Router{
+    public static $routes = [];
+    public static $route;
 
-    public function __construct()
+    public static function add(string $pattern, string $params, string $method = 'GET')
     {
-        $this->routes = include_once(H . '/System/config/routes.php');
+        self::$routes[] = ['pattern' => $pattern, 'run' => $params, 'method' => $method];
     }
-    public function run()
+    private static function matchRoute()
     {
-        foreach ($this->routes AS $path) {
+        $routes_default = App::config('routes', true);
+        $routes = array_merge($routes_default, self::$routes);
+
+        foreach ($routes as $route) {
             # сравниваем метод передачи данных
-            if (strpos($path['method'], $_SERVER['REQUEST_METHOD']) === false) {
+            if (strpos($route['method'], $_SERVER['REQUEST_METHOD']) === false) {
                 continue;
             }
-            # ищем подходящий роут подходящий согласно правилу паттерна
-            if (preg_match('~^' . $path['pattern'] . '$~', App::getURI())) {
-                # получаем внутренний путь из внешнего согласно правилу
-                $internalRoute = preg_replace("~" . $path['pattern'] . "~", $path['run'], App::getURI());
-
-                # разбиваем переданные параметры на сегменты
-                $segments = explode('/', $internalRoute);
-                # определяем какoй контроллер обрабатывает запрос
-                $controllName = '\Controllers\\' . ucfirst(array_shift($segments)) . 'Controller';
-                # определяем какoй method обрабатывает запрос
-                $actionName = 'action' . ucfirst(array_shift($segments));
-
-                # подключаем файл класса-контроллера если он есть
-                $controllerFile = str_replace('\\', '/', H . $controllName . '.php');
-                if (!file_exists($controllerFile)) {
-                    $this->access_denied(__('Отсувствует файл: %s', $controllerFile));
-                }
-                require_once $controllerFile;
-                # проверяем существует ли класс который прописан в роутах
-                if (!class_exists($controllName)) {
-                    $this->access_denied(__('Отсувствует класс: %s', $controllName));
-                }
-                # проверяем существует ли метод в этом классе который прописан в роутах
-                if (!method_exists($controllName, $actionName)) {
-                    $this->access_denied(__('Отсувствует метод: %s у класса %s', $actionName, $controllName));
-                }
-                # если все ок - запускаем
-                $controllObject = new $controllName;
-                $result = call_user_func_array([$controllObject, $actionName], $segments);
-                break;
+            if (preg_match('#^' . $route['pattern'] . '$#i', App::getURI(), $matches)) {
+                $run = explode('/', $route['run']);
+                $route['controller'] = $run[0];
+                $route['action'] = $run[1];
+                /*
+                * планировалось что нужные параметры будут с указанными строчными ключами
+                * но не срослось...
+                $arr = array_filter($matches, function($v, $k){
+                    if (is_string($k)) {
+                        return $v;
+                    }
+                }, ARRAY_FILTER_USE_BOTH);*/
+                unset($route['method']); // метод передачи данных, убираем его
+                unset($route['run']); // контроллер/экшен, убираем его
+                unset($route['pattern']); // паттерн не нужен, убираем его
+                unset($matches[0]); // тут строка в которой найдено совпадение, тоже убираем
+                unset($matches[1]); // тут локализация в параметре, она не нужна
+                self::$route = array_merge($route, $matches);
+                return true;
             }
         }
-        if (!isset($controllObject)) {
-            $this->access_denied(__('Нету подходящего роута для: %s', App::getURI()));
+        return false;
+    }
+    public static function dispatch()
+    {
+        if (self::matchRoute()) {
+            $controller = '\Controllers\\' . ucfirst(array_shift(self::$route)) . 'Controller';
+            $action = 'action' . ucfirst(array_shift(self::$route));
+
+            $obj = new $controller;
+
+            call_user_func_array([$obj, $action], self::$route);
+        } else {
+            http_response_code(404);
         }
     }
-    private function access_denied(string $error)
+    public static function getRoutes()
     {
-        return App::access_denied($error);
+        return self::$routes;
     }
 }
