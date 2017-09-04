@@ -35,7 +35,8 @@ class Controller{
     }
     private function _inicialization()
     {
-        $this->params['uri'] = str_replace(['uk', 'en', 'ru'], '', App::getURI());
+
+        $this->params['uri'] = str_replace(App::language()->getKeys(), '', App::getURI());
         $this->params['projects'] = Projects::getAll();
         $this->params['user'] = App::user();
         $this->params['language'] = App::language();

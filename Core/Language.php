@@ -20,13 +20,18 @@ class Language{
         $this->config = $this->getConfig();
         $this->words = $this->getBaseWords();
     }
-    private function getConfig()
+    private function getConfig(): array
     {
         static $config;
         if (!$config) {
             $config = App::config('languages', true);
         }
         return $config;
+    }
+    # возвращает ключи языков (@return [ru,en,uk...])
+    public function getKeys(): array
+    {
+        return array_keys($this->config['list']);
     }
     private function is_lang(): bool
     {
