@@ -1,0 +1,14 @@
+flexbox {
+    display: flex;
+  }
+  
+  blockA {
+    border: 1px solid black;
+    width: 50%;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: justify;
+    color: #000;
+  }
+  

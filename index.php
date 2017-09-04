@@ -3,8 +3,8 @@ require_once 'System/inc/start.php';
 
 use \Core\{Router,ErrorHandler};
 
-$ErrorHandler = new ErrorHandler();
-$ErrorHandler->register();
+$errorHandler = new ErrorHandler;
+$errorHandler->register();
 
-$router = new Router();
-$router->run();
+Router::add('test', 'main/index');
+Router::dispatch();

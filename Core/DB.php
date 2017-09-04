@@ -26,7 +26,7 @@ abstract class DB
      */
     private static function getConfig()
     {
-        return require(H . '/System/config/db.php');
+        return App::config('db');
     }
 
     /**

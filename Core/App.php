@@ -44,6 +44,7 @@ abstract class App{
     {
         return $_SERVER['HTTP_REFERER'] ?? $link;
     }
+    # выбранный язык сайта
     public static function language()
     {
         static $language;
@@ -53,23 +54,32 @@ abstract class App{
         }
         return $language;
     }
-    # текущий язык сайта
+    # получаем язык сайта из адресной строки
     private static function current_language(): string
     {
         $language_current = explode('/', self::getURI())[0];
-        if (in_array($language_current, ['en', 'ru', 'uk'])) {
-            return $language_current;
-        }
-        return 'ru';
+        return $language_current;
     }
-    public static function getURI()
+
+    public static function getURI(): string
     {
         if (!empty($_SERVER['REQUEST_URI'])) {
             return trim($_SERVER['REQUEST_URI'], '/');
         }
     }
+    # возвращаем URL
     public static function url(string $url): string
     {
         return '/' . self::current_language() . $url;
     }
-}
+    # получаем данные настроек
+    public static function config(string $file, bool $process_sections = false): array
+    {
+        $path_file = H . '/System/config/' . $file . '.ini';
+        if (!file_exists($path_file)) {
+            return ['error'];
+        }
+        $config = parse_ini_file($path_file, $process_sections);
+        return $config;
+    }
+ }

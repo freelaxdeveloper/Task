@@ -1,7 +1,7 @@
 <?php
 namespace Core;
 
-use \Core\DB;
+use \Core\{DB,App};
 
 /*
     Некоторые ураинские и русские слова пишутся одинаково, поэтому в таком случае
@@ -12,15 +12,22 @@ class Language{
     public $lang;
     private $words;
     private $is_update = false;
+    private $config;
 
     public function __construct(string $lang)
     {
         $this->lang = $lang;
+        $this->config = App::config('languages', true);
         $this->words = $this->getBaseWords();
+    }
+    private function is_lang(): bool
+    {
+        return array_key_exists($this->lang, $this->config['list']) ? true : false;
     }
     public function translate(string $string): string
     {
-        if ($this->lang == 'ru') {
+        # если язык русский то переводить не нужно
+        if ($this->lang == 'ru' || !$this->is_lang()) {
             return $string;
         }
         if (isset($this->words[$string])) {
@@ -42,17 +49,12 @@ class Language{
     }
     public function name(): string
     {
-        switch ($this->lang) {
-            case 'ru' : return __('Русский');
-            case 'en' : return __('Английский');
-            case 'uk' : return __('Украинский');
-        }
-        return 'Неизвестно';
+        return __($this->config['list'][$this->lang]);
     }
     # автоперевод с попмощю API сервиса multillect.com
     private function autoTranslate(string $string): string
     {
-        $data = file_get_contents('https://api.multillect.com/translate/json/1.0/561?method=translate/api/translate&from=ru&to=' . $this->lang . '&text=' . $string . '&sig=1b779fccacb995e5971cbb7e1adc371f');
+        $data = file_get_contents('https://api.multillect.com/translate/json/1.0/' . $this->config['set']['id'] . '?method=translate/api/translate&from=ru&to=' . $this->lang . '&text=' . $string . '&sig=' . $this->$config['set']['sig']);
         $data = json_decode($data);
         if (!$translated = $data->result->translated) {
             return $string;

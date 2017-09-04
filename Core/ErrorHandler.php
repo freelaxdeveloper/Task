@@ -49,8 +49,10 @@ class ErrorHandler
         for ($i = 0; $i < count($this->errors); $i++) {
             $errors[] = 'Error: №' . $this->errors[$i]['errno'] . " (" . date('Y-m-d H:i:s') . ")\nDescription: " . $this->errors[$i]['errorstr'] . "\nFile: " . $this->errors[$i]['file'] . "\nLine: " . $this->errors[$i]['line'] . "\n---------\n";
         }
-        error_log(implode("\n", $errors), 3, $log_path);
-        chmod($log_path, 0777);
+        if ($errors) {
+            error_log(implode("\n", $errors), 3, $log_path);
+            chmod($log_path, 0777);
+        }
     }
     public function __destruct()
     {

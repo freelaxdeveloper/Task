@@ -2,6 +2,8 @@
 session_start();
 define('H', $_SERVER['DOCUMENT_ROOT']);
 define('TIME', time());
+# доступные языки, используется в System/config/routes.ini
+define('AVAILABLE_LANG', '(uk|en|ru|ko)');
 
 date_default_timezone_set('Europe/Kiev');
 ini_set('display_errors', 1); // включаем показ ошибок
@@ -20,11 +22,9 @@ require_once H . '/Libraries/twig/autoload.php';
 use \Core\App;
 
 # ф-ция для отладки
-function printr($array)
+function debug($array)
 {
-    echo '<pre>';
-    print_r($array);
-    echo '</pre>';
+    echo '<pre>' . print_r($array, true) . '</pre>';
 }
 # мультиязычность
 function __(): string

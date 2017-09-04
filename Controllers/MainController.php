@@ -48,9 +48,8 @@ class MainController extends Controller{
                 break;
         }
         $params = [];
-        $params['time_start'] = mktime(0, 0, 0);
         $params['shit_days'] = $shit_days;
-        $params['status'] = 2;
+        $params['status'] = 1;
         if ($id_project) {
             $params['id_project'] = $id_project;
             $this->params['id_activePproject'] = $id_project;

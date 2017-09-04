@@ -1,0 +1,25 @@
+{% extends "document.twig" %}
+
+{% block title %}
+    Список сайтов
+{% endblock title %}
+
+{% block meta %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/Static/default/css/distribution.css">
+{% endblock meta %}
+
+{% block content %}
+<flexbox>
+    {% for distribution in distributions %}
+        <blockA>
+            <p><b>{{__('Название')}}:</b> {{distribution.title}} <a href="{{url('/distribution/admin/edit/' ~ distribution.id ~ '/')}}">[ред.]</a></p>
+            <p><b>{{__('Всего установок')}}:</b> {{distribution.install_all}}</p>
+            <p><b>XPath:</b> {{distribution.xpath}}</p>
+            <p><b>{{__('Установок за текущий час')}}:</b> {{distribution.install_hours}}</p>
+            <p><b>{{__('Лимит на текущий час')}}:</b> {{distribution.install_limit}}</p>
+        </blockA>
+    {% endfor %}
+   </flexbox>
+   {{form_clear|raw}}
+{% endblock content %}
