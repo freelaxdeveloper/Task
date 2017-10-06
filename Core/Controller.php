@@ -21,7 +21,7 @@ class Controller{
 
         $this->params['server_name'] = $_SERVER['SERVER_NAME'];
 
-        $loader = new \Twig_Loader_Filesystem(H . '/Views/' . $this->template_dir);
+        $loader = new \Twig_Loader_Filesystem(H . '/Resources/views/' . $this->template_dir);
         $twig = new \Twig_Environment($loader);
 
         $twig->addFunction(new \Twig_Function('__', function (string $string, string $param1 = '', string $param2 = '') {

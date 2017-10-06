@@ -10,5 +10,5 @@ RewriteEngine On
 RewriteCond %{QUERY_STRING} ^$ [NC]
 RewriteRule ^$ /ru/? [R=301,L]
 
-RewriteCond $1 !^(index\.php|Static)
+RewriteCond $1 !^(index\.php|Public)
 RewriteRule ^(.*)$ /index.php/$1 [L]

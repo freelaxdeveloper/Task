@@ -9,7 +9,7 @@ class Router{
 
     public static function add(string $pattern, string $params, string $method = 'GET')
     {
-        self::$routes[] = ['pattern' => $pattern, 'run' => $params, 'method' => $method];
+        self::$routes[] = ['pattern' => AVAILABLE_LANG . $pattern, 'run' => $params, 'method' => $method];
     }
     private static function matchRoute()
     {
@@ -22,7 +22,7 @@ class Router{
                 continue;
             }
             if (preg_match('#^' . $route['pattern'] . '$#i', App::getURI(), $matches)) {
-                $run = explode('/', $route['run']);
+                $run = explode('@', $route['run']);
                 $route['controller'] = $run[0];
                 $route['action'] = $run[1];
                 /*
@@ -47,7 +47,7 @@ class Router{
     public static function dispatch()
     {
         if (self::matchRoute()) {
-            $controller = '\Controllers\\' . ucfirst(array_shift(self::$route)) . 'Controller';
+            $controller = '\App\Http\Controllers\\' . ucfirst(array_shift(self::$route)) . 'Controller';
             $action = 'action' . ucfirst(array_shift(self::$route));
 
             $obj = new $controller;

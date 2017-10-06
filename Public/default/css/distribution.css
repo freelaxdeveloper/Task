@@ -1,0 +1,38 @@
+.distribution{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 2fr));
+    grid-gap: 5px;
+}
+.distribution a{
+    color: #E3D916;
+}
+.distribution div {
+	background-color: #4F5A6E;
+	border: 1px solid #212941;
+	border-radius: 5px;
+	padding: 8px 15px;
+	color: #ffffff;
+	font-size: 18px;
+}
+.distribution div:nth-child(odd) {
+	background-color: #475477;
+}
+.distribution .post{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 50px;
+    grid-gap: 10px;
+}
+.distribution .post span{
+    background-color: #576387;
+    padding: 5px;
+    border-radius: 7px;
+    text-align: center;
+    cursor: pointer;
+}
+.distribution .post span:nth-child(1){
+	grid-column: 1 / -1;
+}
+.distribution .post span:nth-child(5){
+	grid-column: 1 / -1;
+}

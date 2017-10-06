@@ -1,0 +1,9 @@
+{% extends 'app.twig' %}
+
+{% block complete %}
+    <a href="{{url('/task/view/complete/' ~ project.id ~ '/')}}" title="{{__('Выполненные задачи - %s', project.title)}}">{{__('Архив')}}</a>
+{% endblock %}
+
+{% block content %}
+    {% include '.inc/list.tasks.twig' %}
+{% endblock %}

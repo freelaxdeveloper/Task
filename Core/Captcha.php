@@ -32,7 +32,7 @@ class Captcha{
     # получаем случайный шрифт
     private function getFont(): string
     {
-        $fonts = glob(H . '/Static/fonts/*.ttf');
+        $fonts = glob(H . '/Resources/fonts/*.ttf');
         return $fonts[mt_rand(0, count($fonts) - 1)];
     }
     # показываем капчу

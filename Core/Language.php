@@ -33,10 +33,12 @@ class Language{
     {
         return array_keys($this->config['list']);
     }
+    # проверяем существующий ли передан язык
     private function is_lang(): bool
     {
         return array_key_exists($this->lang, $this->config['list']) ? true : false;
     }
+    # переводим строку
     public function translate(string $string): string
     {
         # если язык русский то переводить не нужно
@@ -44,7 +46,7 @@ class Language{
             return $string;
         }
         if (isset($this->words[$string])) {
-            # если перевод совпадает с исходным текстом, пробуем его переводить
+            # если перевод совпадает с исходным текстом, пробуем его перевести
             if ($this->words[$string] == $string) {
                 $this->is_update = true;
                 $this->words[$string] = $this->autoTranslate($string);
@@ -55,14 +57,14 @@ class Language{
             }
             return $this->words[$string];
         }
-        # добавли новое слово в словарь
-        $this->is_update = true;
-        $this->addWord($string);
+        $this->is_update = true; // говорим что нужно обновить словарь
+        $this->addWord($string); // добавли новое слово в словарь
         return $string;
     }
     public function name(): string
     {
-        return __($this->config['list'][$this->lang]);
+        $name = $this->config['list'][$this->lang] ?? 'Неизвестно';
+        return __($name);
     }
     # автоперевод с попмощю API сервиса multillect.com
     private function autoTranslate(string $string): string
@@ -74,6 +76,7 @@ class Language{
         }
         $translated = trim($translated);
         if ($translated == $string) {
+            # если перевод совпадает с исходным текстом, тогда перевод это звездочки =)
             $translated = '***';
         }
         return $translated;
@@ -96,7 +99,7 @@ class Language{
     # файл локализации
     private function getFileLocalize()
     {
-        return H . '/Static/languages/' . $this->lang . '.ini';
+        return H . '/Resources/lang/' . $this->lang . '.ini';
     }
     # обновляем список локализации
     private function update()

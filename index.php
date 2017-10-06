@@ -6,5 +6,5 @@ use \Core\{Router,ErrorHandler};
 $errorHandler = new ErrorHandler;
 $errorHandler->register();
 
-Router::add('test', 'main/index');
+require_once 'App/Http/routes.php';
 Router::dispatch();
