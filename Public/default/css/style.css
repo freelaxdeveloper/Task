@@ -411,6 +411,7 @@ div.message{
 span.listing-action{
 	border-radius:50%;
 	vertical-align:bottom;
+	margin-bottom:5px;
 }
 span.project-name{
 	font-size:15px;

@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use \Core\{Controller,App,Form};
-use \Models\{Project,Projects,Tasks};
-use \More\Text;
+use \App\Core\{Controller,Form,App};
+use \App\Models\{Project,Projects,Tasks};
+use \Libraries\More\Text;
 
 class ProjectController extends Controller{
 

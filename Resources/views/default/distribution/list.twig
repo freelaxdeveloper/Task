@@ -6,7 +6,7 @@
 
 {% block meta %}
     {{ parent() }}
-    <link rel="stylesheet" href="/Static/default/css/distribution.css">
+    <link rel="stylesheet" href="/Public/default/css/distribution.css">
 {% endblock meta %}
 
 {% block content %}
@@ -14,12 +14,13 @@
         {% for distribution in distributions %}
         <div class="post">
             <span title="Название">{{distribution.title}} <a href="{{url('/distribution/admin/edit/' ~ distribution.id ~ '/')}}">[ред.]</a></span>
-            <span title="Всего установок"> {{distribution.install_all}}</span>
-            <span title="Лимит установок на час"> {{distribution.install_limit}}</span>
-            <span title="Уже установлено за час"> {{distribution.install_hours}}</span>
+            <span title="Общий лимит"> {{distribution.install_all}}</span>
+            <span title="Лимит на текущий час"> {{distribution.install_limit}}</span>
+            <span title="Уже использовано"> {{distribution.install_hours}}</span>
             <span title="XPath">{{distribution.xpath}}</span>
         </div>
         {% endfor %}
+        <!--
         {% for row in 0..4 %}
             <div class="post">
                 <span title="Название">Sausages <a href="#">[ред.]</a></span>
@@ -29,6 +30,7 @@
                 <span title="XPath">0094eecb-728b-4bb8-aec2</span>
             </div>
         {% endfor %}
+        -->
     </div>
    {{form_clear|raw}}
 {% endblock content %}

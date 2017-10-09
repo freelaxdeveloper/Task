@@ -1,7 +1,7 @@
 <?php
-namespace Models;
+namespace App\Models;
 
-use Core\DB;
+use \App\Core\DB;
 
 abstract class Distributions{
     public static function getDistribution(): array
@@ -37,7 +37,8 @@ abstract class Distributions{
             return $distribution;
         }
         return [];
-    }public static function getDistributions(array $params = []): array
+    }
+    public static function getDistributions(array $params = []): array
     {
         $where = '';
         $id = $params['id'] ?? false;
@@ -116,7 +117,7 @@ abstract class Distributions{
     }
     public static function getSettings(int $id_distribution): array
     {
-        $hours = DB::me()->query("SELECT * FROM `distribution_settings` WHERE `id_distribution` = '$id_distribution'")->fetchAll();
+        $hours = DB::me()->query("SELECT * FROM `distribution_settings` WHERE `id_distribution` = '$id_distribution' ORDER BY `hours` ASC")->fetchAll();
         return $hours;
     }
 }

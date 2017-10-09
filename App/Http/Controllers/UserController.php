@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use \Core\{Controller,App,Form,Captcha};
-use \Models\{User};
+use \App\Core\{Controller,Form,Captcha,App};
+use \App\Models\User;
 
 class UserController extends Controller{
     public function actionDelete(int $id_user)

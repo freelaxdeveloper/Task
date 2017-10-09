@@ -1,5 +1,5 @@
 <?php
-namespace Core;
+namespace App\Core;
 
 abstract class Authorize{
     // ключ, с которым будет хранится пользовательский ID

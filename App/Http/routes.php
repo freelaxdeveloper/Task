@@ -1,5 +1,5 @@
 <?php
-use \Core\Router;
+use \App\Core\Router;
 
 Router::add('/distribution', 'distribution@index'); // API распределения
 Router::add('/distribution/admin', 'distribution@admin', 'GET|POST'); // Админкa распределения

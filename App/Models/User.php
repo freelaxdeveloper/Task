@@ -1,7 +1,7 @@
 <?php
-namespace Models;
+namespace App\Models;
 
-use \Core\DB;
+use \App\Core\DB;
 
 class User{
     private $id;

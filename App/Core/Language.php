@@ -1,7 +1,7 @@
 <?php
-namespace Core;
+namespace App\Core;
 
-use \Core\{DB,App};
+use \App\Core\{DB,App};
 
 /*
     Некоторые ураинские и русские слова пишутся одинаково, поэтому в таком случае

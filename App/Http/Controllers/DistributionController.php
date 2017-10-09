@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use Core\{Controller,Form};
-use Models\Distributions;
+use \App\Core\{Controller,Form,DB,App};
+use \App\Models\Distributions;
 
 class DistributionController extends Controller{
 
@@ -10,21 +10,22 @@ class DistributionController extends Controller{
     {
         $distribution = Distributions::getDistribution();
         if ($distribution) {
-            echo $distribution['link'] . ':::' . $distribution['xpath'];
+            $message = ['status' => 'true'];
             Distributions::updateInstall($distribution['id'], $distribution['install_hours']);
         } else {
-            echo 'shutdown';
+            $message = ['status' => 'error'];
         }
+        echo json_encode($message);
     }
 
     public function actionAdmin()
     {
         $distributions = Distributions::getDistributions();
         if (isset($_POST['clear'])) {
-            $q = \Core\DB::me()->query("DELETE FROM `distribution_install`");
-            header('Location: ' . \Core\App::referer());
+            $q = DB::me()->query("DELETE FROM `distribution_install`");
+            header('Location: ' . App::referer());
         }
-        $form = new \Core\Form('/distribution/admin/');
+        $form = new Form('/distribution/admin/');
         $form->submit(['value' => 'Очистить', 'name' => 'clear']);
         $this->params['form_clear'] = $form->display();
 
@@ -35,10 +36,10 @@ class DistributionController extends Controller{
     {
         $distributions = Distributions::getDistributions(['id' => $id]);
         if (!$distributions) {
-            \Core\App::access_denied(__('Ошибка'));
+            App::access_denied(__('Ошибка'));
         }
         $hours = Distributions::getSettings($id);
-        $percents = \Core\DB::me()->query("SELECT * FROM `distribution_percent` WHERE `id_distribution` = '$id'")->fetchAll();
+        $percents = DB::me()->query("SELECT * FROM `distribution_percent` WHERE `id_distribution` = '$id' ORDER BY `hours` ASC")->fetchAll();
         
         if (isset($_POST['save'])) {
             $hours = $_POST['hours'];
@@ -48,7 +49,7 @@ class DistributionController extends Controller{
                 }
                 Distributions::updateSettings($id, $i, $hours[$i]);
             }
-            header('Location: ' . \Core\App::url('/distribution/admin/edit/' . $id . '/'));
+            header('Location: ' . App::url('/distribution/admin/edit/' . $id . '/'));
             exit;
         }
         if (isset($_POST['save_percents'])) {
@@ -59,13 +60,14 @@ class DistributionController extends Controller{
                 }
                 Distributions::updatePercents($id, $i, $percents[$i]);
             }
-            header('Location: ' . \Core\App::url('/distribution/admin/edit/' . $id . '/'));
+            header('Location: ' . App::url('/distribution/admin/edit/' . $id . '/'));
             exit;
         }
         if (isset($_POST['cancel'])) {
-            header('Location: ' . \Core\App::url('/distribution/admin/'));
+            header('Location: ' . App::url('/distribution/admin/'));
             exit;
         }
+        
         if (isset($_POST['save_percent'])) {
             $count = (int) $_POST['count'];
             foreach ($percents as $percent) {
@@ -75,10 +77,11 @@ class DistributionController extends Controller{
                 }
                 Distributions::updateSettings($id, $percent['hours'], $count_install);
             }
-            header('Location: ' . \Core\App::url('/distribution/admin/edit/' . $id . '/'));
+            header('Location: ' . App::url('/distribution/admin/edit/' . $id . '/'));
             exit;
         }
         $form = new Form('/distribution/admin/edit/' . $id . '/');
+
         foreach (range(0, 23) as $number) {
             $value = $hours[$number]['count'] ?? false;
             $form->input(['name' => 'hours[]', 'holder' => $number . ' час...', 'value' => $value, 'br' => $number < 23 ? false : true]);

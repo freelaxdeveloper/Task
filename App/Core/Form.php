@@ -1,7 +1,7 @@
 <?php
-namespace Core;
+namespace App\Core;
 
-use \Core\App;
+use \App\Core\App;
 
 class Form{
     public $action; // экшен (string)

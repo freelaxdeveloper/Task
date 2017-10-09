@@ -1,7 +1,7 @@
 <?php
-namespace Models;
+namespace App\Models;
 
-use \Core\{DB, App};
+use \App\Core\{DB,App};
 
 class Project{
     private $id;

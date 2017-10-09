@@ -1,5 +1,5 @@
 <?php
-namespace More;
+namespace Libraries\More;
 
 /*
 * разные полезные ф-ции

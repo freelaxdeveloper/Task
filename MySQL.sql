@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6deb1+deb.cihar.com~xenial.2
--- https://www.phpmyadmin.net/
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
 -- Хост: localhost
--- Время создания: Авг 21 2017 г., 01:32
+-- Время создания: Окт 07 2017 г., 23:51
 -- Версия сервера: 5.7.19-0ubuntu0.16.04.1
--- Версия PHP: 7.1.8-2+ubuntu16.04.1+deb.sury.org+4
+-- Версия PHP: 7.0.22-0ubuntu0.16.04.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,58 @@ SET time_zone = "+00:00";
 --
 -- База данных: `task`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `distribution`
+--
+
+CREATE TABLE `distribution` (
+  `id` int(11) NOT NULL,
+  `xpath` varchar(32) NOT NULL,
+  `link` varchar(64) NOT NULL,
+  `title` varchar(32) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `distribution_install`
+--
+
+CREATE TABLE `distribution_install` (
+  `id` int(11) NOT NULL,
+  `id_distribution` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  `count` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `distribution_percent`
+--
+
+CREATE TABLE `distribution_percent` (
+  `id` int(11) NOT NULL,
+  `percent` int(11) NOT NULL,
+  `id_distribution` int(11) NOT NULL,
+  `hours` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `distribution_settings`
+--
+
+CREATE TABLE `distribution_settings` (
+  `id` int(11) NOT NULL,
+  `id_distribution` int(11) NOT NULL,
+  `hours` int(11) NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -74,6 +126,39 @@ CREATE TABLE `users` (
 --
 
 --
+-- Индексы таблицы `distribution`
+--
+ALTER TABLE `distribution`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `distribution_install`
+--
+ALTER TABLE `distribution_install`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_distribution` (`id_distribution`),
+  ADD KEY `count` (`count`),
+  ADD KEY `date` (`date`);
+
+--
+-- Индексы таблицы `distribution_percent`
+--
+ALTER TABLE `distribution_percent`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `percent` (`percent`),
+  ADD KEY `id_distribution` (`id_distribution`),
+  ADD KEY `hours` (`hours`);
+
+--
+-- Индексы таблицы `distribution_settings`
+--
+ALTER TABLE `distribution_settings`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_distribution` (`id_distribution`),
+  ADD KEY `hours` (`hours`),
+  ADD KEY `count` (`count`);
+
+--
 -- Индексы таблицы `projects`
 --
 ALTER TABLE `projects`
@@ -102,6 +187,26 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для сохранённых таблиц
 --
 
+--
+-- AUTO_INCREMENT для таблицы `distribution`
+--
+ALTER TABLE `distribution`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `distribution_install`
+--
+ALTER TABLE `distribution_install`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT для таблицы `distribution_percent`
+--
+ALTER TABLE `distribution_percent`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+--
+-- AUTO_INCREMENT для таблицы `distribution_settings`
+--
+ALTER TABLE `distribution_settings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT для таблицы `projects`
 --

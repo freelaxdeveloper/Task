@@ -2,7 +2,7 @@
 session_start();
 define('H', $_SERVER['DOCUMENT_ROOT']);
 define('TIME', time());
-# доступные языки, используется в System/config/routes.ini
+# доступные языки, используется в роутах
 define('AVAILABLE_LANG', '(uk|en|ru|ko)');
 
 date_default_timezone_set('Europe/Kiev');
@@ -19,7 +19,7 @@ spl_autoload_register(function ($name) {
 # подключаем шаблонизатор Twig
 require_once H . '/Libraries/twig/autoload.php';
 
-use \Core\App;
+use \App\Core\App;
 
 # ф-ция для отладки
 function debug($array)

@@ -1,8 +1,8 @@
 <?php
-namespace Models;
+namespace App\Models;
 
-use \Core\DB;
-use \Models\User;
+use \App\Core\DB;
+use \App\Models\User;
 
 abstract class Users{
     # добавление нового пользвателя

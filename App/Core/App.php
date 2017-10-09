@@ -1,8 +1,8 @@
 <?php
-namespace Core;
+namespace App\Core;
 
-use \Models\User;
-use \Core\{Authorize,Language};
+use \App\Models\User;
+use \App\Core\{Authorize,Language};
 
 abstract class App{
     const USER_GROUP_USER = 1;

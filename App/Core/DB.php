@@ -4,19 +4,24 @@
   Можно использовать в любом месте движка
   $db = DB::me();
  */
-namespace Core;
+namespace App\Core;
 
-abstract class DB
+use \App\Core\App;
+
+class DB
 {
-    protected static $host;
-    protected static $user;
-    protected static $password;
-    protected static $db_name;
-    protected static $_instance;
+    private static $host;
+    private static $user;
+    private static $password;
+    private static $db_name;
+    private static $_instance;
+
+    private $tableName;
 
 
-    protected function __construct()
+    protected function __construct(string $tableName)
     {
+        $this->tableName = $tableName;
     }
     protected function __clone()
     {
@@ -59,5 +64,20 @@ abstract class DB
             }
         }
         return self::$_instance;
+    }
+    // создаем объект для работы с указанной таблицей
+    public static function table(string $tableName)
+    {
+        return new self($tableName);
+    }
+    // очищаем таблицу
+    public function clear()
+    {
+        self::me()->query('TRUNCATE ' . $this->tableName);
+    }
+    // удаляем таблицу
+    public function delete()
+    {
+        self::me()->query('DROP TABLE ' . $this->tableName);
     }
 }

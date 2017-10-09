@@ -1,9 +1,9 @@
 <?php
-namespace Core;
+namespace App\Core;
 
-use \More\{Text,Pages};
-use \Core\{App,Form};
-use \Models\{Projects,Users};
+use \Libraries\More\Text;
+use \App\Core\{Form,App};
+use \App\Models\{Projects,Users};
 
 class Controller{
     protected $params = [];

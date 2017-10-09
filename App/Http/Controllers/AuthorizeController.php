@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use \Core\{Controller,Authorize,App,Captcha,Form};
-use \Models\{Users};
-use \More\Text;
+use \App\Core\{Controller,Authorize,Captcha,Form,App};
+use \App\Models\Users;
+use \Libraries\More\Text;
 
 class AuthorizeController extends Controller{
     # количество не верный попыток авторизаций, после которых включается капча

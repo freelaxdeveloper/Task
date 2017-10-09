@@ -1,8 +1,8 @@
 <?php
-namespace Models;
+namespace App\Models;
 
-use \Core\{DB,App};
-use \Models\Task;
+use \App\Core\{DB,App};
+use \App\Models\Task;
 
 abstract class Tasks{
     /*

@@ -1,31 +1,5 @@
-Error: №8 (2017-10-06 11:52:36)
-Description: Undefined offset: 1
-File: /var/www/task/Core/Router.php
-Line: 27
----------
-
-Error: №Error (2017-10-06 11:52:36)
-Description: Class '\Controllers\Main/indexController' not found
-File: /var/www/task/Core/Router.php
-Line: 53
----------
-Error: №Error (2017-10-06 11:57:04)
-Description: Class '\Controllers\MainController' not found
-File: /var/www/task/Core/Router.php
-Line: 53
----------
-Error: №Error (2017-10-06 11:58:23)
-Description: Class '\App\Http\Controllers\MainController' not found
-File: /var/www/task/Core/Router.php
-Line: 53
----------
-Error: №Error (2017-10-06 11:59:23)
-Description: Undefined constant 'App\Http\Controllers'
-File: /var/www/task/App/Http/Controllers/MainController.php
-Line: 3
----------
-Error: №Twig_Error_Loader (2017-10-06 12:25:40)
-Description: Unable to find template "document.twig" (looked into: /var/www/task/Resources/views/default) in "/main/authorize.twig" at line 1.
-File: /var/www/task/Libraries/twig/twig/twig/lib/Twig/Loader/Filesystem.php
-Line: 226
+Error: №Error (2017-10-07 23:59:44)
+Description: Undefined constant 'App\Models'
+File: /var/www/task/App/Models/Tasks.php
+Line: 2
 ---------

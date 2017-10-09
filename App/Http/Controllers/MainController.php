@@ -1,9 +1,9 @@
 <?php
 namespace App\Http\Controllers;
 
-use \Core\{Controller,Authorize,App,Captcha};
-use \More\Text;
-use \Models\{Tasks};
+use \App\Core\{Controller,Authorize,Captcha,App};
+use \Libraries\More\Text;
+use \App\Models\Tasks;
 
 class MainController extends Controller{
 
@@ -60,4 +60,13 @@ class MainController extends Controller{
         $this->params['tasks'] = Tasks::getTasks($params);
         $this->display('main/index');
     }
+    
+    // отображение капчи
+    public function actionCaptcha()
+    {
+        $captcha = new Captcha;
+        //$captcha->length = 2;
+        echo $captcha->show();
+    }
+    
 }

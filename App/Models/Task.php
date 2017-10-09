@@ -1,8 +1,8 @@
 <?php
-namespace Models;
+namespace App\Models;
 
-use \Core\DB;
-use \More\Misc;
+use \App\Core\DB;
+use \Libraries\More\Misc;
 
 class Task{
     private $data;
