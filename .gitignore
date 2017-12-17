@@ -2,3 +2,4 @@ System/errorLog.txt
 composer.phar
 vendor/
 System/config/db.ini
+composer.lock
