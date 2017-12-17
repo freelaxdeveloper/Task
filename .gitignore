@@ -1,4 +1,4 @@
-/System/config/db.php
-/System/errorLog.txt
-/composer.phar
-/vendor/
+System/errorLog.txt
+composer.phar
+vendor/
+System/config/db.ini

@@ -1,0 +1,23 @@
+{
+    "name": "freelax/task",
+    "description": "Create and manage your assignments",
+    "type": "project",
+    "require": {
+        "illuminate/database": "^5.5",
+        "twig/twig":">=1.8,<2.0-dev",
+        "vlucas/valitron": "^1.4"
+    },
+    "license": "free",
+    "authors": [
+        {
+            "name": "Aleksandr Shapoval",
+            "email": "Sanek_OS9@yahoo.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "Libraries\\": "Libraries/"
+        }
+    }
+}

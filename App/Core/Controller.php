@@ -24,10 +24,10 @@ class Controller{
         $loader = new \Twig_Loader_Filesystem(H . '/Resources/views/' . $this->template_dir);
         $twig = new \Twig_Environment($loader);
 
-        $twig->addFunction(new \Twig_Function('__', function (string $string, string $param1 = '', string $param2 = '') {
+        $twig->addFunction(new \Twig_SimpleFunction('__', function (string $string, string $param1 = '', string $param2 = '') {
           return __($string, $param1, $param2);
         }));
-        $twig->addFunction(new \Twig_Function('url', function (string $url) {
+        $twig->addFunction(new \Twig_SimpleFunction('url', function (string $url) {
           return App::url($url);
         }));
         $template = $twig->loadTemplate('/' . $filename . '.twig');
