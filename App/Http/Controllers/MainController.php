@@ -18,7 +18,6 @@ class MainController extends Controller{
 
         $this->params['id_activePproject'] = 0;
         //$this->params['sorting'] = 'today';
-
         $this->display('main/index');
     }
     public function actionFaq()

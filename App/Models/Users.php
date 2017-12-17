@@ -40,14 +40,14 @@ abstract class Users{
         }
         return $user;
     }
-    public static function getAll(): array
-    {
-        $users = [];
-        $q = DB::me()->query("SELECT `id` FROM `users` ORDER BY `id` DESC");
-        $res = $q->fetchAll();
-        foreach ($res AS $user) {
-            $users[] = new User($user['id']);
-        }
-        return $users;
-    }
+    // public static function getAll(): array
+    // {
+    //     $users = [];
+    //     $q = DB::me()->query("SELECT `id` FROM `users` ORDER BY `id` DESC");
+    //     $res = $q->fetchAll();
+    //     foreach ($res AS $user) {
+    //         $users[] = User::find($user['id']);
+    //     }
+    //     return $users;
+    // }
 }

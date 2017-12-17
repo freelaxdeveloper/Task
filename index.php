@@ -56,7 +56,7 @@ use \App\Core\{Router,ErrorHandler,DB};
 
 // $errorHandler = new ErrorHandler;
 // $errorHandler->register();
-
+DB::connect();
 require_once 'App/Http/routes.php';
 Router::dispatch();
 

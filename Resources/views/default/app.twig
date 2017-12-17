@@ -75,7 +75,7 @@
                     {% for ank in users %}
                         <li>
                             <a href="#"><i class="fa fa-user"></i> {{ank.login}}</a>
-                            <span class="counter" title="{{__('Проектов: %s - Задач: %s', ank.project_count, ank.task_count)}}">{{ank.project_count}}/{{ank.task_count}}</span>
+                            {# <span class="counter" title="{{__('Проектов: %s - Задач: %s', ank.project_count, ank.task_count)}}">{{ank.project_count}}/{{ank.task_count}}</span> #}
                             {% if user.group >= 3 and user.id != ank.id %}
                                 <span id="menu{{ank.id}}" data-action="action{{ank.id}}" class="menu_action"><i class="fa fa-ellipsis-v"></i></span>
                                 <ul class="action_load action_display" id="action{{ank.id}}">

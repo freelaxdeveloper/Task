@@ -3,7 +3,7 @@ namespace App\Core;
 
 use \Libraries\More\Text;
 use \App\Core\{Form,App};
-use \App\Models\{Projects,Users};
+use \App\Models\{Projects,User};
 
 class Controller{
     protected $params = [];
@@ -40,7 +40,7 @@ class Controller{
         $this->params['projects'] = Projects::getAll();
         $this->params['user'] = App::user();
         $this->params['language'] = App::language();
-        $this->params['users'] = Users::getAll();
+        $this->params['users'] = User::all();
         $this->params['current_data'] = date('Y-m-d\TH:00');
         if (empty($this->params['id_activePproject']))
             $this->params['id_activePproject'] = 0;
