@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 
-use \App\Core\{DB,App};
+use \App\Core\{DB,App,Authorize};
 use \App\Models\Task;
 
 abstract class Tasks{
@@ -54,7 +54,7 @@ abstract class Tasks{
             $where .= ' AND `tasks`.`id_project` = :id_project ';
         }
         # показываем только свои задачи
-        if ($my_task) {
+        if ($my_task && Authorize::isAuthorize()) {
             $where .= ' AND (`tasks`.`id_user` = :id_user OR `projects`.`id_user` = :id_project_user) ';
         }
         # показываем выбранную задачу
@@ -78,7 +78,7 @@ abstract class Tasks{
             $q->bindParam(':time_end', $time_end, \PDO::PARAM_INT);
         if ($id_project)
             $q->bindParam(':id_project', $id_project, \PDO::PARAM_INT);
-        if ($my_task) {
+        if ($my_task && Authorize::isAuthorize()) {
             $id_user = App::user()->id;
             $q->bindParam(':id_user', $id_user, \PDO::PARAM_INT);
             $q->bindParam(':id_project_user', $id_user, \PDO::PARAM_INT);

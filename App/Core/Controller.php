@@ -2,7 +2,7 @@
 namespace App\Core;
 
 use \Libraries\More\Text;
-use \App\Core\{Form,App};
+use \App\Core\{Form,App,Authorize};
 use \App\Models\{Projects,User};
 
 class Controller{
@@ -45,7 +45,7 @@ class Controller{
         if (empty($this->params['id_activePproject']))
             $this->params['id_activePproject'] = 0;
 
-        if (App::user()->id) {
+        if (Authorize::isAuthorize() && App::user()->id) {
             $form = new Form('/project/new/');
             $form->html('<span id="typeProject"></span>', false);
             $form->input(['name' => 'token', 'value' => App::user()->url_token, 'type' => 'hidden', 'br' => false]);
@@ -86,7 +86,7 @@ class Controller{
     # доступ только гостью
     protected function access_guest()
     {
-        if (App::user()->id) {
+        if (Authorize::isAuthorize()) {
             $this->access_denied(__('Страница доступна только гостью'));
         }
     }

@@ -24,20 +24,20 @@ abstract class App{
     # авторизация пользователя
     public static function user()
     {
-        static $_instance;
-        if (!$_instance) {
-            $_instance = User::find(Authorize::getId());
-            if ($_instance->id && $_instance->token_time_update < TIME) {
-                //$_instance->updateToken();
+        static $current_user;
+        if (!$current_user && Authorize::isAuthorize()) {
+            $current_user = User::find(Authorize::getId());
+            if ($current_user->id && $current_user->token_time_update < TIME) {
+                $current_user->updateToken();
             }
             # если почему-то хэш пользователя не совпадает с тем что в сессии
             # сбрасываем авторизацию
-            if ($_instance->id && $_instance->password != Authorize::getHash()) {
+            if ($current_user->id && $current_user->password != Authorize::getHash()) {
                 Authorize::exit();
                 self::access_denied(__('Ошибка авторизации'), true);
             }
         }
-        return $_instance;
+        return $current_user;
     }
     # возвращаем референую ссылку, если таковой нету то заданую
     public static function referer(string $link = '/'): string
@@ -75,9 +75,9 @@ abstract class App{
     # получаем данные настроек
     public static function config(string $file, bool $process_sections = false): array
     {
-        $path_file = H . '/System/config/' . $file . '.ini';
+        $path_file = H . '/Config/' . $file . '.ini';
         if (!file_exists($path_file)) {
-            return ['error'];
+            throw new Exception('File config not exists #:' . $path_file);
         }
         $config = parse_ini_file($path_file, $process_sections);
         return $config;
